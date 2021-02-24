@@ -33,9 +33,9 @@ function get_pokemon_data(data) {
     number.textContent = data["id"];
     pokemon__container.appendChild(number);
 
-    var name = document.createElement("div");
+    var name = document.createElement("a");
     name.id = "pokemon__name";
-    name.textContent = data["name"].charAt(0).toUpperCase() + data["name"].slice(1);
+    name.innerHTML = data["name"].charAt(0).toUpperCase() + data["name"].slice(1);
     pokemon__container.appendChild(name);
 
     var types = document.createElement("div");
@@ -85,3 +85,23 @@ function get_pokemon_data(data) {
 
     document.getElementById("pokemon__list").appendChild(pokemon__container);
 }
+
+function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('pokemon__search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("pokemon__list");
+    li = ul.getElementsByTagName('li');
+  
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
