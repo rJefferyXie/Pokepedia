@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero__container">
+            <div id="all" class="region__container" onclick="retrieve_data('1')">
+                <h1 class="region__name">ALL REGIONS</h1>
+            </div>
+            <div id="kanto" class="region__container" onclick="retrieve_data('2')">
+                <img src="images/kanto/venusaur.png"  class="image">
+                <img src="images/kanto/charizard.png"  class="image">
+                <img src="images/kanto/blastoise.png"  class="image">
+                <img src="images/kanto/articuno.png"  class="image">
+                <img src="images/kanto/zapdos.png"  class="image">
+                <img src="images/kanto/moltres.png"  class="image">
+                <h1 class="region__name">KANTO</h1>
+            </div>
+            <div id="hoenn" class="region__container" onclick="retrieve_data('4')">
+                <img src="images/hoenn/sceptile.png" class="image">
+                <img src="images/hoenn/blaziken.png" class="image">
+                <img src="images/hoenn/swampert.png" class="image">
+                <img src="images/hoenn/groudon.png" class="image">
+                <img src="images/hoenn/kyogre.png" class="image">
+                <img src="images/hoenn/rayquaza.png" class="image">
+                <h1 class="region__name">HOENN</h1>
+            </div>
+            <div id="johto" class="region__container" onclick="retrieve_data('7')">
+                <img src="images/johto/meganium.png" class="image">
+                <img src="images/johto/typhlosion.png" class="image">
+                <img src="images/johto/feraligatr.png" class="image">
+                <img src="images/johto/ho-oh.png" class="image">
+                <img src="images/johto/lugia.png" class="image">
+                <img src="images/johto/celibi.png" class="image">
+                <h1 class="region__name">JOHTO</h1>
+            </div>
+            <div id="sinnoh" class="region__container" onclick="retrieve_data('6')">
+                <img src="images/sinnoh/torterra.png" class="image">
+                <img src="images/sinnoh/infernape.png" class="image">
+                <img src="images/sinnoh/empoleon.png" class="image">
+                <img src="images/sinnoh/dialga.png" class="image">
+                <img src="images/sinnoh/palkia.png" class="image">
+                <img src="images/sinnoh/giratina.png" class="image">
+                <h1 class="region__name">SINNOH</h1>
+            </div>
+            <div id="unova" class="region__container" onclick="retrieve_data('9')">
+                <img src="images/unova/serperior.png" class="image">
+                <img src="images/unova/emboar.png" class="image">
+                <img src="images/unova/samurott.png" class="image">
+                <img src="images/unova/reshiram.png" class="image">
+                <img src="images/unova/zekrom.png" class="image">
+                <img src="images/unova/kyurem.png" class="image">
+                <h1 class="region__name">UNOVA</h1>
+            </div>
+        </div>
+    </div>
+    <ul id="pokemon__list"></ul>
+    <script src="app.js"></script>
+</body>
+</html>
