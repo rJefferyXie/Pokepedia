@@ -6,12 +6,30 @@
     scroll-behavior: smooth;
 }
 
+body::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+}
+
 .hero {
   height: 100vh;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+
+/* .title {
+  color: red;
+} */
 
 .hero__container {
   align-items: center;
@@ -35,7 +53,7 @@
 }
 
 .region__container {
-  background-color: rgb(198, 228, 255);
+  background-color: rgb(158, 207, 250);
   cursor: pointer;
   display: flex;
   width: 900px;
@@ -45,7 +63,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 10px;
   filter: gray; /* IE6-9 */
   -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
   filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
@@ -53,17 +71,31 @@
 
 /* Disable grayscale on hover */
 .region__container:hover {
-  transition-delay: 0.1s;
   -webkit-filter: grayscale(0);
   filter: none;
 }
 
 #pokemon__list {
   text-align: center;
-  height: 600px;
+  height: 650px;
   width: 500px;
-  margin: auto;
   list-style: none;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+#pokemon__list::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+#pokemon__list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+ 
+#pokemon__list::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
 }
 
 #pokemon__types {
@@ -75,7 +107,18 @@
 }
 
 #pokemon__type {
-  padding: 16px;
+  padding: 8px 12px;
+  margin: 4px;
+}
+
+#pokemon__section {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-transform: translate(-25%, 0%);
+  transform: translate(-25%, 0%);
 }
 
 #pokemon__search {
@@ -98,8 +141,4 @@
   font-size: 18px; /* Increase the font-size */
   color: black; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
-}
-
-#pokemon__list li :hover {
-  background-color: #eee; /* Add a hover effect to all links, except for headers */
 }

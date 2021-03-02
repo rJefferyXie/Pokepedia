@@ -1,7 +1,28 @@
 function retrieve_data(gen) {
-    var poke_list = document.getElementById("pokemon__list");
-    while (poke_list.firstChild) {
-        poke_list.removeChild(poke_list.firstChild);
+
+    // Create new section for pokedex / other
+    if (document.getElementById("pokemon__section") == null) {
+        pokemon__section = document.createElement("div");
+        pokemon__section.id = "pokemon__section";
+
+        search = document.createElement("input");
+        search.type="text";
+        search.id = "pokemon__search";
+        search.onkeyup = "search_pokemon()";
+        search.placeholder = "Search for pokemon..";
+
+        pokemon__list = document.createElement("ul");
+        pokemon__list.id = "pokemon__list";
+
+        pokemon__section.appendChild(search);
+        pokemon__section.appendChild(pokemon__list);  
+        
+        document.body.appendChild(pokemon__section)
+    }
+
+    // Clear the previous pokedex results
+    else {
+        document.getElementById("pokemon__list").innerHTML = "";
     }
     
     fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
@@ -17,6 +38,7 @@ function get_pokemon_numbers(data) {
         .then(response => response.json())
         .then(data => get_pokemon_data(data))
     }
+    scroll_to("#pokemon__section");
 }
 
 function get_pokemon_data(data) {
@@ -40,53 +62,43 @@ function get_pokemon_data(data) {
 
     var types = document.createElement("div");
     types.id = "pokemon__types";
-    for (var i = 0; i < data["types"].length; i++) {
-        var type_str = data["types"][i]["type"]["name"];
+
+    if (data["types"].length == 1) {
+        var type_str = data["types"][0]["type"]["name"];
         type_str = type_str.charAt(0).toUpperCase() + type_str.slice(1);
-        
-        if (type_str === "Fire") {
-            pokemon__container.style.backgroundColor="LightCoral";
-        }
-
-        else if (type_str === "Water") {
-            pokemon__container.style.backgroundColor="lightblue";
-        }
-
-        else if (type_str === "Grass") {
-            pokemon__container.style.backgroundColor="lightgreen";
-        }
-
-        else if (type_str === "Electric") {
-            pokemon__container.style.backgroundColor="lightyellow";
-        }
-
-        else if (type_str === "Psychic") {
-            pokemon__container.style.backgroundColor="lightpink";
-        }
-
-        else if (type_str === "Poison") {
-            pokemon__container.style.backgroundColor="MediumPurple";
-        }
-
-        else if (type_str === "Fighting") {
-            pokemon__container.style.backgroundColor="salmon";
-        }
-
-        else if (type_str === "Flying") {
-            pokemon__container.style.backgroundColor="Azure";
-        }
+        type_color = type_checker(type_str);
 
         var type = document.createElement("div");
+        type.style.backgroundColor = type_color;
         type.id = "pokemon__type";
         type.textContent = type_str;
         types.appendChild(type);
     }
-    pokemon__container.appendChild(types);
 
+    else {
+        var type_str = data["types"][0]["type"]["name"];
+        type_str = type_str.charAt(0).toUpperCase() + type_str.slice(1);
+        type_color1 = type_checker(type_str);
+        var type1 = document.createElement("div");
+        type1.id = "pokemon__type";
+        type1.textContent = type_str;
+        type1.style.backgroundColor = type_color1;
+        types.appendChild(type1);
+
+        type_str = data["types"][1]["type"]["name"];
+        type_str = type_str.charAt(0).toUpperCase() + type_str.slice(1);
+        type_color2 = type_checker(type_str);
+        var type2 = document.createElement("div");
+        type2.id = "pokemon__type";
+        type2.textContent = type_str;
+        type2.style.backgroundColor = type_color2;
+        types.appendChild(type2);
+    }
+    pokemon__container.appendChild(types);
     document.getElementById("pokemon__list").appendChild(pokemon__container);
 }
 
-function myFunction() {
+function search_pokemon() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('pokemon__search');
@@ -104,4 +116,82 @@ function myFunction() {
         li[i].style.display = "none";
       }
     }
+  }
+
+  function type_checker(type_str) {
+    if (type_str === "Fire") {
+        return "LightCoral";
+    }
+
+    else if (type_str === "Water") {
+        return "lightblue";
+    }
+
+    else if (type_str === "Grass") {
+        return "lightgreen";
+    }
+
+    else if (type_str === "Electric") {
+        return "lightyellow";
+    }
+
+    else if (type_str === "Psychic") {
+        return "lightpink";
+    }
+
+    else if (type_str === "Poison") {
+        return "MediumPurple";
+    }
+
+    else if (type_str === "Fighting") {
+        return "salmon";
+    }
+
+    else if (type_str === "Flying") {
+        return "Azure";
+    }
+
+    else if (type_str === "Ghost") {
+        return "RebeccaPurple"
+    }
+
+    else if (type_str === "Dark") {
+        return "DimGrey";
+    }
+
+    else if (type_str === "Bug") {
+        return "Olive";
+    }
+
+    else if (type_str === "Steel") {
+        return "LightSteelBlue";
+    }
+
+    else if (type_str === "Rock") {
+        return "SaddleBrown";
+    }
+
+    else if (type_str === "Ice") {
+        return "PowderBlue";
+    }
+
+    else if (type_str === "Ground") {
+        return "SandyBrown";
+    }
+
+    else if (type_str === "Normal") {
+        return "LightGrey";
+    }
+
+    else if (type_str === "Dragon") {
+        return "DarkSlateBlue";
+    }
+  }
+
+  function scroll_to(section) {
+    var destination = document.querySelector(section).offsetTop;
+    window.scroll({
+      top: destination, 
+      behavior: "smooth"
+    });
   }
