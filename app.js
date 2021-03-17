@@ -8,7 +8,7 @@ function retrieve_data(gen) {
         search = document.createElement("input");
         search.type="text";
         search.id = "pokemon__search";
-        search.onkeyup = "search_pokemon()";
+        search.onkeyup = search_pokemon;
         search.placeholder = "Search for pokemon..";
 
         pokemon__list = document.createElement("ul");
