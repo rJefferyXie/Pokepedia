@@ -20,17 +20,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.hero {
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* .title {
-  color: red;
-} */
-
 .hero__container {
   align-items: center;
   text-align: center;
@@ -50,38 +39,66 @@ body::-webkit-scrollbar-thumb {
 	font-size: 80px;
 	line-height: 80px;
 	white-space: nowrap;
+  margin-left: 20px;
 }
 
 .region__container {
-  background-color: rgb(158, 207, 250);
+  background-color: rgb(0, 238, 255);
   cursor: pointer;
   display: flex;
-  width: 900px;
-  margin: 1rem 0px;
+  width: 870px;
+  margin: 4px 0px;
   border: 3px solid #000000;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  text-align: center;
   border-radius: 10px;
   filter: gray; /* IE6-9 */
   -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
   filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
 }
 
-/* Disable grayscale on hover */
 .region__container:hover {
   -webkit-filter: grayscale(0);
   filter: none;
 }
 
-#pokemon__list {
+#kanto:hover {
+  background-color: rgb(255, 206, 115);
+}
+
+#johto:hover {
+  background-color: rgb(143, 178, 253);
+}
+
+#hoenn:hover {
+  background-color: rgb(139, 255, 164);
+}
+
+#sinnoh:hover {
+  background-color: rgb(164, 249, 255);
+}
+
+#unova:hover {
+  background-color: rgb(184, 158, 255);
+}
+
+#kalos:hover {
+  background-color: rgb(168, 255, 219);
+}
+
+.pokemon__container {
   text-align: center;
+  list-style: none;
+}
+
+#pokemon__list {
   height: 630px;
-  width: 500px;
+  width: 400px;
   list-style: none;
   overflow-y: scroll;
   border-radius: 10px;
+  align-content: center;
+  align-items: center;
 }
 
 #pokemon__list::-webkit-scrollbar {
@@ -107,25 +124,36 @@ body::-webkit-scrollbar-thumb {
 }
 
 #pokemon__type {
-  padding: 8px 12px;
+  padding: 6px 12px;
   margin: 4px;
 }
 
-#pokemon__section {
-  display: flex;
+.pokemon__image {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+#pokedex__page {
+  display: none;
   height: 100vh;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#pokedex__section {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  -webkit-transform: translate(-25%, 0%);
-  transform: translate(-25%, 0%);
 }
 
 #pokemon__search {
-  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-  background-position: 10px 12px; /* Position the search icon */
-  background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 500px; /* Full-width */
+  width: 400px; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
@@ -141,4 +169,100 @@ body::-webkit-scrollbar-thumb {
   font-size: 18px; /* Increase the font-size */
   color: black; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
+}
+
+.inspect__button {
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background-color: red;
+}
+
+#new__region {
+  font-size: 18px;
+  margin-top: 20px;
+  padding: 12px 20px 12px 20px; /* Add some padding */
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+
+#new__region:hover{
+  background-color: rgb(116, 246, 255);
+  cursor: pointer;
+}
+
+#utility__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#inspect {
+  height: 40vh;
+  width: 40vh;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+}
+
+#pokemon__row {
+  display: flex;
+}
+
+#pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
+  border: 2px solid #000000;
+  margin: 5px 5px;
+  width: 176px;
+  height: 224px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-content: center;
+  align-items: center;
+}
+
+#generate {
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 12px 20px 12px 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+
+#generate:hover {
+  background-color: rgb(116, 246, 255);
+  cursor: pointer;
+}
+
+#clear_slot1, #clear_slot2, #clear_slot3, #clear_slot4, #clear_slot5, #clear_slot6 {
+  font-size: 18px;
+  text-align: center;
+  color: white;
+  background-color: black;
+  border: 1px solid #000000;
+  width: 96px;
+  height: 24px;
+  border-radius: 10px;
+  margin: 5px 0px 10px 0px;
+}
+
+#clear_slot1:hover, #clear_slot2:hover, #clear_slot3:hover, #clear_slot4:hover, #clear_slot5:hover, #clear_slot6:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.extra__button {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgb(97, 86, 255);
+  border: 1px solid #000000;
+  width: 164px;
+  height: 32px;
+  border-radius: 10px;
+  margin: 10px 0px 10px 0px;
 }
