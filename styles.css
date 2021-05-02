@@ -6,52 +6,167 @@
     scroll-behavior: smooth;
 }
 
-body::-webkit-scrollbar {
-  width: 1em;
+body {
+  overflow: hidden;
 }
- 
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+
+.navbar {
+  background: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
 }
- 
-body::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  border-radius: 10px;
+
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  width: 100%;
+  padding: 0 50px;
+}
+
+#navbar__logo {
+  background-image: -webkit-linear-gradient(to top, #4ca1af, #c4e0e5);
+  background-image: linear-gradient(to top, #4ca1af, #c4e0e5);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar__item {
+  height: 80px;
+}
+
+.navbar__links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 125px;
+  text-decoration: none;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.navbar__links:hover {
+  color: #4ca1af;
+  transition: all 0.3s ease;
 }
 
 .hero__container {
+  display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
+}
+
+.intro__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallpaper {
+  width: 100vw;
+  height: 100vh;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  transform: scale(1.1);
+  object-fit: cover;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* .about {
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0, 0.4); 
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
   position: absolute;
+  padding: 20px;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  text-align: center;
+}
+
+.about2 {
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0, 0.4); 
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  padding: 20px;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
+  text-align: center;
+} */
+
+.region__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
 }
 
 .region__name {
   font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	color: #fff;
 	text-shadow: 
-		0 0 1px rgba(255,255,255,0.8), 
-		1px 1px 1px rgba(0,0,0,0.2);
-	font-size: 80px;
-	line-height: 80px;
+		0 0 5px rgba(255,255,255,0.8), 
+		2px 2px 2px rgba(0,0,0,0.2);
+	font-size: 5rem;
+	line-height: 5rem;
 	white-space: nowrap;
-  margin-left: 20px;
+}
+
+.image-region {
+  width: 5rem;
+  height: 5rem;
 }
 
 .region__container {
   background-color: rgb(0, 238, 255);
   cursor: pointer;
   display: flex;
-  width: 870px;
-  margin: 4px 0px;
+  width: 45vw;
+  position: relative;
   border: 3px solid #000000;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  margin-bottom: 10px;
+  border-radius: 50px;
   filter: gray; /* IE6-9 */
   -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
   filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
@@ -71,11 +186,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #hoenn:hover {
-  background-color: rgb(139, 255, 164);
+  background-color: rgb(128, 255, 155);
 }
 
 #sinnoh:hover {
-  background-color: rgb(164, 249, 255);
+  background-color: rgb(146, 248, 255);
 }
 
 #unova:hover {
@@ -83,7 +198,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #kalos:hover {
-  background-color: rgb(168, 255, 219);
+  background-color: rgb(144, 255, 209);
+}
+
+#alola:hover {
+  background-color: rgb(255, 187, 155);
 }
 
 .pokemon__container {
@@ -91,12 +210,18 @@ body::-webkit-scrollbar-thumb {
   list-style: none;
 }
 
+.image {
+  height: 72px;
+  width: 72px;
+  margin: 0px 4px;
+}
+
 #pokemon__list {
-  height: 630px;
+  height: 628px;
   width: 400px;
+  border: 1px solid rgb(0,0,0);
   list-style: none;
   overflow-y: scroll;
-  border-radius: 10px;
   align-content: center;
   align-items: center;
 }
@@ -107,12 +232,21 @@ body::-webkit-scrollbar-thumb {
  
 #pokemon__list::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
 }
  
 #pokemon__list::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  border-radius: 10px;
+  background-color: rgb(37, 37, 37);
+}
+
+#pokemon__list li {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
 }
 
 #pokemon__types {
@@ -141,8 +275,9 @@ body::-webkit-scrollbar-thumb {
 #pokedex__page {
   display: none;
   height: 100vh;
+  width: 100vw;
+  justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
 }
 
 #pokedex__section {
@@ -150,37 +285,20 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-right: 5px;
 }
 
 #pokemon__search {
   width: 400px; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
-  border: 1px solid #ddd; /* Add a grey border */
-  margin-bottom: 12px; /* Add some space below the input */
-}
-
-#pokemon__list li {
-  border: 1px solid #ddd; /* Add a border to all links */
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6; /* Grey background color */
-  padding: 12px; /* Add some padding */
-  text-decoration: none; /* Remove default text underline */
-  font-size: 18px; /* Increase the font-size */
-  color: black; /* Add a black text color */
-  display: block; /* Make it into a block element to fill the whole list */
-}
-
-.inspect__button {
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  background-color: red;
+  border: 1px solid rgb(0, 0, 0); /* Add a grey border */
+  margin: 6px 0px 12px 0px;
 }
 
 #new__region {
   font-size: 18px;
-  margin-top: 20px;
+  margin: 10px 0px 10px 0px;
   padding: 12px 20px 12px 20px; /* Add some padding */
   background-color: white;
   border-radius: 10px;
@@ -197,34 +315,41 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-#inspect {
-  height: 40vh;
-  width: 40vh;
-  align-items: center;
-  justify-content: center;
-  background-color: red;
+  margin-left: 5px;
 }
 
 #pokemon__row {
   display: flex;
 }
 
-#pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
-  border: 2px solid #000000;
-  margin: 5px 5px;
-  width: 176px;
-  height: 224px;
+#pokemon0, #pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
+  border: 1px solid #000000;
+  background-color: white;
+  width: 172px;
+  height: 226px;
   display: flex;
   flex-direction: column-reverse;
   align-content: center;
   align-items: center;
 }
 
+#pokemon1, #pokemon2 {
+  margin-top: 10px;
+}
+
+#pokemon1, #pokemon3, #pokemon5 {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+#pokemon2, #pokemon4, #pokemon6 {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 #generate {
   font-size: 18px;
-  margin-top: 10px;
+  margin: 10px 0px 5px 0px;
   padding: 12px 20px 12px 20px;
   background-color: white;
   border-radius: 10px;
@@ -236,7 +361,7 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
-#clear_slot1, #clear_slot2, #clear_slot3, #clear_slot4, #clear_slot5, #clear_slot6 {
+#clear_slot0, #clear_slot1, #clear_slot2, #clear_slot3, #clear_slot4, #clear_slot5, #clear_slot6 {
   font-size: 18px;
   text-align: center;
   color: white;
@@ -248,10 +373,168 @@ body::-webkit-scrollbar-thumb {
   margin: 5px 0px 10px 0px;
 }
 
-#clear_slot1:hover, #clear_slot2:hover, #clear_slot3:hover, #clear_slot4:hover, #clear_slot5:hover, #clear_slot6:hover {
-  background-color: red;
+#clear_slot0:hover, #clear_slot1:hover, #clear_slot2:hover, #clear_slot3:hover, #clear_slot4:hover, #clear_slot5:hover, #clear_slot6:hover {
+  background-color: rgb(144, 160, 255);
   cursor: pointer;
 }
+
+#moves__and__extra {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#move__list {
+  width: 340px;
+  height: 300px;
+  background-color: #ffffff;
+  border: 1px solid rgb(0,0,0);
+  list-style: none;
+  overflow-y: scroll;
+  align-content: center;
+  align-items: center;
+}
+
+#move__list li {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+#pokemon__description {
+  width: 60%;
+  height: 172px;
+}
+
+#teambuilder__view {
+  display: none;
+  width: 40vw;
+  height: 720px;
+  background-color: tomato;
+}
+
+#inspect__view {
+  display: flex;
+  background-color: rgb(190, 164, 255);
+  width: 40vw;
+  height: 720px;
+}
+
+#stats__and__description {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#stat__list-default, #stat__list-active {
+  color: rgb(0, 0, 0);
+  width: 95%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#stat__list-default {
+  display: flex;
+}
+
+#stat__list-active {
+  display: none;
+}
+
+.stat__bar-default, .stat__bar-active {
+  width: 50%;
+  height: 32px;
+  margin: 5px 0px 5px 0px;
+  border-radius: 20px;
+  line-height: 32px;
+  text-indent: 8px;
+}
+
+.stat__bar-active {
+  text-align: right;
+  direction: rtl;
+}
+
+#stat0-active, #stat0-default {
+  background-color: #FF5959;
+}
+
+#stat1-active, #stat1-default {
+  background-color: #F5AC78;
+}
+
+#stat2-active, #stat2-default {
+  background-color: #FAE078;
+}
+
+#stat3-active, #stat3-default {
+  background-color: #9DB7F5;
+}
+
+#stat4-active, #stat4-default {
+  background-color: #A7DB8D;
+}
+
+#stat5-active, #stat5-default {
+  background-color: #FA92B2;
+}
+
+
+
+
+
+
+.music__container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.song__title__container {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px 5px 0px;
+}
+
+.song__title {
+  white-space: nowrap;
+  margin: 0px 5px 0px 5px;
+}
+
+.music__controls {
+  display: flex;
+  flex-direction: row;
+}
+
+.music__button {
+  font-size: 32px;
+  margin: 0px 5px 0px 5px;
+}
+
+/* .play__button {
+
+} */
+
+.music__button:hover {
+  cursor: pointer;
+  color: white;
+}
+
+
+
+
 
 .extra__button {
   font-size: 18px;
@@ -259,10 +542,28 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: rgb(97, 86, 255);
-  border: 1px solid #000000;
-  width: 164px;
-  height: 32px;
-  border-radius: 10px;
-  margin: 10px 0px 10px 0px;
+  width: 128px;
+  height: 64px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin: 0px 0px 15px 0px;
+  /* transform: translate(0%, -100%); */
+}
+
+.extra__button:hover {
+  cursor: pointer;
+}
+
+#inspect__button {
+  background-color: rgb(190, 164, 255);
+}
+
+#teambuilder__button {
+  background-color: tomato;
+}
+
+
+
+#play__1, #play__2 {
+  display: none;
 }
