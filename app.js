@@ -91,7 +91,7 @@ const first_song = 0; // start of playlist
 const final_song = 6; // end of playlist
 
 var current_soundtrack;
-var current_track = Math.floor(Math.random() * 6);
+var current_track; 
 var current_track_name = document.getElementsByClassName("song__title");
 var music_playing = false;
 
@@ -178,6 +178,7 @@ function retrieve_data(gen, region) {
     pokedex.innerHTML = "";
     region__page.style.display = "none";
     current_soundtrack = region;
+    current_track = Math.floor(Math.random() * 6);
 
     fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
     .then(response => response.json())
