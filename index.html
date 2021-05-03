@@ -6,7 +6,7 @@
     <title>Pokédex</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-    <audio src="soundtrack/101 - opening.mp3" id="background__music" autostart="false"></audio>
+    <audio src="none" id="background__music"></audio>
 </head>
 <body>
     <!-- Navigation Bar Section-->
@@ -46,7 +46,7 @@
             </div> -->
             <div class="region__section">
                 <!-- <img src="images/wallpaper2.jpg" class="wallpaper"> -->
-                <div id="kanto" class="region__container" onclick="retrieve_data('2')">
+                <div id="kanto" class="region__container" onclick="retrieve_data('2', 'kanto')">
                     <img src="images/kanto/venusaur.png"  class="image-region">
                     <img src="images/kanto/charizard.png"  class="image-region">
                     <img src="images/kanto/blastoise.png"  class="image-region">
@@ -55,7 +55,7 @@
                     <img src="images/kanto/moltres.png"  class="image-region">
                     <h1 class="region__name">KANTO</h1>
                 </div>
-                <div id="johto" class="region__container" onclick="retrieve_data('7')">
+                <div id="johto" class="region__container" onclick="retrieve_data('7', 'johto')">
                     <h1 class="region__name">JOHTO</h1>
                     <img src="images/johto/meganium.png" class="image-region">
                     <img src="images/johto/typhlosion.png" class="image-region">
@@ -64,7 +64,7 @@
                     <img src="images/johto/lugia.png" class="image-region">
                     <img src="images/johto/celibi.png" class="image-region">
                 </div>
-                <div id="hoenn" class="region__container" onclick="retrieve_data('4')">
+                <div id="hoenn" class="region__container" onclick="retrieve_data('4', 'hoenn')">
                     <img src="images/hoenn/sceptile.png" class="image-region">
                     <img src="images/hoenn/blaziken.png" class="image-region">
                     <img src="images/hoenn/swampert.png" class="image-region">
@@ -73,7 +73,7 @@
                     <img src="images/hoenn/rayquaza.png" class="image-region">
                     <h1 class="region__name">HOENN</h1>
                 </div>
-                <div id="sinnoh" class="region__container" onclick="retrieve_data('6')">
+                <div id="sinnoh" class="region__container" onclick="retrieve_data('6', 'sinnoh')">
                     <h1 class="region__name">SINNOH</h1>
                     <img src="images/sinnoh/torterra.png" class="image-region">
                     <img src="images/sinnoh/infernape.png" class="image-region">
@@ -82,7 +82,7 @@
                     <img src="images/sinnoh/palkia.png" class="image-region">
                     <img src="images/sinnoh/giratina.png" class="image-region">
                 </div>
-                <div id="unova" class="region__container" onclick="retrieve_data('9')">
+                <div id="unova" class="region__container" onclick="retrieve_data('9', 'unova')">
                     <img src="images/unova/serperior.png" class="image-region">
                     <img src="images/unova/emboar.png" class="image-region">
                     <img src="images/unova/samurott.png" class="image-region">
@@ -91,7 +91,7 @@
                     <img src="images/unova/kyurem.png" class="image-region">
                     <h1 class="region__name">UNOVA</h1>
                 </div>
-                <div id="kalos" class="region__container" onclick="retrieve_data('12')">
+                <div id="kalos" class="region__container" onclick="retrieve_data('12', 'kalos')">
                     <h1 class="region__name">KALOS</h1>
                     <img src="images/kalos/chesnaught.png" class="image-region">
                     <img src="images/kalos/delphox.png" class="image-region">
@@ -100,7 +100,7 @@
                     <img src="images/kalos/yveltal.png" class="image-region">
                     <img src="images/kalos/zygarde.png" class="image-region">
                 </div>
-                <div id="alola" class="region__container" onclick="retrieve_data('16')">
+                <div id="alola" class="region__container" onclick="retrieve_data('16', 'alola')">
                     <img src="images/alola/decidueye.png" class="image-region">
                     <img src="images/alola/incineroar.png" class="image-region">
                     <img src="images/alola/primarina.png" class="image-region">
@@ -153,7 +153,7 @@
                     <div class="music__container">
                         <div class="song__title__container">
                             <i class="fas fa-music"></i>
-                            <p class="song__title">Currently Playing: Opening</i></p>
+                            <p class="song__title"></i></p>
                             <i class="fas fa-music"></i>
                         </div>
                         <div class="music__controls">
@@ -192,22 +192,24 @@
                         </div>
                     </div>
                 </ul>
-                <div class="music__container">
-                    <div class="song__title__container">
-                        <i class="fas fa-music"></i>
-                        <p class="song__title">Currently Playing: Opening</i></p>
-                        <i class="fas fa-music"></i>
+                <div id="team__info">
+                    <div id="generate">
+                        Auto-Complete
                     </div>
-                    <div class="music__controls">
-                        <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
-                        <div id="pause__2" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                        <div id="play__2" class="music__button" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
-                        <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
+                    <div class="music__container">
+                        <div class="song__title__container">
+                            <i class="fas fa-music"></i>
+                            <p class="song__title"></i></p>
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="music__controls">
+                            <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
+                            <div id="pause__2" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
+                            <div id="play__2" class="music__button" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                            <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="generate">
-                Auto-Complete
             </div>
         </div>
         <div id="extra__page">

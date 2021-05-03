@@ -20,23 +20,84 @@ const type_color_schemes = { // source: https://bulbapedia.bulbagarden.net/wiki/
     "Steel": "#D1D1E0",
     "Water": "#9DB7F5"}
 
+// source for all soundtracks: https://downloads.khinsider.com/search?search=pokemon
+const soundtracks = {
+    "kanto": {
+        0: {name: "Cerulean City", file_path: "soundtrack/kanto/Cerulean City.mp3"},
+        1: {name: "Hiwada Town", file_path: "soundtrack/kanto/Hiwada Town.mp3"},
+        2: {name: "Pokémon Gym", file_path: "soundtrack/kanto/Pokémon Gym.mp3"},
+        3: {name: "Pokémon League", file_path: "soundtrack/kanto/Pokémon League.mp3"},
+        4: {name: "Route 1", file_path: "soundtrack/kanto/Route 1.mp3"},
+        5: {name: "Tanba City", file_path: "soundtrack/kanto/Tanba City.mp3"},
+        6: {name: "Title (HeartGold & SoulSilver)", file_path: "soundtrack/kanto/Title.mp3"}
+    },
+    "johto": {
+        0: {name: "Enju City", file_path: "soundtrack/johto/Enju City.mp3"},
+        1: {name: "Friendly Shop", file_path: "soundtrack/johto/New Bark Town.mp3"},
+        2: {name: "Hall Of Fame", file_path: "soundtrack/johto/Hall Of Fame.mp3"},
+        3: {name: "Indigo Plateau", file_path: "soundtrack/johto/Indigo Plateau.mp3"},
+        4: {name: "New Bark Town", file_path: "soundtrack/johto/New Bark Town.mp3"},
+        5: {name: "Pokemon Center", file_path: "soundtrack/johto/Pokemon Center.mp3"},
+        6: {name: "Rocket Hideout", file_path: "soundtrack/johto/Rocket Hideout.mp3"}
+    },
+    "hoenn": {
+        0: {name: "Kanazumi City", file_path: "soundtrack/hoenn/Kanazumi City.mp3"},
+        1: {name: "Minamo City", file_path: "soundtrack/hoenn/Minamo City.mp3"},
+        2: {name: "Mt. Chimney", file_path: "soundtrack/hoenn/Mt. Chimney.mp3"},
+        3: {name: "Route 101", file_path: "soundtrack/hoenn/Route 101.mp3"},
+        4: {name: "Route 110", file_path: "soundtrack/hoenn/Route 110.mp3"},
+        5: {name: "Shidake Town", file_path: "soundtrack/hoenn/Shidake Town.mp3"},
+        6: {name: "Touka City", file_path: "soundtrack/hoenn/Touka City.mp3"}
+    },
+    "sinnoh": {
+        0: {name: "Kotobuki City (Night)", file_path: "soundtrack/sinnoh/Kotobuki City (Night).mp3"},
+        1: {name: "Kurogane City (Day)", file_path: "soundtrack/sinnoh/Kurogane City (Day).mp3"},
+        2: {name: "Lake", file_path: "soundtrack/sinnoh/Lake.mp3"},
+        3: {name: "Nagisa City (Night)", file_path: "soundtrack/sinnoh/Nagisa City (Night).mp3"},
+        4: {name: "Route 201 (Day)", file_path: "soundtrack/sinnoh/Route 201 (Day).mp3"},
+        5: {name: "Route 205 (Day)", file_path: "soundtrack/sinnoh/Route 205 (Day).mp3"},
+        6: {name: "Route 206 (Night)", file_path: "soundtrack/sinnoh/Route 206 (Night).mp3"}
+    },
+    "unova": {
+        0: {name: "Accumula Town", file_path: "soundtrack/unova/Accumula Town.mp3"},
+        1: {name: "Castelia City", file_path: "soundtrack/unova/Castelia City.mp3"},
+        2: {name: "Nimbasa City", file_path: "soundtrack/unova/Nimbasa City.mp3"},
+        3: {name: "Route 19 (Spring/Summer)", file_path: "soundtrack/unova/Route 19 (Spring & Summer).mp3"},
+        4: {name: "Skyarrow Bridge", file_path: "soundtrack/unova/Skyarrow Bridge.mp3"},
+        5: {name: "Team Plasma Plots", file_path: "soundtrack/unova/Team Plasma Plots.mp3"},
+        6: {name: "The Pokémon League", file_path: "soundtrack/unova/The Pokémon League.mp3"}
+    },
+    "kalos": {
+        0: {name: "Aquacorde Town", file_path: "soundtrack/kalos/Aquacorde Town.mp3"},
+        1: {name: "Cyllage City", file_path: "soundtrack/kalos/Cyllage City.mp3"},
+        2: {name: "Kalos", file_path: "soundtrack/kalos/Kalos.mp3"},
+        3: {name: "Parfum Palace", file_path: "soundtrack/kalos/Parfum Palace.mp3"},
+        4: {name: "Route 1 - Vaniville Pathway", file_path: "soundtrack/kalos/Route 1 - Vaniville Pathway.mp3"},
+        5: {name: "Santalune City", file_path: "soundtrack/kalos/Santalune City.mp3"},
+        6: {name: "Victory Road", file_path: "soundtrack/kalos/Victory Road.mp3"}
+    },
+    "alola": {
+        0: {name: "Festival Plaza (Day)", file_path: "soundtrack/alola/Festival Plaza (Day).mp3"},
+        1: {name: "Hau'oli City (Night)", file_path: "soundtrack/alola/Hau'oli City (Night).mp3"},
+        2: {name: "Heahea City (Day)", file_path: "soundtrack/alola/Heahea City (Day).mp3"},
+        3: {name: "Malie City (Day)", file_path: "soundtrack/alola/Malie City (Day).mp3"},
+        4: {name: "Paniola Town (Day)", file_path: "soundtrack/alola/Paniola Town (Day).mp3"},
+        5: {name: "Route 2 on Melemele Island", file_path: "soundtrack/alola/Route 2 on Melemele Island.mp3"},
+        6: {name: "The Pokémon League", file_path: "soundtrack/alola/The Pokémon League.mp3"}
+    }
+}
+
+const first_song = 0; // start of playlist
+const final_song = 6; // end of playlist
+
+var current_soundtrack;
+var current_track = Math.floor(Math.random() * 6);
+var current_track_name = document.getElementsByClassName("song__title");
+var music_playing = false;
+
 var background__music = document.getElementById("background__music");
 background__music.addEventListener("ended", next_song);
 background__music.volume = 0.2;
-
-var music_playing = false;
-var current_track_name = document.getElementsByClassName("song__title");
-var current_track = 0;
-const soundtrack = {
-    0: {name: "Opening", file_path: "soundtrack/101 - opening.mp3"},
-    1: {name: "New Bark Town", file_path: "soundtrack/004 New Bark Town (heartgold & soulsilver).mp3"},
-    2: {name: "Title Screen (Heartgold & Soulsilver)", file_path: "soundtrack/002 Title Screen (heartgold & soulsilver).mp3"},
-    3: {name: "Pokémon League", file_path: "soundtrack/151 Pokémon League (heartgold & soulsilver).mp3"},
-    4: {name: "The Road to Viridian City", file_path: "soundtrack/106 - the road to viridian city.mp3"},
-    5: {name: "Azalea Town", file_path: "soundtrack/033 Azalea Town (heartgold & soulsilver).mp3"},
-    6: {name: "Route 205 (Day)", file_path: "soundtrack/1-39 Route 205 (Day) (diamond pearl).mp3"},
-    7: {name: "Lake", file_path: "soundtrack/1-07 Lake (diamond pearl).mp3"},
-}
 
 var team_strength = null
 var pokedex__page = document.getElementById("pokedex__page");
@@ -112,14 +173,17 @@ function region_page() {
     }
 }
 
-function retrieve_data(gen) {
+function retrieve_data(gen, region) {
     pokedex__page.style.display = "flex";
     pokedex.innerHTML = "";
     region__page.style.display = "none";
+    current_soundtrack = region;
 
     fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
     .then(response => response.json())
     .then(data => get_pokemon_numbers(data))
+
+    play_song();
 }
 
 function get_pokemon_numbers(data) {
@@ -130,7 +194,6 @@ function get_pokemon_numbers(data) {
         .then(response => response.json())
         .then(data => get_pokemon_data(data))
     }
-    play_song();
 }
 
 function get_pokemon_data(data) {
@@ -289,8 +352,12 @@ async function get_flavor_text(data) {
     })
 }
 
-
 function play_song() {
+    if (background__music.src = "none") {
+        background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+        change_song_title();
+    }
+
     background__music.play();
     music_playing = true;
     document.getElementById("pause__1").style.display = "block";
@@ -309,30 +376,30 @@ function pause_song() {
 }
 
 function previous_song() {
-    if (current_track == 0) {
-        current_track = Object.keys(soundtrack).length - 1;
+    if (current_track == first_song) {
+        current_track = final_song;
     }
     else {
         current_track -= 1;
     }
-    background__music.src = soundtrack[current_track]['file_path'];
+    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
     change_song_title();
 }
 
 function next_song() {
-    if (current_track == Object.keys(soundtrack).length - 1) {
-        current_track = 0;
+    if (current_track == final_song) {
+        current_track = first_song;
     } else {
         current_track += 1;
     }
-    background__music.src = soundtrack[current_track]['file_path'];
+    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
     change_song_title();
 }
 
 function change_song_title() {
     for (var i = 0; i < current_track_name.length; i++) {
-        current_track_name[i].textContent = "Currently Playing: " + soundtrack[current_track]['name'];
+        current_track_name[i].textContent = "Currently Playing: " + soundtracks[current_soundtrack][current_track]['name'];
     }
 }
