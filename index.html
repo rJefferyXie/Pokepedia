@@ -35,7 +35,6 @@
     <!-- Hero Section -->
     <div id="hero">
         <div class="hero__container">
-            <!-- <img src="images/wallpaper.jpg" class="wallpaper"> -->
             <!-- <div class="intro__section">
                 <p class="about">
                     Was good shawtie
@@ -45,7 +44,6 @@
                 </p>
             </div> -->
             <div class="region__section">
-                <!-- <img src="images/wallpaper2.jpg" class="wallpaper"> -->
                 <div id="kanto" class="region__container" onclick="retrieve_data('2', 'kanto')">
                     <img src="images/kanto/venusaur.png"  class="image-region">
                     <img src="images/kanto/charizard.png"  class="image-region">
@@ -113,7 +111,7 @@
         </div>
     </div>
 
-    <div id="pokedex__page">
+    <div id="pokedex__page" class="hide">
         <div id="pokedex__section">
             <input type="text" id="pokemon__search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
             <ul id="pokemon__list"></ul>
@@ -134,7 +132,7 @@
                         <div id="stat4-default" class="stat__bar-default">special-defense</div>
                         <div id="stat5-default" class="stat__bar-default">speed</div>
                     </ul>
-                    <ul id="stat__list-active">
+                    <ul id="stat__list-active" class="hide">
                         <p class="stat__header"></p>
                         <div id="stat0-active" class="stat__bar-active">hp</div>
                         <div id="stat1-active" class="stat__bar-active">attack</div>
@@ -145,7 +143,7 @@
                     </ul>
                 </div>
                 <div id="moves__and__extra">
-                    <ul id="evolution__chain"></ul>
+                    <ul id="evolution__chain" class="hide"></ul>
                     <ul id="move__list"></ul>
                     <div class="music__container">
                         <div class="song__title__container">
@@ -156,13 +154,13 @@
                         <div class="music__controls">
                             <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
                             <div id="pause__1" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                            <div id="play__1" class="music__button" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                            <div id="play__1" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
                             <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="teambuilder__view">
+            <div id="teambuilder__view" class="hide">
                 <ul id="team">
                     <div id="pokemon__row">
                         <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)">
@@ -202,7 +200,7 @@
                         <div class="music__controls">
                             <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
                             <div id="pause__2" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                            <div id="play__2" class="music__button" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                            <div id="play__2" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
                             <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
                         </div>
                     </div>

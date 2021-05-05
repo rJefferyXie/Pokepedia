@@ -99,10 +99,10 @@ background__music.addEventListener("ended", next_song);
 background__music.volume = 0.1;
 
 var team_strength = null
-var pokedex__page = document.getElementById("pokedex__page");
-var region__page = document.getElementById("hero");
-var pokedex = document.getElementById("pokemon__list");
-var evolution_chain = document.getElementById('evolution__chain');
+const pokedex__page = document.getElementById("pokedex__page");
+const region__page = document.getElementById("hero");
+const pokedex = document.getElementById("pokemon__list");
+const evolution_chain = document.getElementById('evolution__chain');
 
 // --------------------------------------- Drag and Drop Section --------------------------------------- // 
 function onDragStart(event) {
@@ -164,8 +164,8 @@ function onDragEnd() {
 
 // --------------------------------------- Retrieve Pokemon Data Section --------------------------------------- //
 function region_page() {
-    pokedex__page.style.display = "none";
-    region__page.style.display = "block";
+    pokedex__page.className = "hide";
+    region__page.className = "none";
     
     for (var i = 0; i <= 6; i++) {
         clear_slot(i);
@@ -175,8 +175,8 @@ function region_page() {
 
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
-    pokedex__page.style.display = "flex";
-    region__page.style.display = "none";
+    pokedex__page.className = "none";
+    region__page.className = "hide";
     current_soundtrack = region;
     current_track = Math.floor(Math.random() * 6);
     background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
@@ -303,20 +303,20 @@ function clear_slot(slot) {
     pokemon_slot.innerHTML = "";
     pokemon_slot.appendChild(clear_button);
     pokemon_slot.style.backgroundColor = "white";
-    document.getElementById("stat__list-active").style.display = "none";
-    document.getElementById("stat__list-default").style.display = "flex";
+    document.getElementById("stat__list-active").className = "hide";
+    document.getElementById("stat__list-default").className = "none";
     document.getElementById("move__list").innerHTML = "";
     document.getElementById("pokemon__description").textContent = "";
     evolution_chain.innerHTML = "";
-    evolution_chain.style.display = "none";
+    evolution_chain.className = "hide";
 }
 
 function fetch_inspect(data) {
     var pokedex_entry = data.id.replace("pokemon__container", "");
     pokedex_entry = pokedex_entry.replace("placed", "");
 
-    document.getElementById("stat__list-default").style.display = "none";
-    document.getElementById("stat__list-active").style.display = "flex";
+    document.getElementById("stat__list-default").className = "hide"
+    document.getElementById("stat__list-active").className = "none";
 
     fetch("https://pokeapi.co/api/v2/pokemon/" + pokedex_entry + "/")
     .then(response => response.json())
@@ -376,7 +376,7 @@ async function get_evolution_info(data) {
 
 function get_evolution_chain(data) {
     if (data['chain']['evolves_to'].length > 0) {
-        evolution_chain.style.display = "flex";
+        evolution_chain.className = "none";
     }
 
     var pokemon_container = document.getElementById(data['chain']['species']['name']).cloneNode(true);
@@ -429,20 +429,20 @@ function play_song() {
     change_song_title();
     background__music.play();
     music_playing = true;
-    toggle_play_pause("block", "block", "none", "none");
+    toggle_play_pause("music__button", "music__button", "hide", "hide");
 }
 
 function pause_song() {
     background__music.pause();
     music_playing = false;
-    toggle_play_pause("none", "none", "block", "block");
+    toggle_play_pause("hide", "hide", "music__button", "music__button");
 }
 
 function toggle_play_pause(pause1, pause2, play1, play2) {
-    document.getElementById("pause__1").style.display = pause1;
-    document.getElementById("pause__2").style.display = pause2;
-    document.getElementById("play__1").style.display = play1;
-    document.getElementById("play__2").style.display = play2;
+    document.getElementById("pause__1").className = pause1;
+    document.getElementById("pause__2").className = pause2;
+    document.getElementById("play__1").className = play1;
+    document.getElementById("play__2").className = play2;
 }
 
 function previous_song() {

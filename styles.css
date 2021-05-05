@@ -35,7 +35,6 @@ body {
 }
 
 #navbar__logo {
-  color: white;
   background-image: -webkit-linear-gradient(to top, #4ca1af, #c4e0e5);
   background-image: linear-gradient(to top, #4ca1af, #c4e0e5);
   -webkit-background-clip: text;
@@ -305,22 +304,22 @@ body {
 
 /* ----- Pokedex / Move List Section ----- */
 #pokedex__page {
-  display: none;
-  height: 90vh;
-  width: 100vw;
+  position: relative;
+  display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  height: 90vh;
+  width: 100vw;
 }
 
 #pokedex__section {
   display: flex;
-  background-color: #9DB7F5;
-  width: 20%;
-  height: 85%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #9DB7F5;
+  width: 20%;
+  height: 85%;
   border-radius: 16px;
 }
 
@@ -509,7 +508,6 @@ body {
 
 /* ----- Teambuilder Section ----- */
 #teambuilder__view {
-  display: none;
   background-color: tomato;
 }
 
@@ -567,10 +565,6 @@ body {
   display: flex;
 }
 
-#stat__list-active {
-  display: none;
-}
-
 .stat__bar-default, .stat__bar-active {
   max-width: 100%;
   min-width: 5%;
@@ -621,18 +615,25 @@ body {
 }
 
 #evolution__chain {
-  display: none;
-  background-color: white;
+  display: flex;
   flex-direction: row;
+  text-align: center;
+  background-color: white;
   overflow-x: scroll;
   width: 95%;
   height: 25%;
-  text-align: center;
+
 }
 
 .evolution__trigger {
   display: flex;
   align-items: center;
+}
+
+.hide {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 
 /* ----- Music Section ----- */
@@ -668,8 +669,4 @@ body {
 .music__button:hover {
   cursor: pointer;
   color: white;
-}
-
-#play__1, #play__2 {
-  display: none;
 }
