@@ -1,4 +1,5 @@
 # Enhanced-Pokedex
+A pokedex with many amazing features such as viewing pokemon stats and movesets in real time, building your own team, and a built in team generator.
 
 # Core Features
 * 7 Regions to Choose From:
