@@ -1,5 +1,4 @@
 // --------------------------------------- All Constants / Variables --------------------------------------- // 
-
 const type_color_schemes = { // source: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
     "Bug": "#C6D16E",
     "Dark": "#A29288",
@@ -97,12 +96,13 @@ var music_playing = false;
 
 var background__music = document.getElementById("background__music");
 background__music.addEventListener("ended", next_song);
-background__music.volume = 0.2;
+background__music.volume = 0.1;
 
 var team_strength = null
 var pokedex__page = document.getElementById("pokedex__page");
 var region__page = document.getElementById("hero");
 var pokedex = document.getElementById("pokemon__list");
+var evolution_chain = document.getElementById('evolution__chain');
 
 // --------------------------------------- Drag and Drop Section --------------------------------------- // 
 function onDragStart(event) {
@@ -163,7 +163,6 @@ function onDragEnd() {
 
 
 // --------------------------------------- Retrieve Pokemon Data Section --------------------------------------- //
-
 function region_page() {
     pokedex__page.style.display = "none";
     region__page.style.display = "block";
@@ -171,47 +170,56 @@ function region_page() {
     for (var i = 0; i <= 6; i++) {
         clear_slot(i);
     }
-
     pause_song();
 }
 
-function retrieve_data(gen, region) {
-    pokedex__page.style.display = "flex";
+function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
+    pokedex__page.style.display = "flex";
     region__page.style.display = "none";
     current_soundtrack = region;
     current_track = Math.floor(Math.random() * 6);
-
-    fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
-    .then(response => response.json())
-    .then(data => get_pokemon_numbers(data))
-
+    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
 }
 
-function get_pokemon_numbers(data) {
-    var pokedex = data["pokemon_entries"];
-    for (var i = 0; i < pokedex.length; i++) {
-        var pokemon_number = pokedex[i]["pokemon_species"]["url"].replace("https://pokeapi.co/api/v2/pokemon-species/", "").replace("/", "");
-        fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon_number + "/")
-        .then(response => response.json())
-        .then(data => get_pokemon_data(data))
+function retrieve_data(gen, region) {
+    initialize_pokedex_page(region);
+    fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
+    .then(response => response.json())
+    .then(data => generate_pokedex(data))
+}
+
+async function generate_pokedex(data) {
+    const promiseArray = await get_promise_array(data);
+    for (var i = 0; i < promiseArray.length; i++) {
+        get_pokemon_data(promiseArray[i], i + 1);
     }
 }
 
-function get_pokemon_data(data) {
-    pokemon__container = create_pokemon_container(data);
+function get_promise_array(data) {
+    var pokedex = data["pokemon_entries"];
+    let promiseArray = [];
+
+    for (var i = 0; i < pokedex.length; i++) {
+        let pokemon_number = pokedex[i]["pokemon_species"]["url"].replace("https://pokeapi.co/api/v2/pokemon-species/", "").replace("/", "");
+        promiseArray.push(fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon_number + "/").then(response => response.json()));
+    }
+    return Promise.all(promiseArray);
+}
+
+function get_pokemon_data(data, entry_number) {
+    let pokemon__container = create_pokemon_container();
     pokemon__container.appendChild(get_image(data));
-    pokemon__container.appendChild(get_entry_number(data));
-    pokemon__container.appendChild(get_name(data));
+    pokemon__container.appendChild(get_entry_number(entry_number));
+    pokemon__container.appendChild(get_name(data, pokemon__container));
     pokemon__container.appendChild(get_types(data));
     pokedex.appendChild(pokemon__container);
 }
 
-function create_pokemon_container(data) {
+function create_pokemon_container() {
     var pokemon__container = document.createElement("li");
     pokemon__container.className = "pokemon__container";
-    pokemon__container.id = "pokemon__container" + data["id"];
     pokemon__container.draggable="true";
     pokemon__container.addEventListener("dragstart", onDragStart);
     pokemon__container.addEventListener("dragend", onDragEnd);
@@ -226,17 +234,18 @@ function get_image(data) {
     return image;
 }
 
-function get_entry_number(data) {
+function get_entry_number(entry_number) {
     var number = document.createElement("div");
     number.className = "pokemon__number";
-    number.textContent = "#" + data["id"];
+    number.textContent = "#" + entry_number;
     return number;
 }
 
-function get_name(data) {
+function get_name(data, pokemon__container) {
     var name = document.createElement("a");
     name.className = "pokemon__name";
     name.innerHTML = data["name"].charAt(0).toUpperCase() + data["name"].slice(1);
+    pokemon__container.id = data["name"];
     return name;
 }
 
@@ -251,7 +260,7 @@ function get_types(data) {
 
         var type = document.createElement("div");
         type.style.backgroundColor = type_color;
-        type.id = "pokemon__type";
+        type.className = "pokemon__type";
         type.textContent = type_str;
         types.appendChild(type);
     }
@@ -298,6 +307,8 @@ function clear_slot(slot) {
     document.getElementById("stat__list-default").style.display = "flex";
     document.getElementById("move__list").innerHTML = "";
     document.getElementById("pokemon__description").textContent = "";
+    evolution_chain.innerHTML = "";
+    evolution_chain.style.display = "none";
 }
 
 function fetch_inspect(data) {
@@ -312,10 +323,17 @@ function fetch_inspect(data) {
     .then(data => get_inspect_info(data))
 }
 
-function get_inspect_info(data) {
-    get_pokemon_stats(data)
-    .then(get_pokemon_moves(data))
-    .then(get_flavor_text(data['species']['url']))
+async function get_inspect_info(data) {
+    get_pokemon_stats(data);
+    get_pokemon_moves(data);
+    let species_info = await get_species_info(data);
+    await get_flavor_text(species_info);
+    get_evolution_info(species_info);
+}
+
+async function get_species_info(data) {
+    return fetch(data['species']['url'])
+    .then(response => response.json());
 }
 
 async function get_pokemon_stats(data) {
@@ -343,38 +361,91 @@ async function get_pokemon_moves(data) {
     }
 }
 
-async function get_flavor_text(data) {
+function get_flavor_text(data) {
     var pokemon__description = document.getElementById("pokemon__description");
-    fetch(data)
-    .then(response => response.json())
-    .then(data => {
-        var flavor_text = data['flavor_text_entries'][0]['flavor_text'];
-        flavor_text = flavor_text.replace("\f", " ");
-        pokemon__description.textContent = flavor_text;
-    })
+    var flavor_text = data['flavor_text_entries'][0]['flavor_text'];
+    flavor_text = flavor_text.replace("\f", " ");
+    pokemon__description.textContent = flavor_text;
 }
 
-function play_song() {
-    if (background__music.src = "none") {
-        background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
-        change_song_title();
+async function get_evolution_info(data) {
+    fetch(data['evolution_chain']['url'])
+    .then(response => response.json())
+    .then(data => get_evolution_chain(data))
+}
+
+function get_evolution_chain(data) {
+    if (data['chain']['evolves_to'].length > 0) {
+        evolution_chain.style.display = "flex";
     }
 
+    var pokemon_container = document.getElementById(data['chain']['species']['name']).cloneNode(true);
+    pokemon_container.id = pokemon_container.id + "_chain";
+    pokemon_container.style.display = "block";
+    pokemon_container.removeChild(pokemon_container.lastChild);
+    evolution_chain.appendChild(pokemon_container);
+
+    for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
+        var trigger = document.createElement('div');
+        trigger.className = "evolution__trigger";
+        if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
+            trigger.textContent = "Level: " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_level'];
+        }
+        else if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
+            trigger.textContent = "use-item";
+        }
+        evolution_chain.appendChild(trigger);
+        pokemon_container = document.getElementById(data['chain']['evolves_to'][i]['species']['name']).cloneNode(true);
+        pokemon_container.id = pokemon_container.id + "_chain";
+        pokemon_container.style.display = "block";
+        pokemon_container.removeChild(pokemon_container.lastChild);
+        evolution_chain.appendChild(pokemon_container);
+    }
+
+    data = data['chain']['evolves_to'][0];
+    if (data['evolves_to'].length > 0) {
+        for (var i = 0; i < data['evolves_to'].length; i++) {
+            var trigger = document.createElement('div');
+            trigger.className = "evolution__trigger";
+            if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
+                trigger.textContent = "Level: " + data['evolves_to'][i]['evolution_details'][0]['min_level'];
+            }
+            else if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
+                trigger.textContent = "use-item";
+            }
+            evolution_chain.appendChild(trigger);
+            pokemon_container = document.getElementById(data['evolves_to'][i]['species']['name']).cloneNode(true);
+            pokemon_container.id = pokemon_container.id + "_chain";
+            pokemon_container.style.display = "block";
+            pokemon_container.removeChild(pokemon_container.lastChild);
+            evolution_chain.appendChild(pokemon_container);
+        }
+    }
+}
+
+
+
+
+/* ----- Music Section ----- */
+function play_song() {
+    change_song_title();
     background__music.play();
     music_playing = true;
-    document.getElementById("pause__1").style.display = "block";
-    document.getElementById("pause__2").style.display = "block";
-    document.getElementById("play__1").style.display = "none";
-    document.getElementById("play__2").style.display = "none";
+    toggle_play_pause("block", "block", "none", "none");
+
 }
 
 function pause_song() {
     background__music.pause();
     music_playing = false;
-    document.getElementById("pause__1").style.display = "none";
-    document.getElementById("pause__2").style.display = "none";
-    document.getElementById("play__1").style.display = "block";
-    document.getElementById("play__2").style.display = "block";
+    toggle_play_pause("none", "none", "block", "block");
+}
+
+function toggle_play_pause(pause1, pause2, play1, play2) {
+    document.getElementById("pause__1").style.display = pause1;
+    document.getElementById("pause__2").style.display = pause2;
+    document.getElementById("play__1").style.display = play1;
+    document.getElementById("play__2").style.display = play2;
 }
 
 function previous_song() {
@@ -386,18 +457,17 @@ function previous_song() {
     }
     background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
-    change_song_title();
 }
 
 function next_song() {
     if (current_track == final_song) {
         current_track = first_song;
-    } else {
+    } 
+    else {
         current_track += 1;
     }
     background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
-    change_song_title();
 }
 
 function change_song_title() {
