@@ -4,6 +4,7 @@ A pokedex with many amazing features such as viewing pokemon stats and movesets 
 # Table of Contents
 * [Regions](#regions)
 * [Features](#features)
+* [Sources](#sources)
 
 # Regions <a name="regions"></a>
 
@@ -45,3 +46,9 @@ A pokedex with many amazing features such as viewing pokemon stats and movesets 
 * Soundtrack
     * Your favorite soundtracks from each generation of pokemon.
     * 7 unique soundtracks from each region.
+
+# Sources <a name="sources"></a>
+* Pokemon Database: https://pokeapi.co/docs/v2
+* Pokemon Soundtracks: https://downloads.khinsider.com/search?search=pokemon
+* Pokemon Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
+* Pokemon Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
