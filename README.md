@@ -48,7 +48,7 @@ A pokedex with many amazing features such as viewing pokemon stats and movesets 
     * 7 unique soundtracks from each region.
 
 # Sources <a name="sources"></a>
-* Pokemon Database: https://pokeapi.co/docs/v2
-* Pokemon Soundtracks: https://downloads.khinsider.com/search?search=pokemon
-* Pokemon Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
-* Pokemon Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
+* Database: https://pokeapi.co/docs/v2
+* Soundtracks: https://downloads.khinsider.com/search?search=pokemon
+* Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
+* Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
