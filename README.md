@@ -1,6 +1,6 @@
 # Enhanced-Pokedex
 A pokedex with many amazing features such as viewing pokemon stats and movesets in real time, building your own team, and a built in team generator.
-https://github.com/rJefferyXie/Enhanced-Pokedex
+https://rjefferyxie.github.io/Enhanced-Pokedex/
 
 # Table of Contents
 * [Regions](#regions)
