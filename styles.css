@@ -80,8 +80,8 @@ body {
   width: 100vw;
   height: 100vh;
   background-image: url(images/wallpaper.jpg);
-  background-position: center center;
   background-repeat: no-repeat;
+  background-position: center top;
   background-attachment: fixed;
   background-size: cover;
   background-color: #464646;
@@ -228,7 +228,8 @@ body {
   align-items: center;
   position: absolute;
   justify-content: center;
-  top: 15%;
+  top: 50%;
+  transform: translateY(-45%);
 }
 
 .region__name {
@@ -252,6 +253,8 @@ body {
 }
 
 .region__container {
+  min-width: 320px;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
