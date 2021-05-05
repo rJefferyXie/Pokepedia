@@ -35,6 +35,7 @@ body {
 }
 
 #navbar__logo {
+  color: white;
   background-image: -webkit-linear-gradient(to top, #4ca1af, #c4e0e5);
   background-image: linear-gradient(to top, #4ca1af, #c4e0e5);
   -webkit-background-clip: text;
