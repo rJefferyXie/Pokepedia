@@ -472,3 +472,17 @@ function change_song_title() {
         current_track_name[i].textContent = "Currently Playing: " + soundtracks[current_soundtrack][current_track]['name'];
     }
 }
+
+
+
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.navbar__menu');
+const navLogo = document.querySelector('#navbar__logo');
+
+// Display Mobile Menu
+const mobileMenu = () => {
+  menu.classList.toggle('is-active');
+  menuLinks.classList.toggle('active');
+};
+
+menu.addEventListener('click', mobileMenu);
