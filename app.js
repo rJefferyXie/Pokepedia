@@ -91,10 +91,10 @@ const final_song = 6; // end of playlist
 
 var current_soundtrack;
 var current_track; 
-var current_track_name = document.getElementsByClassName("song__title");
+const current_track_name = document.getElementsByClassName("song__title");
 var music_playing = false;
 
-var background__music = document.getElementById("background__music");
+const background__music = document.getElementById("background__music");
 background__music.addEventListener("ended", next_song);
 background__music.volume = 0.1;
 
@@ -379,27 +379,16 @@ function get_evolution_chain(data) {
         evolution_chain.className = "none";
     }
 
-    var pokemon_container = document.getElementById(data['chain']['species']['name']).cloneNode(true);
-    pokemon_container.id = pokemon_container.id + "_chain";
-    pokemon_container.style.display = "block";
-    pokemon_container.removeChild(pokemon_container.lastChild);
-    evolution_chain.appendChild(pokemon_container);
-
+    create_evolution_container(data['chain']['species']['name']);
     for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
         var trigger = document.createElement('div');
         trigger.className = "evolution__trigger";
+        trigger.textContent = data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
         if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
-            trigger.textContent = "Level: " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_level'];
-        }
-        else if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
-            trigger.textContent = "use-item";
+            trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_level'];
         }
         evolution_chain.appendChild(trigger);
-        pokemon_container = document.getElementById(data['chain']['evolves_to'][i]['species']['name']).cloneNode(true);
-        pokemon_container.id = pokemon_container.id + "_chain";
-        pokemon_container.style.display = "block";
-        pokemon_container.removeChild(pokemon_container.lastChild);
-        evolution_chain.appendChild(pokemon_container);
+        create_evolution_container(data['chain']['evolves_to'][i]['species']['name']);
     }
 
     data = data['chain']['evolves_to'][0];
@@ -407,20 +396,22 @@ function get_evolution_chain(data) {
         for (var i = 0; i < data['evolves_to'].length; i++) {
             var trigger = document.createElement('div');
             trigger.className = "evolution__trigger";
+            trigger.textContent = data['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
             if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
-                trigger.textContent = "Level: " + data['evolves_to'][i]['evolution_details'][0]['min_level'];
-            }
-            else if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
-                trigger.textContent = "use-item";
+                trigger.textContent += ": " + data['evolves_to'][i]['evolution_details'][0]['min_level'];
             }
             evolution_chain.appendChild(trigger);
-            pokemon_container = document.getElementById(data['evolves_to'][i]['species']['name']).cloneNode(true);
-            pokemon_container.id = pokemon_container.id + "_chain";
-            pokemon_container.style.display = "block";
-            pokemon_container.removeChild(pokemon_container.lastChild);
-            evolution_chain.appendChild(pokemon_container);
+            create_evolution_container(data['evolves_to'][i]['species']['name']);
         }
     }
+}
+
+function create_evolution_container(pokemon_container) {
+    let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
+    evolution_container.id = evolution_container.id + "_chain";
+    evolution_container.style.display = "block";
+    evolution_container.removeChild(evolution_container.lastChild);
+    evolution_chain.appendChild(evolution_container);
 }
 
 
