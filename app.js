@@ -171,6 +171,8 @@ function region_page() {
     for (var i = 0; i <= 6; i++) {
         clear_slot(i);
     }
+
+    pause_song();
 }
 
 function retrieve_data(gen, region) {
@@ -253,7 +255,6 @@ function get_types(data) {
         type.textContent = type_str;
         types.appendChild(type);
     }
-
     return types;
 }
 
