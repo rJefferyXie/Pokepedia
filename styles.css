@@ -76,6 +76,17 @@ body {
 }
 
 /* ----- Hero Section ----- */
+#hero {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(images/wallpaper.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
 .hero__container {
   display: flex;
   align-items: center;
@@ -86,16 +97,14 @@ body {
   user-select: none;          /* Likely future */ 
 }
 
-.wallpaper {
-  height: 100%;
+/* .wallpaper {
   width: 100%;
-  object-fit: cover;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
-}
+} */
 
 
 @media screen and (max-width: 960px) {
