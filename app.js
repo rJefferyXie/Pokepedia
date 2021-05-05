@@ -353,13 +353,13 @@ async function get_pokemon_moves(data) {
         move.id = "move" + i;
         move.className = "pokemon__move";
         move.textContent = moves[i]['move']['name'] + "\n";
+        document.getElementById("move__list").appendChild(move);
+    }
+}
 
         // fetch(moves[i]['move']['url'])
         // .then(response => response.json())
         // .then(data => move_data = data)
-        document.getElementById("move__list").appendChild(move);
-    }
-}
 
 function get_flavor_text(data) {
     var pokemon__description = document.getElementById("pokemon__description");
@@ -424,15 +424,12 @@ function get_evolution_chain(data) {
 }
 
 
-
-
 /* ----- Music Section ----- */
 function play_song() {
     change_song_title();
     background__music.play();
     music_playing = true;
     toggle_play_pause("block", "block", "none", "none");
-
 }
 
 function pause_song() {
