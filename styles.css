@@ -185,8 +185,9 @@ body {
 
 #mobile-menu.is-active .bar:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
+  }
 }
-}
+
 /* .intro__section {
   display: flex;
   align-items: center;
@@ -242,19 +243,12 @@ body {
 	white-space: nowrap;
 }
 
-@media only screen and (max-width: 960px) {
-  .region__name {
-    font-size: 2rem;
-  }
-}
-
 .image-region {
   width: 10%;
 }
 
 .region__container {
   min-width: 320px;
-  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -324,7 +318,7 @@ body {
 }
 
 #pokemon__search {
-  width: 340px; /* Full-width */
+  width: 90%;
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid rgb(0, 0, 0); /* Add a grey border */
@@ -333,7 +327,6 @@ body {
 
 #pokemon__list, #move__list {
   background-color: white;
-  width: 340px;
   border: 1px solid rgb(0,0,0);
   list-style: none;
   overflow-y: scroll;
@@ -343,11 +336,13 @@ body {
 }
 
 #pokemon__list {
-  height: 630px;
+  height: 85%;
+  width: 90%;
 }
 
 #move__list {
   height: 230px;
+  width: 340px;
 }
 
 #pokemon__list::-webkit-scrollbar, #move__list::-webkit-scrollbar {
@@ -383,6 +378,7 @@ body {
 .pokemon__container {
   text-align: center;
   list-style: none;
+  width: 100%;
 }
 
 #pokemon__types {
@@ -394,7 +390,7 @@ body {
 
 .pokemon__type {
   padding: 6px 12px;
-  margin: 4px;
+  margin: 0px 4px 0px 4px;
   border-radius: 6px;
 }
 
@@ -415,11 +411,12 @@ body {
   align-items: center;
   justify-content: center;
   height: 85%;
+  width: 40%;
   position: relative;
 }
 
 #teambuilder__view, #inspect__view {
-  width: 40vw;
+  width: 100%;
   height: 100%;
   border-radius: 16px;
 }
@@ -428,30 +425,22 @@ body {
   display: flex;
 }
 
+
 #pokemon0, #pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
   border: 1px solid #000000;
   background-color: white;
-  width: 172px;
-  height: 226px;
   display: flex;
+  width: 10vw;
+  height: 24vh;
   flex-direction: column-reverse;
   align-content: center;
   align-items: center;
-  border-radius: 9px;
+  border-radius: 12px;
+  margin: 0px 0px 10px 10px;
 }
 
 #pokemon1, #pokemon2 {
-  margin-top: 10px;
-}
-
-#pokemon1, #pokemon3, #pokemon5 {
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
-
-#pokemon2, #pokemon4, #pokemon6 {
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin-top: 7.5px;
 }
 
 #clear_slot0, #clear_slot1, #clear_slot2, #clear_slot3, #clear_slot4, #clear_slot5, #clear_slot6 {
@@ -508,6 +497,7 @@ body {
 
 /* ----- Teambuilder Section ----- */
 #teambuilder__view {
+  display: flex;
   background-color: tomato;
 }
 
@@ -622,7 +612,6 @@ body {
   overflow-x: scroll;
   width: 95%;
   height: 25%;
-
 }
 
 .evolution__trigger {
@@ -669,4 +658,109 @@ body {
 .music__button:hover {
   cursor: pointer;
   color: white;
+}
+
+
+
+
+@media screen and (max-width: 960px) {
+  .region__name {
+    font-size: 2rem;
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .pokemon__name, .pokemon__number {
+    font-size: 12px;
+  }
+
+  #pokedex__page {
+    flex-direction: column;
+    width: 95%;
+    height: 100%;
+  }
+
+  #pokemon0, #pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
+    min-width: 100px;
+    width: 27vw;
+    height: 21vh;
+    margin: 0px 0px 5px 5px;
+  }
+
+  #pokemon0, #pokemon1, #pokemon3, #pokemon5 {
+    margin-top: 5px;
+  }
+  
+  #pokedex__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #9DB7F5;
+    width: 90%;
+    height: 60%;
+    border-radius: 16px;
+    margin: 5px 0px 0px 0px;
+  }
+
+  .pokemon__image {
+    width: 64px;
+    height: 64px;
+  }
+  
+  #pokemon__search {
+    width: 90%;
+    margin-bottom: 5px;
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid rgb(0, 0, 0); /* Add a grey border */
+  }
+  
+  #pokemon__list {
+    width: 90%;
+    height: 22vh;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgb(0,0,0);
+    list-style: none;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    align-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+
+  #teambuilder__view {
+    flex-direction: column;
+  }
+
+  #team {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+  }
+
+  .pokemon__type {
+    font-size: 12px;    
+    padding: 3px 3px;
+
+  }
+
+  #team__info {
+    width: 100%;
+    height: 50%;
+  }
+
+  #pokemon__row {
+    flex-direction: column;
+  }
+
+
+  #utility__section {
+    width: 90%;
+  }
 }

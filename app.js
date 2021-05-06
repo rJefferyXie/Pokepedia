@@ -268,13 +268,13 @@ function get_types(data) {
 }
 
 function inspect_screen() {
-    document.getElementById("inspect__view").style.display = "flex";
-    document.getElementById("teambuilder__view").style.display = "none";
+    document.getElementById("inspect__view").className = "none";
+    document.getElementById("teambuilder__view").className = "hide";
 }
 
 function teambuilder_screen() {
-    document.getElementById("teambuilder__view").style.display = "flex";
-    document.getElementById("inspect__view").style.display = "none";
+    document.getElementById("teambuilder__view").className = "none";
+    document.getElementById("inspect__view").className = "hide";
 }
 
 function search_pokemon() {
@@ -381,7 +381,7 @@ function get_evolution_chain(data) {
 
     create_evolution_container(data['chain']['species']['name']);
     for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
-        var trigger = document.createElement('div');
+        let trigger = document.createElement('div');
         trigger.className = "evolution__trigger";
         trigger.textContent = data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
         if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
@@ -394,7 +394,7 @@ function get_evolution_chain(data) {
     data = data['chain']['evolves_to'][0];
     if (data['evolves_to'].length > 0) {
         for (var i = 0; i < data['evolves_to'].length; i++) {
-            var trigger = document.createElement('div');
+            let trigger = document.createElement('div');
             trigger.className = "evolution__trigger";
             trigger.textContent = data['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
             if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
