@@ -35,14 +35,12 @@
     <!-- Hero Section -->
     <div id="hero">
         <div class="hero__container">
-            <!-- <div class="intro__section">
+            <div class="intro__section">
                 <p class="about">
                     Was good shawtie
-                </p>
-                <p class="about2">
                     Drag and drop, team builder, inspect and compare pokemon
                 </p>
-            </div> -->
+            </div>
             <div class="region__section">
                 <div id="kanto" class="region__container" onclick="retrieve_data('2', 'kanto')">
                     <img src="images/kanto/venusaur.png"  class="image-region">
@@ -119,10 +117,11 @@
         <div id="utility__section">
             <div id="inspect__view">
                 <div id="stats__and__description">
-                    <div id="pokemon0" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                        <div id="clear_slot0" onclick="clear_slot(0)">Clear</div>
-                    </div>
+                    <div id="pokemon0" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                     <div id="pokemon__description"></div>
+                    <ul id="evolution__chain" class="hide"></ul>
+                </div>
+                <div id="moves__and__extra">
                     <ul id="stat__list-default">
                         <p class="stat__header"></p>
                         <div id="stat0-default" class="stat__bar-default">hp</div>
@@ -141,15 +140,12 @@
                         <div id="stat4-active" class="stat__bar-active">special-defense</div>
                         <div id="stat5-active" class="stat__bar-active">speed</div>
                     </ul>
-                </div>
-                <div id="moves__and__extra">
-                    <ul id="evolution__chain" class="hide"></ul>
                     <ul id="move__list"></ul>
                     <div class="music__container">
                         <div class="song__title__container">
-                            <i class="fas fa-music"></i>
-                            <p class="song__title"></i></p>
-                            <i class="fas fa-music"></i>
+                            <p class="song__title">
+                                <span class="title"></span>
+                            </p>
                         </div>
                         <div class="music__controls">
                             <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
@@ -162,29 +158,17 @@
             </div>
             <div id="teambuilder__view" class="hide">
                 <ul id="team">
-                    <div id="pokemon__row">
-                        <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot1" onclick="clear_slot(1)">Clear</div>
-                        </div>
-                        <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot2" onclick="clear_slot(2)">Clear</div>
-                        </div>
+                    <div class="pokemon__row">
+                        <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                        <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                     </div>
-                    <div id="pokemon__row">
-                        <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot3" onclick="clear_slot(3)">Clear</div>
-                        </div>
-                        <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot4" onclick="clear_slot(4)">Clear</div>
-                        </div>
+                    <div class="pokemon__row">
+                        <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                        <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                     </div>
-                    <div id="pokemon__row">
-                        <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot5" onclick="clear_slot(5)">Clear</div>
-                        </div>
-                        <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)">
-                            <div id="clear_slot6" onclick="clear_slot(6)">Clear</div>
-                        </div>
+                    <div class="pokemon__row">
+                        <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                        <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                     </div>
                 </ul>
                 <div id="team__info">
@@ -193,9 +177,9 @@
                     </div>
                     <div class="music__container">
                         <div class="song__title__container">
-                            <i class="fas fa-music"></i>
-                            <p class="song__title"></i></p>
-                            <i class="fas fa-music"></i>
+                            <p class="song__title">
+                                <span class="title"></span>
+                            </p>
                         </div>
                         <div class="music__controls">
                             <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
