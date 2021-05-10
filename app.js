@@ -516,7 +516,10 @@ function next_song() {
 
 function change_song_title() {
     for (var i = 0; i < current_track_name.length; i++) {
-        current_track_name[i].textContent = "Currently Playing: " + soundtracks[current_soundtrack][current_track]['name'];
+        current_track_name[i].innerHTML = 
+        '<i class="fas fa-music"></i> ' + 
+        "Currently Playing: " + soundtracks[current_soundtrack][current_track]['name'] + 
+        ' <i class="fas fa-music"></i>';
     }
 }
 

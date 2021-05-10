@@ -6,10 +6,6 @@
     scroll-behavior: smooth;
 }
 
-body {
-    overflow: hidden;
-}
-
 .hide {
     position: absolute;
     top: -9999px;
@@ -82,7 +78,7 @@ body {
 /* ----- Hero Section ----- */
 #hero {
     width: 100%;
-    height: 92vh;
+    height: calc(100vh - 80px);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -228,7 +224,6 @@ body {
 
 #pokemon__search:focus {
     outline: none;
-    
 }
 
 .pokemon__name, .pokemon__number, .pokemon__type {
@@ -277,14 +272,19 @@ body {
     width: 3vh;
     border: 1px solid black;
     color: white;
-    border-radius: 10px 0px 0px 0px;
+    border-radius: 10px 0px 10px 0px;
     background-color: rgb(172, 172, 172);
 }
-  
+
 .pokemon__container:hover button, .pokemon__container-placed:hover button {
     cursor: pointer;
-    left: 0;
-    top: 0;
+    left: -1px;
+    top: -1px;
+}
+
+.pokemon__container:hover button {
+    left: -2px;
+    top: -1px;
 }
 
 /* ----- Pokedex / Move List Section ----- */
@@ -422,18 +422,25 @@ body {
     background-color: rgb(152, 226, 255);
 }
 
-#stats__and__description {
+#left__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     width: 50%;
     margin: 10px auto;
+}
+
+#image__and__description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #pokemon__description {
     overflow: hidden;
     width: 95%;
-    height: 50%;
 }
 
 #stat__list-default, #stat__list-active {
@@ -484,7 +491,7 @@ body {
     background-color: #FA92B2;
 }
 
-#moves__and__extra {
+#moves__and__stats {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -524,13 +531,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    width: 100%;
+    width: 95%;
 }
 
 .song__title__container {
     display: flex;
     flex-direction: row;
-    width: 95%;
 }
 
 .song__title {
@@ -541,7 +547,7 @@ body {
 
 .song__title:hover span {
     display: inline-block;
-    padding-right: 100%;
+    padding-left: 100%;
     animation: song__title 10s linear infinite;
 }
   
@@ -550,7 +556,7 @@ body {
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(100%, 0);
+        transform: translate(-100%, 0);
     }
 }
 
@@ -604,6 +610,9 @@ body {
 
 /* ----- Desktop / Responsive ----- */
 @media screen and (min-width: 960px) {
+    body {
+        overflow: hidden;
+    }
 
     /* ----- Hero Section ----- */
     .hero__container {
@@ -700,6 +709,8 @@ body {
         max-width: 172px;
         height: 24vh;
         margin: 0px 0px 0px 10px;
+        text-align: center;
+        justify-content: center;
     }
 
     /* ----- Inspect Section ----- */
@@ -707,12 +718,22 @@ body {
         border-radius: 16px;
     }
 
-    #moves__and__extra {
+    #image__and__description {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    #pokemon__description {
+        width: 50%;
+    }
+
+    #moves__and__stats {
         justify-content: space-evenly;
     }
 
     #evolution__chain {
-        height: 37%;
+        height: 30%;
     }
 
     /* ----- Teambuilder Section ----- */
