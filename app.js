@@ -106,7 +106,115 @@ const region__page = document.getElementById("hero");
 const pokedex = document.getElementById("pokemon__list");
 const evolution_chain = document.getElementById('evolution__chain');
 
-// --------------------------------------- Drag and Drop Section --------------------------------------- // 
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.navbar__menu');
+const navLogo = document.querySelector('#navbar__logo');
+
+// Display Mobile Menu
+const mobileMenu = () => {
+  menu.classList.toggle('is-active');
+  menuLinks.classList.toggle('active');
+};
+
+menu.addEventListener('click', mobileMenu);
+
+// --------------------------------------- Website State Functions --------------------------------------- //
+function region_page() {
+    pokedex__page.className = "hide";
+    region__page.className = "none";
+    
+    clear_inspect();
+
+    for (var i = 0; i <= 6; i++) {
+        let slot = document.getElementById("pokemon" + i);
+        clear_slot(slot);
+    }
+    pause_song();
+}
+
+function initialize_pokedex_page(region) {
+    pokedex.innerHTML = "";
+    pokedex__page.className = "none";
+    region__page.className = "hide";
+    current_soundtrack = region;
+    current_track = Math.floor(Math.random() * 6);
+    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    // play_song();
+}
+
+function swap_view(inspect, teambuilder) {
+    document.getElementById("inspect__view").className = inspect;
+    document.getElementById("teambuilder__view").className = teambuilder;
+}
+
+function inspect_screen() {
+    current_view = "inspect";
+    swap_view("none", "hide");
+}
+
+function teambuilder_screen() {
+    current_view = "teambuilder";
+    swap_view("hide", "none");
+}
+
+// --------------------------------------- Data Management Functions --------------------------------------- //
+function find_slot(pokemon__container) {
+    if (current_view == "inspect") {
+        let slot = document.getElementById("pokemon0");
+        if (slot.childElementCount > 0) {
+            clear_slot(slot);
+        }
+        insert_slot(slot, pokemon__container);
+        return;
+    } 
+    if (current_view == "teambuilder") {
+        for (var i = 1; i <= 6; i++) {
+            var slot = document.getElementById("pokemon" + i);
+            if (slot.childElementCount == 0) {
+                insert_slot(slot, pokemon__container);
+                return;
+            }
+        }
+    }
+}
+
+function clear_inspect() {
+    document.getElementById("moves__and__stats").className = "hide";
+    document.getElementById("stat__list-active").className = "hide";
+    document.getElementById("stat__list-default").className = "none";
+    document.getElementById("move__list").innerHTML = "";
+    document.getElementById("pokemon__description").className = "hide";
+    document.getElementById("pokemon__description").textContent = "";
+    evolution_chain.innerHTML = "";
+    evolution_chain.className = "hide";
+}
+
+function insert_slot(slot, pokemon__container) {
+    let original_container = document.getElementById(pokemon__container);
+    let datacopy = original_container.cloneNode(true);
+    datacopy.id = original_container.id + "placed";
+    datacopy.className = original_container.className + "-placed";
+    datacopy.draggable="true";
+    datacopy.removeChild(datacopy.lastChild);
+    datacopy.appendChild(create_clear_button(slot));
+    datacopy.addEventListener("dragstart", onDragStart);
+    datacopy.addEventListener("dragend", onDragEnd);
+    slot.appendChild(datacopy);
+
+    if (slot.id == "pokemon0") {
+        fetch_inspect(document.getElementById(pokemon__container));
+    }
+}
+
+function clear_slot(pokemon_slot) {
+    if (current_view == "inspect") {
+        clear_inspect();
+    }
+    pokemon_slot.innerHTML = "";
+}
+
+
+// --------------------------------------- Drag and Drop Functions --------------------------------------- // 
 function onDragStart(event) {
     // Make background dark to highlight where to drag pokemon
     pokedex__page.style.backgroundColor = "#363b3b";
@@ -155,31 +263,7 @@ function onDragEnd() {
     }
 }
 
-
-// --------------------------------------- Retrieve Pokemon Data Section --------------------------------------- //
-function region_page() {
-    pokedex__page.className = "hide";
-    region__page.className = "none";
-    
-    clear_inspect();
-
-    for (var i = 0; i <= 6; i++) {
-        let slot = document.getElementById("pokemon" + i);
-        clear_slot(slot);
-    }
-    pause_song();
-}
-
-function initialize_pokedex_page(region) {
-    pokedex.innerHTML = "";
-    pokedex__page.className = "none";
-    region__page.className = "hide";
-    current_soundtrack = region;
-    current_track = Math.floor(Math.random() * 6);
-    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
-    // play_song();
-}
-
+// --------------------------------------- Data Retrieval Functions --------------------------------------- //
 function retrieve_data(gen, region) {
     initialize_pokedex_page(region);
     fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
@@ -281,18 +365,7 @@ function get_types(data) {
     return types;
 }
 
-function inspect_screen() {
-    current_view = "inspect";
-    document.getElementById("inspect__view").className = "none";
-    document.getElementById("teambuilder__view").className = "hide";
-}
-
-function teambuilder_screen() {
-    current_view = "teambuilder";
-    document.getElementById("teambuilder__view").className = "none";
-    document.getElementById("inspect__view").className = "hide";
-}
-
+// --------------------------------------- Utility Functions --------------------------------------- // 
 function search_pokemon() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
@@ -307,70 +380,21 @@ function search_pokemon() {
       txtValue = a.textContent || a.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         li[i].style.display = "";
-      } else {
+      } 
+      else {
         li[i].style.display = "none";
-      }
-    }
-  }
-
-function find_slot(pokemon__container) {
-    if (current_view == "inspect") {
-        let slot = document.getElementById("pokemon0");
-        if (slot.childElementCount > 0) {
-            clear_slot(slot);
-        }
-        insert_slot(slot, pokemon__container);
-        return;
-    } 
-    if (current_view == "teambuilder") {
-        for (var i = 1; i <= 6; i++) {
-            var slot = document.getElementById("pokemon" + i);
-            if (slot.childElementCount == 0) {
-                insert_slot(slot, pokemon__container);
-                return;
-            }
         }
     }
 }
 
-function clear_inspect() {
-    document.getElementById("stat__list-active").className = "hide";
-    document.getElementById("stat__list-default").className = "none";
-    document.getElementById("move__list").innerHTML = "";
-    document.getElementById("pokemon__description").textContent = "";
-    evolution_chain.innerHTML = "";
-    evolution_chain.className = "hide";
-}
-
-function insert_slot(slot, pokemon__container) {
-    let original_container = document.getElementById(pokemon__container);
-    let datacopy = original_container.cloneNode(true);
-    datacopy.id = original_container.id + "placed";
-    datacopy.className = original_container.className + "-placed";
-    datacopy.draggable="true";
-    datacopy.removeChild(datacopy.lastChild);
-    datacopy.appendChild(create_clear_button(slot));
-    datacopy.addEventListener("dragstart", onDragStart);
-    datacopy.addEventListener("dragend", onDragEnd);
-    slot.appendChild(datacopy);
-
-    if (slot.id == "pokemon0") {
-        fetch_inspect(document.getElementById(pokemon__container));
-    }
-}
-
-function clear_slot(pokemon_slot) {
-    if (current_view == "inspect") {
-        clear_inspect();
-    }
-    pokemon_slot.innerHTML = "";
-}
-
+// --------------------------------------- Utility Data Retrieval Functions --------------------------------------- //
 function fetch_inspect(data) {
     var pokedex_entry = data.id.replace("pokemon__container", "");
     pokedex_entry = pokedex_entry.replace("placed", "");
 
-    document.getElementById("stat__list-default").className = "hide"
+    document.getElementById("pokemon__description").className = "none";
+    document.getElementById("moves__and__stats").className = "none";
+    document.getElementById("stat__list-default").className = "hide";
     document.getElementById("stat__list-active").className = "none";
 
     fetch("https://pokeapi.co/api/v2/pokemon/" + pokedex_entry + "/")
@@ -471,7 +495,7 @@ function create_evolution_container(pokemon_container) {
 }
 
 
-/* ----- Music Section ----- */
+/* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {
     change_song_title();
     background__music.play();
@@ -522,17 +546,3 @@ function change_song_title() {
         ' <i class="fas fa-music"></i>';
     }
 }
-
-
-
-const menu = document.querySelector('#mobile-menu');
-const menuLinks = document.querySelector('.navbar__menu');
-const navLogo = document.querySelector('#navbar__logo');
-
-// Display Mobile Menu
-const mobileMenu = () => {
-  menu.classList.toggle('is-active');
-  menuLinks.classList.toggle('active');
-};
-
-menu.addEventListener('click', mobileMenu);

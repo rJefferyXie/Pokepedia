@@ -268,23 +268,47 @@
 }
 
 .pokemon__container button, .pokemon__container-placed button {
+    cursor: pointer;
     height: 3vh;
     width: 3vh;
     border: 1px solid black;
     color: white;
-    border-radius: 10px 0px 10px 0px;
-    background-color: rgb(172, 172, 172);
 }
 
-.pokemon__container:hover button, .pokemon__container-placed:hover button {
-    cursor: pointer;
-    left: -1px;
-    top: -1px;
+.pokemon__container button {
+    border-radius: 0px 0px 10px 0px;
+    background-color: #A7DB8D;
+}
+
+.pokemon__container-placed button {
+    border-radius: 10px 0px 10px 0px;
+    background-color: #FF5959;
+}
+
+@media screen and (max-width: 960px) {
+    .pokemon__container button {
+        left: -2px;
+        top: -2px;
+    }
+
+    .pokemon__container-placed button {
+        left: -1px;
+        top: -1px;
+    }
 }
 
 .pokemon__container:hover button {
     left: -2px;
+    top: -2px;
+}
+
+.pokemon__container-placed:hover button {
+    left: -1px;
     top: -1px;
+}
+
+.pokemon__container button:focus, .pokemon__container-placed button:focus {
+    outline: none;
 }
 
 /* ----- Pokedex / Move List Section ----- */
@@ -377,6 +401,9 @@
     background-color: rgb(255, 255, 255);
     border: 1px solid #000000;
     border-radius: 12px;
+}
+
+#pokemon1, #pokemon2, #pokemon3, #pokemon4, #pokemon5, #pokemon6 {
     margin: 0px 0px 5px 5px;
 }
 
@@ -440,7 +467,9 @@
 
 #pokemon__description {
     overflow: hidden;
+    height: 100%;
     width: 95%;
+    background-color: white;
 }
 
 #stat__list-default, #stat__list-active {
@@ -459,7 +488,7 @@
     margin: 3px 5px 3px 0px;
     border-radius: 20px;
     text-indent: 8px;
-    line-height: 24px;
+    line-height: 3vh;
 }
 
 .stat__bar-active {
