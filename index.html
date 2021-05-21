@@ -7,13 +7,14 @@
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="icon" sizes="144x144" href="images/pokeball.png">
     <audio src="none" id="background__music"></audio>
 </head>
 <body>
-    <!-- Navigation Bar Section-->
+    <!-- Navigation Bar Section -->
     <nav class="navbar">
         <div class="navbar__container">
-            <a onclick="scroll_to('#region__page')" id="navbar__logo"><i class="fab fa-pinterest-p"></i></i>okepedia</a>
+            <a onclick="region_page()" id="navbar__logo"><i class="fab fa-pinterest-p"></i></i>okepedia</a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span> 
                 <span class="bar"></span>
@@ -21,7 +22,7 @@
             </div>
             <ul class="navbar__menu">
                 <li class="navbar__item">
-                    <a onclick="scroll_to('#a_star')" class="navbar__links">Home</a>
+                    <a onclick="region_page()" class="navbar__links">Home</a>
                 </li>
                 <li class="navbar__item">
                     <a onclick="scroll_to('#dijkstras')" class="navbar__links">Features</a>
@@ -110,95 +111,163 @@
         </div>
     </div>
 
-    <div id="pokedex__page" class="hide">
-        <div id="pokedex__section">
-            <input type="text" id="pokemon__search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
-            <ul id="pokemon__list"></ul>
-        </div>
-        <div id="utility__section">
-            <div id="inspect__view">
-                <div id="left__container">
-                    <div id="image__and__description">
-                        <div id="pokemon0" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                        <div id="pokemon__description" class="hide"></div>
-                    </div>
-                    <ul id="evolution__chain" class="hide"></ul>
+
+
+    <div id="pokedex" class="hide">
+        <div id="left">
+            <div id="top-left"></div>
+            <div id="top-left1">
+                <div id="glass-button">
+                    <div id="reflect"></div>
                 </div>
-                <div id="moves__and__stats" class="hide">
-                    <ul id="stat__list-default">
-                        <p class="stat__header"></p>
-                        <div id="stat0-default" class="stat__bar-default">hp</div>
-                        <div id="stat1-default" class="stat__bar-default">attack</div>
-                        <div id="stat2-default" class="stat__bar-default">defense</div>
-                        <div id="stat3-default" class="stat__bar-default">special-attack</div>
-                        <div id="stat4-default" class="stat__bar-default">special-defense</div>
-                        <div id="stat5-default" class="stat__bar-default">speed</div>
-                    </ul>
-                    <ul id="stat__list-active" class="hide">
-                        <p class="stat__header"></p>
-                        <div id="stat0-active" class="stat__bar-active">hp</div>
-                        <div id="stat1-active" class="stat__bar-active">attack</div>
-                        <div id="stat2-active" class="stat__bar-active">defense</div>
-                        <div id="stat3-active" class="stat__bar-active">special-attack</div>
-                        <div id="stat4-active" class="stat__bar-active">special-defense</div>
-                        <div id="stat5-active" class="stat__bar-active">speed</div>
-                    </ul>
-                    <ul id="move__list"></ul>
-                    <div class="music__container">
-                        <div class="song__title__container">
-                            <p class="song__title">
-                                <span class="title"></span>
-                            </p>
+                <div id="top-buttons">
+                    <div id="top-button-red"></div>
+                    <div id="top-button-yellow"></div>
+                    <div id="top-button-green"></div>
+                </div>
+            </div>
+            <div id="top-left2"></div>
+            <div id="pokedex__section">
+                <ul id="pokemon__list"></ul>
+                <div id="search-and-filter">
+                    <input type="text" id="pokemon__search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
+                    <div id="filter"><i class="fas fa-filter"></i></div></div>
+            </div>
+            <div id="blue-button-left"></div>
+            <div id="green-button-left"></div>
+            <div id="orange-button-left"></div>
+            <div id="cross">
+                <div id="mid-cross">
+                    <div id="mid-circle"></div>
+                </div>
+                <div id="top-cross" onclick="increaseIdPokemon()">
+                    <div id="upC"></div>
+                </div>
+                <div id="right-cross">
+                    <div id="rightC"></div>
+                </div>
+                <div id="bot-cross" onclick="decreaseIdPokemon()">
+                    <div id="downC"></div>
+                </div>
+                <div id="left-cross">
+                    <div id="leftC"></div>
+                </div>
+            </div>
+        </div>
+          <div id="middle">
+            <div class="hinge" id="hinge1"></div>
+            <div class="hinge" id="hinge2"></div>
+            <div class="hinge" id="hinge3"></div>
+          </div>
+        <div id="right">
+            <div id="top-right-container">
+                <div id="top-right1"></div>
+                <div id="top-right2"></div>
+            </div>
+            <div id="right-screen">
+                <div id="right-cross-container">
+                    <div id="left-cross-button">
+                        <div id="leftT"></div>
+                    </div>
+                    <div id="right-cross-button">
+                        <div id="rightT"></div>
+                    </div>
+                </div>
+                <div id="utility__section">
+                    <div id="inspect__view">
+                        <div id="inspect-buttons">
+                            <div id="intro" class="inspect-button" onclick="change_inspect_screen('intro', 'intro-container')">Intro</div>
+                            <div id="stats" class="inspect-button" onclick="change_inspect_screen('stats', 'stats-container')">Stats</div>
+                            <div id="moves" class="inspect-button" onclick="change_inspect_screen('moves', 'moves-container')">Moves</div>
+                            <div id="chain" class="inspect-button" onclick="change_inspect_screen('chain', 'chain-container')">Chain</div>
                         </div>
-                        <div class="music__controls">
+                        <div id="inspect-container">
+                            <div id="intro-container">
+                                <div id="pokemon0" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                <div id="description-container" class="hide">
+                                    <div id="description"></div>
+                                </div>
+                            </div>
+                            <div id="stats-container" class="hide">
+                                <div id="stats-default">Select a pokemon first.</div>
+                                <ul id="stat-list" class="hide">
+                                    <div id="stat-name-container">
+                                        <div class="stat-header">health</div>
+                                        <div class="stat-header">attack</div>
+                                        <div class="stat-header">defense</div>
+                                        <div class="stat-header">sp. atk</div>
+                                        <div class="stat-header">sp. def</div>
+                                        <div class="stat-header">speed</div>
+                                    </div>
+                                    <div id="stat-bar-container">
+                                        <div id="health" class="stat-bar"></div>
+                                        <div id="attack" class="stat-bar"></div>
+                                        <div id="defense" class="stat-bar"></div>
+                                        <div id="special-attack" class="stat-bar"></div>
+                                        <div id="special-defense" class="stat-bar"></div>
+                                        <div id="speed" class="stat-bar"></div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div id="moves-container" class="hide">
+                                <div id="moves-default">Select a pokemon first.</div>
+                                <ul id="move-list" class="hide"></ul>
+                            </div>
+                            <div id="chain-container" class="hide">
+                                <div id="evolution-default">Select a pokemon first.</div>
+                                <ul id="evolution-chain" class="hide"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="teambuilder__view" class="hide">
+                        <div id="teambuilder-buttons">
+                            <div id="team" class="teambuilder-button" onclick="change_teambuilder_screen('team')">Team</div>
+                            <div id="power" class="teambuilder-button" onclick="change_teambuilder_screen('power')">Power</div>
+                        </div>
+                        <div id="teambuilder-container">
+                            <ul id="team-container">
+                                <div class="pokemon__row">
+                                    <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                </div>
+                                <div class="pokemon__row">
+                                    <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                </div>
+                                <div class="pokemon__row">
+                                    <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                </div>
+                            </ul>
+                            <div id="team__info" class="hide">
+                                <div id="generate">
+                                    Auto-Complete
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="utility__buttons">
+                        <div id="inspect__button" class="extra__button" onclick="inspect_screen()">Inspect</div>
+                        <div id="teambuilder__button" class="extra__button" onclick="teambuilder_screen()">Team</div>
+                        <div id="compare__button" class="extra__button" onclick="">Compare</div>
+
+                        <!-- <div id="new__region" class="extra__button" onclick="region_page()">New Region</div> -->
+                    </div>
+                    <div id="music__container">
+                        <div id="song__title__container">
+                            <span id="song__title"></span>
+                        </div>
+                        <div id="music__controls">
                             <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
-                            <div id="pause__1" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                            <div id="play__1" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                            <div id="pause" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
+                            <div id="play" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
                             <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="teambuilder__view" class="hide">
-                <ul id="team">
-                    <div class="pokemon__row">
-                        <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                        <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                    </div>
-                    <div class="pokemon__row">
-                        <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                        <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                    </div>
-                    <div class="pokemon__row">
-                        <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                        <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                    </div>
-                </ul>
-                <div id="team__info">
-                    <div id="generate">
-                        Auto-Complete
-                    </div>
-                    <div class="music__container">
-                        <div class="song__title__container">
-                            <p class="song__title">
-                                <span class="title"></span>
-                            </p>
-                        </div>
-                        <div class="music__controls">
-                            <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
-                            <div id="pause__2" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                            <div id="play__2" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
-                            <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div id="utility__buttons">
-            <div id="inspect__button" class="extra__button" onclick="inspect_screen()">Inspect</div>
-            <div id="teambuilder__button" class="extra__button" onclick="teambuilder_screen()">Teambuilder</div>
-            <div id="new__region" class="extra__button" onclick="region_page()">New Region</div>
-        </div>
+      </div>
     </div>
     <script src="app.js"></script>
 </body>

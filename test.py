@@ -50,7 +50,23 @@ def get_inspect_info():
 
 data = requests.get("https://pokeapi.co/api/v2/evolution-chain/67/").json()
 
-print(data['chain']['species'])
+# print(data['chain']['species'])
 
 for i in range(0, len(data['chain']['evolves_to'])):
-    print(data['chain']['evolves_to'][i]['species'])
+    if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item":
+        print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'])
+        print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['url'])
+
+
+    if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up":
+        if data['chain']['evolves_to'][i]['evolution_details'][0]['location']:
+            print(data['chain']['evolves_to'][i]['evolution_details'][0]['location']['name'])
+        elif data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day']:
+            print(data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day'])
+        elif data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection']:
+            print(data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection'])
+
+        
+
+# for i in range(0, len(data['chain']['evolves_to'])):
+#     print(data['chain']['evolves_to'][i]['species'])
