@@ -8,27 +8,27 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
     <link rel="icon" sizes="144x144" href="images/pokeball.png">
-    <audio src="none" id="background__music"></audio>
+    <audio src="none" id="background-music"></audio>
 </head>
 <body>
     <!-- Navigation Bar Section -->
     <nav class="navbar">
-        <div class="navbar__container">
-            <a onclick="region_page()" id="navbar__logo"><i class="fab fa-pinterest-p"></i></i>okepedia</a>
-            <div class="navbar__toggle" id="mobile-menu">
+        <div class="navbar-container">
+            <a onclick="region_page()" id="navbar-logo">POKEPEDIA + LOGO</a>
+            <div class="navbar-toggle" id="mobile-menu">
                 <span class="bar"></span> 
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            <ul class="navbar__menu">
-                <li class="navbar__item">
-                    <a onclick="region_page()" class="navbar__links">Home</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a onclick="region_page()" class="navbar-links">Home</a>
                 </li>
-                <li class="navbar__item">
-                    <a onclick="scroll_to('#dijkstras')" class="navbar__links">Features</a>
+                <li class="navbar-item">
+                    <a onclick="scroll_to('#dijkstras')" class="navbar-links">Features</a>
                 </li>
-                <li class="navbar__item">
-                    <a onclick="scroll_to('#dijkstras')" class="navbar__links">Contact</a>
+                <li class="navbar-item">
+                    <a onclick="scroll_to('#dijkstras')" class="navbar-links">Contact</a>
                 </li>
             </ul>
         </div>
@@ -36,77 +36,107 @@
 
     <!-- Hero Section -->
     <div id="hero">
-        <div class="hero__container">
-            <div class="intro__section">
-                <p class="about">
-                    Was good shawtie
-                    Drag and drop, team builder, inspect and compare pokemon
-                </p>
+        <div id="intro-section">
+            <div id="background-container">
+                <div class="rect rect-1"></div>
+                <!-- <div class="rect rect-2"></div> -->
+                <div class="rect rect-3"></div>
             </div>
-            <div class="region__section">
-                <div id="kanto" class="region__container" onclick="retrieve_data('2', 'kanto')">
-                    <img src="images/kanto/venusaur.png"  class="image-region">
-                    <img src="images/kanto/charizard.png"  class="image-region">
-                    <img src="images/kanto/blastoise.png"  class="image-region">
-                    <img src="images/kanto/articuno.png"  class="image-region">
-                    <img src="images/kanto/zapdos.png"  class="image-region">
-                    <img src="images/kanto/moltres.png"  class="image-region">
-                    <h1 class="region__name">KANTO</h1>
+            <div id="about-container">
+                <div id="about1">
+                    <p class="header">About Pokepedia</p>
+                    <p class="text">
+                        Learn about all of your favorite pokemon's strengths, weaknesses, and backgrounds. 
+                        We have a fully interactive pokedex with many different features for all users.
+                        Core Features Include: Pokemon Lookup, Team Generation, Comparing Pokemon
+                    </p>
                 </div>
-                <div id="johto" class="region__container" onclick="retrieve_data('7', 'johto')">
-                    <h1 class="region__name">JOHTO</h1>
-                    <img src="images/johto/meganium.png" class="image-region">
-                    <img src="images/johto/typhlosion.png" class="image-region">
-                    <img src="images/johto/feraligatr.png" class="image-region">
-                    <img src="images/johto/ho-oh.png" class="image-region">
-                    <img src="images/johto/lugia.png" class="image-region">
-                    <img src="images/johto/celibi.png" class="image-region">
+                <div class="hide" id="about2">
+                    <p class="header">Real Time Lookup</p>
+                    <p class="text">
+                        Learn about your favorite pokemon in real time! 
+                        We have a fully interactive pokedex with many different features for all users!
+                    </p>
                 </div>
-                <div id="hoenn" class="region__container" onclick="retrieve_data('4', 'hoenn')">
-                    <img src="images/hoenn/sceptile.png" class="image-region">
-                    <img src="images/hoenn/blaziken.png" class="image-region">
-                    <img src="images/hoenn/swampert.png" class="image-region">
-                    <img src="images/hoenn/groudon.png" class="image-region">
-                    <img src="images/hoenn/kyogre.png" class="image-region">
-                    <img src="images/hoenn/rayquaza.png" class="image-region">
-                    <h1 class="region__name">HOENN</h1>
+                <div class="hide" id="about3">
+                    <p class="header">Team Generation</p>
+                    <p class="text">
+                        Confused on what pokemon you want to use? Our pokedex can generate a team of six pokemon for you.
+                        You can customize the generator with options such as banning legendary pokemon, allowing duplicate pokemon, 
+                        allowing more than one starter pokemon, and much more.
+                    </p>
                 </div>
-                <div id="sinnoh" class="region__container" onclick="retrieve_data('6', 'sinnoh')">
-                    <h1 class="region__name">SINNOH</h1>
-                    <img src="images/sinnoh/torterra.png" class="image-region">
-                    <img src="images/sinnoh/infernape.png" class="image-region">
-                    <img src="images/sinnoh/empoleon.png" class="image-region">
-                    <img src="images/sinnoh/dialga.png" class="image-region">
-                    <img src="images/sinnoh/palkia.png" class="image-region">
-                    <img src="images/sinnoh/giratina.png" class="image-region">
+                <div id="circle-container">
+                    <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
+                    <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
+                    <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
                 </div>
-                <div id="unova" class="region__container" onclick="retrieve_data('9', 'unova')">
-                    <img src="images/unova/serperior.png" class="image-region">
-                    <img src="images/unova/emboar.png" class="image-region">
-                    <img src="images/unova/samurott.png" class="image-region">
-                    <img src="images/unova/reshiram.png" class="image-region">
-                    <img src="images/unova/zekrom.png" class="image-region">
-                    <img src="images/unova/kyurem.png" class="image-region">
-                    <h1 class="region__name">UNOVA</h1>
-                </div>
-                <div id="kalos" class="region__container" onclick="retrieve_data('12', 'kalos')">
-                    <h1 class="region__name">KALOS</h1>
-                    <img src="images/kalos/chesnaught.png" class="image-region">
-                    <img src="images/kalos/delphox.png" class="image-region">
-                    <img src="images/kalos/greninja.png" class="image-region">
-                    <img src="images/kalos/xerneas.png" class="image-region">
-                    <img src="images/kalos/yveltal.png" class="image-region">
-                    <img src="images/kalos/zygarde.png" class="image-region">
-                </div>
-                <div id="alola" class="region__container" onclick="retrieve_data('16', 'alola')">
-                    <img src="images/alola/decidueye.png" class="image-region">
-                    <img src="images/alola/incineroar.png" class="image-region">
-                    <img src="images/alola/primarina.png" class="image-region">
-                    <img src="images/alola/lunala.png" class="image-region">
-                    <img src="images/alola/solgaleo.png" class="image-region">
-                    <img src="images/alola/necrozma.png" class="image-region">
-                    <h1 class="region__name">ALOLA</h1>
-                </div>
+                <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
+            </div>
+        </div>
+        <div id="region-section">
+            <div id="kanto" class="region-container" onclick="retrieve_data('2', 'kanto')">
+                <img src="images/kanto/venusaur.png"  class="image-region">
+                <img src="images/kanto/charizard.png"  class="image-region">
+                <img src="images/kanto/blastoise.png"  class="image-region">
+                <img src="images/kanto/articuno.png"  class="image-region">
+                <img src="images/kanto/zapdos.png"  class="image-region">
+                <img src="images/kanto/moltres.png"  class="image-region">
+                <h1 class="region-name">KANTO</h1>
+            </div>
+            <div id="johto" class="region-container" onclick="retrieve_data('7', 'johto')">
+                <h1 class="region-name">JOHTO</h1>
+                <img src="images/johto/meganium.png" class="image-region">
+                <img src="images/johto/typhlosion.png" class="image-region">
+                <img src="images/johto/feraligatr.png" class="image-region">
+                <img src="images/johto/ho-oh.png" class="image-region">
+                <img src="images/johto/lugia.png" class="image-region">
+                <img src="images/johto/celibi.png" class="image-region">
+            </div>
+            <div id="hoenn" class="region-container" onclick="retrieve_data('4', 'hoenn')">
+                <img src="images/hoenn/sceptile.png" class="image-region">
+                <img src="images/hoenn/blaziken.png" class="image-region">
+                <img src="images/hoenn/swampert.png" class="image-region">
+                <img src="images/hoenn/groudon.png" class="image-region">
+                <img src="images/hoenn/kyogre.png" class="image-region">
+                <img src="images/hoenn/rayquaza.png" class="image-region">
+                <h1 class="region-name">HOENN</h1>
+            </div>
+            <div id="sinnoh" class="region-container" onclick="retrieve_data('6', 'sinnoh')">
+                <h1 class="region-name">SINNOH</h1>
+                <img src="images/sinnoh/torterra.png" class="image-region">
+                <img src="images/sinnoh/infernape.png" class="image-region">
+                <img src="images/sinnoh/empoleon.png" class="image-region">
+                <img src="images/sinnoh/dialga.png" class="image-region">
+                <img src="images/sinnoh/palkia.png" class="image-region">
+                <img src="images/sinnoh/giratina.png" class="image-region">
+            </div>
+            <div id="unova" class="region-container" onclick="retrieve_data('9', 'unova')">
+                <img src="images/unova/serperior.png" class="image-region">
+                <img src="images/unova/emboar.png" class="image-region">
+                <img src="images/unova/samurott.png" class="image-region">
+                <img src="images/unova/reshiram.png" class="image-region">
+                <img src="images/unova/zekrom.png" class="image-region">
+                <img src="images/unova/kyurem.png" class="image-region">
+                <h1 class="region-name">UNOVA</h1>
+            </div>
+            <div id="kalos" class="region-container" onclick="retrieve_data('12', 'kalos')">
+                <h1 class="region-name">KALOS</h1>
+                <img src="images/kalos/chesnaught.png" class="image-region">
+                <img src="images/kalos/delphox.png" class="image-region">
+                <img src="images/kalos/greninja.png" class="image-region">
+                <img src="images/kalos/xerneas.png" class="image-region">
+                <img src="images/kalos/yveltal.png" class="image-region">
+                <img src="images/kalos/zygarde.png" class="image-region">
+            </div>
+            <div id="alola" class="region-container" onclick="retrieve_data('16', 'alola')">
+                <img src="images/alola/decidueye.png" class="image-region">
+                <img src="images/alola/incineroar.png" class="image-region">
+                <img src="images/alola/primarina.png" class="image-region">
+                <img src="images/alola/lunala.png" class="image-region">
+                <img src="images/alola/solgaleo.png" class="image-region">
+                <img src="images/alola/necrozma.png" class="image-region">
+                <h1 class="region-name">ALOLA</h1>
             </div>
         </div>
     </div>
@@ -127,10 +157,10 @@
                 </div>
             </div>
             <div id="top-left2"></div>
-            <div id="pokedex__section">
-                <ul id="pokemon__list"></ul>
+            <div id="pokedex-section">
+                <ul id="pokemon-list"></ul>
                 <div id="search-and-filter">
-                    <input type="text" id="pokemon__search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
+                    <input type="text" id="pokemon-search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
                     <div id="filter"><i class="fas fa-filter"></i></div></div>
             </div>
             <div id="blue-button-left"></div>
@@ -173,8 +203,8 @@
                         <div id="rightT"></div>
                     </div>
                 </div>
-                <div id="utility__section">
-                    <div id="inspect__view">
+                <div id="utility-section">
+                    <div id="inspect-view">
                         <div id="inspect-buttons">
                             <div id="intro" class="inspect-button" onclick="change_inspect_screen('intro', 'intro-container')">Intro</div>
                             <div id="stats" class="inspect-button" onclick="change_inspect_screen('stats', 'stats-container')">Stats</div>
@@ -219,49 +249,50 @@
                             </div>
                         </div>
                     </div>
-                    <div id="teambuilder__view" class="hide">
+                    <div id="teambuilder-view" class="hide">
                         <div id="teambuilder-buttons">
-                            <div id="team" class="teambuilder-button" onclick="change_teambuilder_screen('team')">Team</div>
-                            <div id="power" class="teambuilder-button" onclick="change_teambuilder_screen('power')">Power</div>
+                            <div id="team" class="teambuilder-button" onclick="change_teambuilder_screen('team', 'team-container')">Team</div>
+                            <div id="power" class="teambuilder-button" onclick="change_teambuilder_screen('power', 'power-container')">Power</div>
                         </div>
                         <div id="teambuilder-container">
-                            <ul id="team-container">
-                                <div class="pokemon__row">
+                            <div id="team-container">
+                                <div class="pokemon-row">
                                     <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                     <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                 </div>
-                                <div class="pokemon__row">
+                                <div class="pokemon-row">
                                     <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                     <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                 </div>
-                                <div class="pokemon__row">
+                                <div class="pokemon-row">
                                     <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                     <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                 </div>
-                            </ul>
-                            <div id="team__info" class="hide">
+                            </div>
+                            <div id="power-container" class="hide">
+                                <div id="power-summary"></div>
                                 <div id="generate">
                                     Auto-Complete
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="utility__buttons">
-                        <div id="inspect__button" class="extra__button" onclick="inspect_screen()">Inspect</div>
-                        <div id="teambuilder__button" class="extra__button" onclick="teambuilder_screen()">Team</div>
-                        <div id="compare__button" class="extra__button" onclick="">Compare</div>
+                    <div id="utility-buttons">
+                        <div id="inspect-button" class="extra-button" onclick="inspect_screen()">Inspect</div>
+                        <div id="teambuilder-button" class="extra-button" onclick="teambuilder_screen()">Team</div>
+                        <div id="compare-button" class="extra-button" onclick="">Compare</div>
 
-                        <!-- <div id="new__region" class="extra__button" onclick="region_page()">New Region</div> -->
+                        <!-- <div id="new-region" class="extra-button" onclick="region_page()">New Region</div> -->
                     </div>
-                    <div id="music__container">
-                        <div id="song__title__container">
-                            <span id="song__title"></span>
+                    <div id="music-container">
+                        <div id="song-title-container">
+                            <span id="song-title"></span>
                         </div>
-                        <div id="music__controls">
-                            <div class="music__button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
-                            <div id="pause" class="music__button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
+                        <div id="music-controls">
+                            <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
+                            <div id="pause" class="music-button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
                             <div id="play" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
-                            <div class="music__button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
+                            <div class="music-button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
                         </div>
                     </div>
                 </div>

@@ -98,31 +98,37 @@ const soundtracks = {
 const first_song = 0; // start of playlist
 const final_song = 6; // end of playlist
 
+const first_intro_section = 1; // first intro page
+const final_intro_section = 3; // last intro page
+
+var current_intro_section = 1;
+
 var current_soundtrack;
 var current_track; 
-const current_track_name = document.getElementById("song__title");
-var music__container = document.getElementById("music__container");
+const current_track_name = document.getElementById("song-title");
+var music_container = document.getElementById("music-container");
 var music_playing = false;
 
-const background__music = document.getElementById("background__music");
-background__music.addEventListener("ended", next_song);
-background__music.volume = 0.1;
+const background_music = document.getElementById("background-music");
+background_music.addEventListener("ended", next_song);
+background_music.volume = 0.1;
 
 var current_view = "inspect";
+
 var inspect_active = "intro";
 var inspect_container = "intro-container";
 
 var teambuilder_active = "team";
+var teambuilder_container = "team-container";
 
-var team_strength = null
-const pokedex__page = document.getElementById("pokedex");
-const region__page = document.getElementById("hero");
-const pokedex = document.getElementById("pokemon__list");
+const pokedex_page = document.getElementById("pokedex");
+const hero = document.getElementById("hero");
+const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
 
 const menu = document.querySelector('#mobile-menu');
-const menuLinks = document.querySelector('.navbar__menu');
-const navLogo = document.querySelector('#navbar__logo');
+const menuLinks = document.querySelector('.navbar-menu');
+const navLogo = document.querySelector('#navbar-logo');
 
 // Display Mobile Menu
 const mobileMenu = () => {
@@ -134,9 +140,11 @@ menu.addEventListener('click', mobileMenu);
 
 // --------------------------------------- Website State Functions --------------------------------------- //
 function region_page() {
-    pokedex__page.className = "hide";
-    region__page.className = "none";
+    pokedex_page.className = "hide";
+    hero.className = "none";
     clear_inspect();
+
+    scroll_to("hero");
 
     for (var i = 0; i <= 6; i++) {
         let slot = document.getElementById("pokemon" + i);
@@ -145,19 +153,57 @@ function region_page() {
     pause_song();
 }
 
+function previous_intro_section() {
+    hide_old_section();
+    if (current_intro_section == first_intro_section) {
+        current_intro_section = final_intro_section;
+    }
+    else {
+        current_intro_section -= 1;
+    }
+    show_new_section();
+}
+
+function change_intro_section(new_section) {
+    hide_old_section();
+    current_intro_section = new_section;
+    show_new_section();
+}
+
+function next_intro_section() {
+    hide_old_section();
+    if (current_intro_section == final_intro_section) {
+        current_intro_section = first_intro_section;
+    }
+    else {
+        current_intro_section += 1;
+    }
+    show_new_section();
+}
+
+function hide_old_section() {
+    document.getElementById("about" + current_intro_section).className = "hide";
+    document.getElementById("circle-" + current_intro_section).className = "fas fa-circle";
+}
+
+function show_new_section() {
+    document.getElementById("about" + current_intro_section).className = "";
+    document.getElementById("circle-" + current_intro_section).className = "fas fa-circle active";
+}
+
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
-    pokedex__page.className = "none";
-    region__page.className = "hide";
+    pokedex_page.className = "none";
+    hero.className = "hide";
     current_soundtrack = region;
     current_track = Math.floor(Math.random() * 6);
-    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
-    // play_song();
+    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    play_song();
 }
 
 function swap_view(inspect, teambuilder) {
-    document.getElementById("inspect__view").className = inspect;
-    document.getElementById("teambuilder__view").className = teambuilder;
+    document.getElementById("inspect-view").className = inspect;
+    document.getElementById("teambuilder-view").className = teambuilder;
 }
 
 function inspect_screen() {
@@ -180,27 +226,29 @@ function change_inspect_screen(new_active, new_container) {
     inspect_container = new_container;
 }
 
-function change_teambuilder_screen(new_active) {
+function change_teambuilder_screen(new_active, new_container) {
     document.getElementById(teambuilder_active).style.backgroundColor = "#9facb4";
     document.getElementById(new_active).style.backgroundColor = "#6b77e4";
     teambuilder_active = new_active;
+
+    document.getElementById(teambuilder_container).className = "hide";
+    document.getElementById(new_container).className = "none";
+    teambuilder_container = new_container;
 }
 
 // --------------------------------------- Data Management Functions --------------------------------------- //
-function find_slot(pokemon__container) {
+function find_slot(pokemon_container) {
     if (current_view == "inspect") {
         let slot = document.getElementById("pokemon0");
-        if (slot.childElementCount > 0) {
-            clear_slot(slot);
-        }
-        insert_slot(slot, pokemon__container);
+        clear_slot(slot);
+        insert_slot(slot, pokemon_container);
         return;
     } 
     if (current_view == "teambuilder") {
         for (var i = 1; i <= 6; i++) {
             var slot = document.getElementById("pokemon" + i);
             if (slot.childElementCount == 0) {
-                insert_slot(slot, pokemon__container);
+                insert_slot(slot, pokemon_container);
                 return;
             }
         }
@@ -209,32 +257,37 @@ function find_slot(pokemon__container) {
 
 function clear_inspect() {
     document.getElementById("moves-default").className = "none";
-    document.getElementById("stats-default").className = "none";
-    document.getElementById("evolution-default").className = "none";
     document.getElementById("move-list").className = "hide";
-    document.getElementById("stat-list").className = "hide";
-    document.getElementById("evolution-chain").className = "hide";
-    document.getElementById("description-container").className = "hide";
     document.getElementById("move-list").innerHTML = "";
-    document.getElementById("description").innerHTML = "";
-    evolution_chain.innerHTML = "";
+
+    document.getElementById("stats-default").className = "none";
+    document.getElementById("stat-list").className = "hide";
+
+    document.getElementById("evolution-default").className = "none";
+    document.getElementById("evolution-chain").className = "hide";
+    document.getElementById("evolution-chain").innerHTML = "";
+
+    document.getElementById("description-container").className = "hide";
 }
 
-function insert_slot(slot, pokemon__container) {
-    let original_container = document.getElementById(pokemon__container);
+function insert_slot(slot, pokemon_container) {
+    let original_container = document.getElementById(pokemon_container);
     let datacopy = original_container.cloneNode(true);
     datacopy.id = original_container.id + "placed";
     datacopy.className = original_container.className + "-placed";
     datacopy.draggable="true";
     datacopy.removeChild(datacopy.lastChild);
     datacopy.appendChild(create_clear_button(slot));
-    datacopy.addEventListener("dragstart", onDragStart);
-    datacopy.addEventListener("dragend", onDragEnd);
+    // datacopy.addEventListener("dragstart", onDragStart);
+    // datacopy.addEventListener("dragend", onDragEnd);
     slot.appendChild(datacopy);
 
     if (slot.id == "pokemon0") {
-        fetch_inspect(document.getElementById(pokemon__container));
+        fetch_inspect(document.getElementById(pokemon_container));
     }
+    // else {
+    //     eval();
+    // }
 }
 
 function clear_slot(pokemon_slot) {
@@ -242,55 +295,6 @@ function clear_slot(pokemon_slot) {
         clear_inspect();
     }
     pokemon_slot.innerHTML = "";
-}
-
-// --------------------------------------- Drag and Drop Functions --------------------------------------- // 
-function onDragStart(event) {
-    // Make background dark to highlight where to drag pokemon
-    pokedex__page.style.backgroundColor = "#363b3b";
-
-    // Highlight each cell that does not contain a pokemon
-    for (var i = 0; i <= 6; i++) {
-        var pokemon_cell = document.getElementById("pokemon" + i);
-        if (pokemon_cell.childElementCount == 0) {
-            pokemon_cell.style.border = "4px solid #54ff82";
-        }
-    }
-    event.dataTransfer.setData("Text", event.target.id);
-}
-
-function onDragOver(event) {
-    event.preventDefault();
-}
-
-function onDrop(event) {
-    event.preventDefault();
-
-    // If target cell is empty
-    if (event.target.childElementCount == 0) {
-        var data = event.dataTransfer.getData("Text");
-
-        // Dragging a pokemon from one slot to another
-        if (document.getElementById(data).id.includes("placed")) {
-            event.target.appendChild(document.getElementById(data));
-        }
-
-        // Dragging from pokedex to an empty slot
-        else {
-            insert_slot(event.target, data);
-        }
-    }
-}
-
-function onDragEnd() {
-    // Reset background to white after drop
-    pokedex__page.style.backgroundColor = "white";
-
-    // Reset each cell that does not contain a pokemon
-    for (var i = 0; i <= 6; i++) {
-        var pokemon_cell = document.getElementById("pokemon" + i);
-        pokemon_cell.style.border = "1px solid #000000";
-    }
 }
 
 // --------------------------------------- Data Retrieval Functions --------------------------------------- //
@@ -320,27 +324,27 @@ function get_promise_array(data) {
 }
 
 function get_pokemon_data(data, entry_number) {
-    let pokemon__container = create_pokemon_container();
-    pokemon__container.appendChild(get_image(data));
-    pokemon__container.appendChild(get_entry_number(entry_number));
-    pokemon__container.appendChild(get_name(data, pokemon__container));
-    pokemon__container.appendChild(get_types(data));
-    pokemon__container.appendChild(create_insert_button(pokemon__container.id));
-    pokedex.appendChild(pokemon__container);
+    let pokemon_container = create_pokemon_container();
+    pokemon_container.appendChild(get_image(data));
+    pokemon_container.appendChild(get_entry_number(entry_number));
+    pokemon_container.appendChild(get_name(data, pokemon_container));
+    pokemon_container.appendChild(get_types(data));
+    pokemon_container.appendChild(create_insert_button(pokemon_container.id));
+    pokedex.appendChild(pokemon_container);
 }
 
 function create_pokemon_container() {
-    let pokemon__container = document.createElement("li");
-    pokemon__container.className = "pokemon__container";
-    pokemon__container.draggable="true";
-    pokemon__container.addEventListener("dragstart", onDragStart);
-    pokemon__container.addEventListener("dragend", onDragEnd);
-    return pokemon__container;
+    let pokemon_container = document.createElement("li");
+    pokemon_container.className = "pokemon-container";
+    pokemon_container.draggable="true";
+    // pokemon_container.addEventListener("dragstart", onDragStart);
+    // pokemon_container.addEventListener("dragend", onDragEnd);
+    return pokemon_container;
 }
 
 function create_insert_button(pokemon_container) {
     let insert_button = document.createElement("button");
-    insert_button.className = "hide insert__button";
+    insert_button.className = "hide insert-button";
     insert_button.onclick = function() {find_slot(pokemon_container);};
     insert_button.textContent = "+";
     return insert_button;
@@ -348,7 +352,7 @@ function create_insert_button(pokemon_container) {
 
 function create_clear_button(pokemon_slot) {
     let clear_button = document.createElement("button");
-    clear_button.className = "hide clear__button";
+    clear_button.className = "hide clear-button";
     clear_button.onclick = function() {clear_slot(pokemon_slot);};
     clear_button.textContent = "x";
     return clear_button;
@@ -356,7 +360,7 @@ function create_clear_button(pokemon_slot) {
 
 function get_image(data) {
     let image = document.createElement("img");
-    image.className = "pokemon__image";
+    image.className = "pokemon-image";
     image.src = data["sprites"]["front_default"];
     image.draggable="false";
     return image;
@@ -364,16 +368,16 @@ function get_image(data) {
 
 function get_entry_number(entry_number) {
     let number = document.createElement("div");
-    number.className = "pokemon__number";
+    number.className = "pokemon-number";
     number.textContent = "#" + entry_number;
     return number;
 }
 
-function get_name(data, pokemon__container) {
+function get_name(data, pokemon_container) {
     let name = document.createElement("a");
-    name.className = "pokemon__name";
+    name.className = "pokemon-name";
     name.innerHTML = data["name"].charAt(0).toUpperCase() + data["name"].slice(1);
-    pokemon__container.id = data["name"];
+    pokemon_container.id = data["name"];
     return name;
 }
 
@@ -388,7 +392,7 @@ function get_types(data) {
 
         var type = document.createElement("div");
         type.style.backgroundColor = type_color;
-        type.className = "pokemon__type";
+        type.className = "pokemon-type";
         type.textContent = type_str;
         types.appendChild(type);
     }
@@ -399,7 +403,7 @@ function get_types(data) {
 function search_pokemon() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('pokemon__search');
+    input = document.getElementById('pokemon-search');
     filter = input.value.toUpperCase();
     ul = pokedex;
     li = ul.getElementsByTagName('li');
@@ -417,9 +421,17 @@ function search_pokemon() {
     }
 }
 
+function scroll_to(section) {
+    var destination = document.getElementById(section).offsetTop - 80;
+    window.scroll({
+      top: destination, 
+      behavior: "smooth"
+    });
+  }
+
 // --------------------------------------- Utility Data Retrieval Functions --------------------------------------- //
 function fetch_inspect(data) {
-    var pokedex_entry = data.id.replace("pokemon__container", "");
+    var pokedex_entry = data.id.replace("pokemon-container", "");
     pokedex_entry = pokedex_entry.replace("placed", "");
 
     document.getElementById("description-container").className = "none";
@@ -465,7 +477,7 @@ async function get_pokemon_moves(data) {
     for (var i = 0; i <= moves.length; i++) {
         var move = document.createElement("li");
         move.id = "move" + i;
-        move.className = "pokemon__move";
+        move.className = "pokemon-move";
         move.textContent = moves[i]['move']['name'] + "\n";
         document.getElementById("move-list").appendChild(move);
     }
@@ -492,7 +504,7 @@ function get_evolution_chain(data) {
     create_evolution_container(data['chain']['species']['name']);
     for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
         let trigger = document.createElement('div');
-        trigger.className = "evolution__trigger";
+        trigger.className = "evolution-trigger";
         trigger.textContent = data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
         if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
             if (data['chain']['evolves_to'][i]['evolution_details'][0]['min_level']) {
@@ -521,7 +533,7 @@ function get_evolution_chain(data) {
     if (data['evolves_to'].length > 0) {
         for (var i = 0; i < data['evolves_to'].length; i++) {
             let trigger = document.createElement('div');
-            trigger.className = "evolution__trigger";
+            trigger.className = "evolution-trigger";
             trigger.textContent = data['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
             if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
                 trigger.textContent += ": " + data['evolves_to'][i]['evolution_details'][0]['min_level'];
@@ -538,26 +550,49 @@ function get_evolution_chain(data) {
 
 function create_evolution_container(pokemon_container) {
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
-    evolution_container.className = "pokemon__container-placed";
+    evolution_container.className = "pokemon-container-placed";
     evolution_container.id = evolution_container.id + "_chain";
     evolution_container.style.display = "block";
     evolution_container.removeChild(evolution_container.lastChild);
     evolution_chain.appendChild(evolution_container);
 }
+/* --------------------------------------- Team Power --------------------------------------- */
+// function eval() {
+//     for (var i = 1; i <= 6; i++) {
+//         var pokemon_cell = document.getElementById("pokemon" + i);
+
+//         if (pokemon_cell.childElementCount == 0) {
+//             continue;
+//         }
+
+//         var pokemon_container = pokemon_cell.getElementsByClassName("pokemon-container-placed")[0];
+//         var type_container = pokemon_container.getElementsByClassName("type-container")[0];
+//         var type_list = type_container.getElementsByClassName("pokemon-type");
+
+//         for (var j = 0; j < type_list.length; j++) {
+//             document.getElementById("power-summary").textContent += type_list[j].textContent;
+//         }
+//     }
+// }
+
+// for every unique pokemon type that you have: +5 eval
+// for every unique pokemon type that you do not have: -5 eval
+// for every duplicate pokemon type: -10 eval, -20 eval, etc.
+// for every pokemon type immunity (one pokemon for each type max): +20 eval
 
 
 /* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {
     change_song_title();
-    background__music.play();
+    background_music.play();
     music_playing = true;
-    toggle_play_pause("music__button", "hide");
+    toggle_play_pause("music-button", "hide");
 }
 
 function pause_song() {
-    background__music.pause();
+    background_music.pause();
     music_playing = false;
-    toggle_play_pause("hide", "music__button");
+    toggle_play_pause("hide", "music-button");
 }
 
 function toggle_play_pause(pause, play) {
@@ -572,7 +607,7 @@ function previous_song() {
     else {
         current_track -= 1;
     }
-    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
 }
 
@@ -583,7 +618,7 @@ function next_song() {
     else {
         current_track += 1;
     }
-    background__music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
     play_song();
 }
 
