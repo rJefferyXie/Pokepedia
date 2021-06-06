@@ -64,7 +64,7 @@ body {
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent; */
-    color: black;
+    color: rgb(235, 116, 116);
     margin: auto 0;
     font-size: 1.8rem;
 }
@@ -102,17 +102,17 @@ body {
     -ms-user-select: none;      
     user-select: none;       
     background-color: rgb(255, 255, 255);   
-    /* background-image: url(images/wallpaper.jpg);
+    background-image: url(images/background.jpg);
+    /* <a href="https://www.vecteezy.com/free-vector/white-abstract-background">White Abstract Background Vectors by Vecteezy</a> */
     background-repeat: no-repeat;
     background-position: center top;
     background-attachment: fixed;
-    background-size: cover; */
+    background-size: cover;
 }
 
 #intro-section {
     height: calc(100vh - 80px);
     width: 100vw;
-    background-color: white;
 }
 
 .rect {
@@ -122,16 +122,16 @@ body {
 }
 
 .rect-1 {
-    left: -20%;
-    top: -20%;
-    height: 60vh;
-    width: 60vw;
-    transform: rotate(135deg);
+    left: 0%;
+    top: 0%;
+    height: 60%;
+    width: 30%;
+    transform: rotate(45deg);
     background-color: rgb(92, 218, 165);
 }
 
 .rect-2 {
-    left: 0%;
+    left: -10%;
     top: 80%;
     height: 60%;
     width: 30%;
@@ -142,8 +142,8 @@ body {
 .rect-3 {
     right: -20%;
     bottom: -20%;
-    height: 60vh;
-    width: 60vw;
+    height: 60%;
+    width: 30%;
     transform: rotate(135deg);
     background-color: rgb(201, 73, 34);
 }
@@ -170,7 +170,7 @@ body {
 }
 
 .header {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     width: 100%;
 }
 
@@ -185,6 +185,7 @@ body {
     justify-content: flex-start;
     width: 50%;
     max-width: 640px;
+    margin-top: 4px;
 }
 
 #circle-container i {
@@ -199,11 +200,11 @@ body {
 
 #region-button {
     color: black;
-    background-color: rgb(147, 201, 233);
+    background-color: rgb(134, 240, 169);
     padding: 20px 10px 20px 10px;
     font-size: 1rem;
     border-radius: 20px;
-    box-shadow: 0px 1px 1px 2px rgb(88, 125, 146);
+    box-shadow: 0px 1px 1px 2px rgb(88, 160, 112);
     cursor: pointer;
     border: none;
     outline: none;
