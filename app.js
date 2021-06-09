@@ -422,12 +422,34 @@ function search_pokemon() {
 }
 
 function scroll_to(section) {
-    var destination = document.getElementById(section).offsetTop - 80;
+    let destination = document.getElementById(section).offsetTop - 80;
     window.scroll({
       top: destination, 
       behavior: "smooth"
     });
-  }
+}
+
+function scrollUp() {
+    if (pokedex.scrollTop % 178 == 0) {
+        pokedex.scroll({
+            top: pokedex.scrollTop -= 181,
+            behavior: "smooth"
+        });
+    }
+    else {
+        pokedex.scroll({
+            top: pokedex.scrollTop = pokedex.scrollTop - pokedex.scrollTop % 178,
+            behavior: "smooth"
+        });
+    }
+}
+
+function scrollDown() {
+    pokedex.scroll({
+        top: pokedex.scrollTop = pokedex.scrollTop + (178 - pokedex.scrollTop % 178),
+        behavior: "smooth"
+    });
+}
 
 // --------------------------------------- Utility Data Retrieval Functions --------------------------------------- //
 function fetch_inspect(data) {
