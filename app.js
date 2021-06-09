@@ -99,7 +99,7 @@ const first_song = 0; // start of playlist
 const final_song = 6; // end of playlist
 
 const first_intro_section = 1; // first intro page
-const final_intro_section = 3; // last intro page
+const final_intro_section = 4; // last intro page
 
 var current_intro_section = 1;
 

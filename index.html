@@ -42,15 +42,15 @@
                     <p class="header">About Pokepedia</p>
                     <p class="text">
                         Learn about all of your favorite pokemon's strengths, weaknesses, and backgrounds. 
-                        We have a fully interactive pokedex with many different features for all users.
-                        Core Features Include: Pokemon Lookup, Team Generation, Comparing Pokemon
+                        This website offers a fully interactive pokedex with many different features such as
+                        pokemon lookup, team generation, and comparing pokemon.
                     </p>
                     <img src="images/undraw/intro.svg" class="about-image">
                 </div>
                 <div class="hide" id="about2">
-                    <p class="header">Real Time Lookup</p>
+                    <p class="header">Pokemon Lookup</p>
                     <p class="text">
-                        With our real time lookup, you can find information on any pokemon in the selected region.
+                        With a fully functional pokedex specific to your selected region, you can find information on any pokemon.
                         Learn about each pokemon's background, stats, moveset, and evolution chain with one click.
                     </p>
                     <img src="images/undraw/lookup.svg" class="about-image">
@@ -58,16 +58,24 @@
                 <div class="hide" id="about3">
                     <p class="header">Team Generation</p>
                     <p class="text">
-                        Automatically generate a full team of six pokemon as you please.
-                        You can customize the generator with options such as banning legendary pokemon, allowing duplicate pokemon, 
+                        Automatically generate a team of six pokemon with one click.
+                        Customize the generator with options such as banning legendary pokemon, allowing duplicate pokemon, 
                         allowing more than one starter pokemon, and much more.
                     </p>
                     <img src="images/undraw/teambuilder.svg" class="about-image">
+                </div>
+                <div class="hide" id="about4">
+                    <p class="header">Compare Pokemon</p>
+                    <p class="text">
+                        Compare pokemon side-by-side to view their core similarities and differences.
+                    </p>
+                    <img src="images/undraw/compare.svg" class="about-image">
                 </div>
                 <div id="circle-container">
                     <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
                     <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
                     <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
+                    <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i>
                 </div>
                 <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
             </div>
@@ -139,8 +147,7 @@
         </div>
     </div>
 
-
-
+    <!-- Pokedex Section -->
     <div id="pokedex" class="hide">
         <div id="left">
             <div id="top-left"></div>
@@ -279,8 +286,6 @@
                         <div id="inspect-button" class="extra-button" onclick="inspect_screen()">Inspect</div>
                         <div id="teambuilder-button" class="extra-button" onclick="teambuilder_screen()">Team</div>
                         <div id="compare-button" class="extra-button" onclick="">Compare</div>
-
-                        <!-- <div id="new-region" class="extra-button" onclick="region_page()">New Region</div> -->
                     </div>
                     <div id="music-container">
                         <div id="song-title-container">
