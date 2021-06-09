@@ -114,7 +114,6 @@ background_music.addEventListener("ended", next_song);
 background_music.volume = 0.1;
 
 var current_view = "inspect";
-
 var inspect_active = "intro";
 var inspect_container = "intro-container";
 
@@ -139,11 +138,10 @@ const mobileMenu = () => {
 menu.addEventListener('click', mobileMenu);
 
 // --------------------------------------- Website State Functions --------------------------------------- //
-function region_page() {
+function hero_page() {
     pokedex_page.className = "hide";
     hero.className = "none";
     clear_inspect();
-
     scroll_to("hero");
 
     for (var i = 0; i <= 6; i++) {
@@ -151,6 +149,13 @@ function region_page() {
         clear_slot(slot);
     }
     pause_song();
+}
+
+function region_page() {
+    if (hero.classList.contains("hide")) {
+        hero_page();
+    }
+    scroll_to('region-section');
 }
 
 function previous_intro_section() {
