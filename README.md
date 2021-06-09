@@ -53,3 +53,5 @@ https://rjefferyxie.github.io/Enhanced-Pokedex/
 * Soundtracks: https://downloads.khinsider.com/search?search=pokemon
 * Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
 * Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
+* Pokedex Template: https://github.com/bloodstorms/pokedex
+* Hero Images: https://undraw.co/illustrations
