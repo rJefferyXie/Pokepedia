@@ -22,10 +22,10 @@
             </div>
             <ul class="navbar-menu">
                 <li class="navbar-item">
-                    <a onclick="region_page()" class="navbar-links">Home</a>
+                    <a onclick="region_page()" class="navbar-links">About</a>
                 </li>
                 <li class="navbar-item">
-                    <a onclick="scroll_to('#dijkstras')" class="navbar-links">Features</a>
+                    <a onclick="scroll_to('region-section')" class="navbar-links">Regions</a>
                 </li>
                 <li class="navbar-item">
                     <a onclick="scroll_to('#dijkstras')" class="navbar-links">Contact</a>
@@ -37,9 +37,6 @@
     <!-- Hero Section -->
     <div id="hero">
         <div id="intro-section">
-            <!-- <div class="rect rect-1"></div>
-            <div class="rect rect-2"></div>
-            <div class="rect rect-3"></div> -->
             <div id="about-container">
                 <div id="about1">
                     <p class="header">About Pokepedia</p>
@@ -48,6 +45,7 @@
                         We have a fully interactive pokedex with many different features for all users.
                         Core Features Include: Pokemon Lookup, Team Generation, Comparing Pokemon
                     </p>
+                    <img src="images/undraw/intro.svg" class="about-image">
                 </div>
                 <div class="hide" id="about2">
                     <p class="header">Real Time Lookup</p>
@@ -55,6 +53,7 @@
                         With our real time lookup, you can find information on any pokemon in the selected region.
                         Learn about each pokemon's background, stats, moveset, and evolution chain with one click.
                     </p>
+                    <img src="images/undraw/lookup.svg" class="about-image">
                 </div>
                 <div class="hide" id="about3">
                     <p class="header">Team Generation</p>
@@ -63,6 +62,7 @@
                         You can customize the generator with options such as banning legendary pokemon, allowing duplicate pokemon, 
                         allowing more than one starter pokemon, and much more.
                     </p>
+                    <img src="images/undraw/teambuilder.svg" class="about-image">
                 </div>
                 <div id="circle-container">
                     <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
