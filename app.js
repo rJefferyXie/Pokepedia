@@ -95,6 +95,15 @@ const soundtracks = {
     }
 }
 
+const tabs = {
+    "intro": ["chain", "stats"],
+    "stats": ["intro", "moves"],
+    "moves": ["stats", "chain"],
+    "chain": ["moves", "intro"],
+    "team": ["build", "build"],
+    "build": ["team", "team"]
+}
+
 const first_song = 0; // start of playlist
 const final_song = 6; // end of playlist
 
@@ -219,6 +228,24 @@ function inspect_screen() {
 function teambuilder_screen() {
     current_view = "teambuilder";
     swap_view("hide", "none");
+}
+
+function previous_screen() {
+    if (current_view == "inspect") {
+        change_inspect_screen(tabs[inspect_active][0], tabs[inspect_active][0] + "-container")
+    }
+    else if (current_view == "teambuilder") {
+        change_teambuilder_screen(tabs[teambuilder_active][0], tabs[teambuilder_active][0] + "-container")
+    }
+}
+
+function next_screen() {
+    if (current_view == "inspect") {
+        change_inspect_screen(tabs[inspect_active][1], tabs[inspect_active][1] + "-container")
+    }
+    else if (current_view == "teambuilder") {
+        change_teambuilder_screen(tabs[teambuilder_active][1], tabs[teambuilder_active][1] + "-container")
+    }
 }
 
 function change_inspect_screen(new_active, new_container) {

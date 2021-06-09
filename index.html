@@ -77,8 +77,8 @@
                     <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
                     <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i>
                 </div>
-                <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
             </div>
+            <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
         </div>
         <div id="region-section">
             <div id="kanto" class="region-container" onclick="retrieve_data('2', 'kanto')">
@@ -199,10 +199,10 @@
             </div>
             <div id="right-screen">
                 <div id="right-cross-container">
-                    <div id="left-cross-button">
+                    <div id="left-cross-button" onclick="previous_screen()">
                         <div id="leftT"></div>
                     </div>
-                    <div id="right-cross-button">
+                    <div id="right-cross-button" onclick="next_screen()">
                         <div id="rightT"></div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                     <div id="teambuilder-view" class="hide">
                         <div id="teambuilder-buttons">
                             <div id="team" class="teambuilder-button" onclick="change_teambuilder_screen('team', 'team-container')">Team</div>
-                            <div id="power" class="teambuilder-button" onclick="change_teambuilder_screen('power', 'power-container')">Power</div>
+                            <div id="build" class="teambuilder-button" onclick="change_teambuilder_screen('build', 'build-container')">Build</div>
                         </div>
                         <div id="teambuilder-container">
                             <div id="team-container">
@@ -272,11 +272,7 @@
                                     <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
                                 </div>
                             </div>
-                            <div id="power-container" class="hide">
-                                <div id="power-summary"></div>
-                                <div id="generate">
-                                    Auto-Complete
-                                </div>
+                            <div id="build-container" class="hide">
                             </div>
                         </div>
                     </div>
