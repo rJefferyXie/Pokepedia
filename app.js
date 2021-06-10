@@ -106,28 +106,25 @@ const tabs = {
 
 const first_song = 0; // start of playlist
 const final_song = 6; // end of playlist
+const music = document.getElementById("background-music"); // audio source for music
+const track_name = document.getElementById("song-title");  
+var region_soundtrack; // soundtrack for selected region
+var track_number; // track number (from soundtracks dictionary) of current song being played
+var music_playing = false;
+music.addEventListener("ended", next_song); // play next song after each song ends
+music.volume = 0.1;
 
 const first_intro_section = 1; // first intro page
 const final_intro_section = 4; // last intro page
-
 var current_intro_section = 1;
 
-var current_soundtrack;
-var current_track; 
-const current_track_name = document.getElementById("song-title");
-var music_container = document.getElementById("music-container");
-var music_playing = false;
-
-const background_music = document.getElementById("background-music");
-background_music.addEventListener("ended", next_song);
-background_music.volume = 0.1;
-
-var current_view = "inspect";
-var inspect_active = "intro";
+var current_view = "inspect"; // options: inspect, teambuilder, compare
+var inspect_active = "intro"; // options: intro, stats, moves, chain
 var inspect_container = "intro-container";
-
-var teambuilder_active = "team";
+var teambuilder_active = "team"; // options: team, build
 var teambuilder_container = "team-container";
+
+var interval_; // used for holding down the scroll up/down buttons for pokedex
 
 const pokedex_page = document.getElementById("pokedex");
 const hero = document.getElementById("hero");
@@ -149,7 +146,7 @@ menu.addEventListener('click', mobileMenu);
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
     pokedex_page.className = "hide";
-    hero.className = "none";
+    hero.className = "show";
     clear_inspect();
     scroll_to("hero");
 
@@ -201,17 +198,17 @@ function hide_old_section() {
 }
 
 function show_new_section() {
-    document.getElementById("about" + current_intro_section).className = "";
+    document.getElementById("about" + current_intro_section).className = "show";
     document.getElementById("circle-" + current_intro_section).className = "fas fa-circle active";
 }
 
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
-    pokedex_page.className = "none";
+    pokedex_page.className = "show";
     hero.className = "hide";
-    current_soundtrack = region;
-    current_track = Math.floor(Math.random() * 6);
-    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    region_soundtrack = region;
+    track_number = Math.floor(Math.random() * 6);
+    music.src = soundtracks[region_soundtrack][track_number]['file_path'];
     play_song();
 }
 
@@ -222,12 +219,12 @@ function swap_view(inspect, teambuilder) {
 
 function inspect_screen() {
     current_view = "inspect";
-    swap_view("none", "hide");
+    swap_view("show", "hide");
 }
 
 function teambuilder_screen() {
     current_view = "teambuilder";
-    swap_view("hide", "none");
+    swap_view("hide", "show");
 }
 
 function previous_screen() {
@@ -254,7 +251,7 @@ function change_inspect_screen(new_active, new_container) {
     inspect_active = new_active;
 
     document.getElementById(inspect_container).className = "hide";
-    document.getElementById(new_container).className = "none";
+    document.getElementById(new_container).className = "show";
     inspect_container = new_container;
 }
 
@@ -264,7 +261,7 @@ function change_teambuilder_screen(new_active, new_container) {
     teambuilder_active = new_active;
 
     document.getElementById(teambuilder_container).className = "hide";
-    document.getElementById(new_container).className = "none";
+    document.getElementById(new_container).className = "show";
     teambuilder_container = new_container;
 }
 
@@ -288,14 +285,14 @@ function find_slot(pokemon_container) {
 }
 
 function clear_inspect() {
-    document.getElementById("moves-default").className = "none";
+    document.getElementById("moves-default").className = "show";
     document.getElementById("move-list").className = "hide";
     document.getElementById("move-list").innerHTML = "";
 
-    document.getElementById("stats-default").className = "none";
+    document.getElementById("stats-default").className = "show";
     document.getElementById("stat-list").className = "hide";
 
-    document.getElementById("evolution-default").className = "none";
+    document.getElementById("evolution-default").className = "show";
     document.getElementById("evolution-chain").className = "hide";
     document.getElementById("evolution-chain").innerHTML = "";
 
@@ -307,11 +304,8 @@ function insert_slot(slot, pokemon_container) {
     let datacopy = original_container.cloneNode(true);
     datacopy.id = original_container.id + "placed";
     datacopy.className = original_container.className + "-placed";
-    datacopy.draggable="true";
     datacopy.removeChild(datacopy.lastChild);
     datacopy.appendChild(create_clear_button(slot));
-    // datacopy.addEventListener("dragstart", onDragStart);
-    // datacopy.addEventListener("dragend", onDragEnd);
     slot.appendChild(datacopy);
 
     if (slot.id == "pokemon0") {
@@ -368,9 +362,6 @@ function get_pokemon_data(data, entry_number) {
 function create_pokemon_container() {
     let pokemon_container = document.createElement("li");
     pokemon_container.className = "pokemon-container";
-    pokemon_container.draggable="true";
-    // pokemon_container.addEventListener("dragstart", onDragStart);
-    // pokemon_container.addEventListener("dragend", onDragEnd);
     return pokemon_container;
 }
 
@@ -394,7 +385,6 @@ function get_image(data) {
     let image = document.createElement("img");
     image.className = "pokemon-image";
     image.src = data["sprites"]["front_default"];
-    image.draggable="false";
     return image;
 }
 
@@ -461,10 +451,15 @@ function scroll_to(section) {
     });
 }
 
+document.getElementById("top-cross").onmousedown = function() {
+    scrollUp();
+    interval_ = setInterval(scrollUp, 200);
+}
+
 function scrollUp() {
     if (pokedex.scrollTop % 178 == 0) {
         pokedex.scroll({
-            top: pokedex.scrollTop -= 181,
+            top: pokedex.scrollTop -= 178,
             behavior: "smooth"
         });
     }
@@ -474,6 +469,11 @@ function scrollUp() {
             behavior: "smooth"
         });
     }
+}
+
+document.getElementById("bot-cross").onmousedown = function() {
+    scrollDown();
+    interval_ = setInterval(scrollDown, 200);
 }
 
 function scrollDown() {
@@ -488,15 +488,13 @@ function fetch_inspect(data) {
     var pokedex_entry = data.id.replace("pokemon-container", "");
     pokedex_entry = pokedex_entry.replace("placed", "");
 
-    document.getElementById("description-container").className = "none";
-
+    document.getElementById("description-container").className = "show";
     document.getElementById("moves-default").className = "hide";
     document.getElementById("stats-default").className = "hide";
     document.getElementById("evolution-default").className = "hide";
-
-    document.getElementById("move-list").className = "none";
-    document.getElementById("stat-list").className = "none";
-    document.getElementById("evolution-chain").className = "none";
+    document.getElementById("move-list").className = "show";
+    document.getElementById("stat-list").className = "show";
+    document.getElementById("evolution-chain").className = "show";
 
     fetch("https://pokeapi.co/api/v2/pokemon/" + pokedex_entry + "/")
     .then(response => response.json())
@@ -543,7 +541,13 @@ async function get_pokemon_moves(data) {
 
 function get_flavor_text(data) {
     var description = document.getElementById("description");
-    var flavor_text = data['flavor_text_entries'][0]['flavor_text'];
+    var flavor_text_list = data['flavor_text_entries'];
+    for (var i = 0; i <= flavor_text_list.length; i++) {
+        if (flavor_text_list[i]['language']['name'] == "en") {
+            var flavor_text = flavor_text_list[i]['flavor_text'];
+            break;
+        }
+    }
     flavor_text = flavor_text.replace("\f", " ");
     description.textContent = flavor_text;
 }
@@ -573,7 +577,6 @@ function get_evolution_chain(data) {
             else if (data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection']) {
                 trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection'];
             }
-
         }
 
         if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
@@ -638,13 +641,13 @@ function create_evolution_container(pokemon_container) {
 /* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {
     change_song_title();
-    background_music.play();
+    music.play();
     music_playing = true;
     toggle_play_pause("music-button", "hide");
 }
 
 function pause_song() {
-    background_music.pause();
+    music.pause();
     music_playing = false;
     toggle_play_pause("hide", "music-button");
 }
@@ -655,29 +658,29 @@ function toggle_play_pause(pause, play) {
 }
 
 function previous_song() {
-    if (current_track == first_song) {
-        current_track = final_song;
+    if (track_number == first_song) {
+        track_number = final_song;
     }
     else {
-        current_track -= 1;
+        track_number -= 1;
     }
-    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    music.src = soundtracks[region_soundtrack][track_number]['file_path'];
     play_song();
 }
 
 function next_song() {
-    if (current_track == final_song) {
-        current_track = first_song;
+    if (track_number == final_song) {
+        track_number = first_song;
     } 
     else {
-        current_track += 1;
+        track_number += 1;
     }
-    background_music.src = soundtracks[current_soundtrack][current_track]['file_path'];
+    music.src = soundtracks[region_soundtrack][track_number]['file_path'];
     play_song();
 }
 
 function change_song_title() {
-        current_track_name.innerHTML = '<i class="fas fa-music"></i> ' + 
-        "Currently Playing: " + soundtracks[current_soundtrack][current_track]['name'] + 
+        track_name.innerHTML = '<i class="fas fa-music"></i> ' + 
+        "Currently Playing: " + soundtracks[region_soundtrack][track_number]['name'] + 
         ' <i class="fas fa-music"></i>';
 }

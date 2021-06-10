@@ -16,12 +16,12 @@ def get_inspect_info():
 
 # print(data["power"])
 
-# data = requests.get("https://pokeapi.co/api/v2/pokemon-species/3/").json()
+data = requests.get("https://pokeapi.co/api/v2/pokemon-species/3/").json()
 
-# print(data["flavor_text_entries"][0]["flavor_text"])
+print(data["flavor_text_entries"][0]["flavor_text"])
 
-# for flavor in data["flavor_text_entries"]:
-#     print(flavor["flavor_text"])
+for flavor in data["flavor_text_entries"]:
+    print(flavor)
 
 
 # for i in range(1, 252):
@@ -48,23 +48,23 @@ def get_inspect_info():
 #     data = requests.get("https://pokeapi.co/api/v2/pokemon-species/" + str(i) + "/").json()
 #     print(data['varieties'][0]['is_default'], data['varieties'][0]['pokemon']['url'])
 
-data = requests.get("https://pokeapi.co/api/v2/evolution-chain/67/").json()
+# data = requests.get("https://pokeapi.co/api/v2/evolution-chain/67/").json()
 
 # print(data['chain']['species'])
 
-for i in range(0, len(data['chain']['evolves_to'])):
-    if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item":
-        print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'])
-        print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['url'])
+# for i in range(0, len(data['chain']['evolves_to'])):
+#     if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item":
+#         print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'])
+#         print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['url'])
 
 
-    if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up":
-        if data['chain']['evolves_to'][i]['evolution_details'][0]['location']:
-            print(data['chain']['evolves_to'][i]['evolution_details'][0]['location']['name'])
-        elif data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day']:
-            print(data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day'])
-        elif data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection']:
-            print(data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection'])
+#     if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up":
+#         if data['chain']['evolves_to'][i]['evolution_details'][0]['location']:
+#             print(data['chain']['evolves_to'][i]['evolution_details'][0]['location']['name'])
+#         elif data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day']:
+#             print(data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day'])
+#         elif data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection']:
+#             print(data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection'])
 
         
 

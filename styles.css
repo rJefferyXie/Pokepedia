@@ -142,14 +142,14 @@ body {
 .about-image {
     width: 100%;
     max-width: 840px;
-    height: auto;
+    margin-top: 10px;
 }
 
 #about-container #circle-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 50%;
+    width: 75%;
     max-width: 640px;
     margin-top: 10px;
 }
@@ -953,8 +953,8 @@ body {
     text-align: center;
     padding: 6px;
     font-family: 'digital_dream';
-    background-color: #10c48e;
-    box-shadow: 0 0 10px #1c7a56 inset, 0px 0px 5px 1px #6e0808 ;
+    background-color: #3786c7;
+    box-shadow: 0 0 10px #295e8a inset;
     border-radius: 12px;
 }
 
