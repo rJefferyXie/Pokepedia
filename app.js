@@ -504,10 +504,50 @@ function fetch_inspect(data) {
 
 async function get_inspect_info(data) {
     get_pokemon_stats(data);
-    get_pokemon_moves(data);
+    get_move_stats(data);
+
     let species_info = await get_species_info(data);
-    await get_flavor_text(species_info);
+    get_flavor_text(species_info);
     get_evolution_info(species_info);
+}
+
+async function get_pokemon_stats(data) {
+    var stats = data["stats"];
+    for (var i = 0; i < stats.length; i++) {
+        var stat = stats[i]['base_stat'];
+        document.getElementById(stat_dictionary[i]).style.width = stat * 1.2 + "px";
+        document.getElementById(stat_dictionary[i]).textContent = stat;
+    }
+}
+
+async function get_move_info(moveName) {
+    var move = document.createElement("li");
+    move.id = "_" + moveName;
+    move.className = "pokemon-move";
+    move.textContent = moveName;
+    document.getElementById("move-list").appendChild(move);
+}
+
+async function get_move_array(data) {
+    var moves = data["moves"];
+    let promiseArray = [];
+
+    for (var i = 0; i < moves.length; i++) {
+        await get_move_info(moves[i]['move']['name']);
+        promiseArray.push(fetch(moves[i]['move']['url']).then(response => response.json()));
+    }
+
+    return Promise.all(promiseArray);
+}
+
+async function get_move_stats(data) {
+    let move_array = await get_move_array(data);
+
+    for (var i = 0; i < move_array.length; i++) {
+        if (move_array[i]['accuracy']) {
+            document.getElementById("_" + move_array[i]['name']).textContent += move_array[i]['accuracy'];
+        }
+    }
 }
 
 async function get_species_info(data) {
@@ -515,32 +555,7 @@ async function get_species_info(data) {
     .then(response => response.json());
 }
 
-async function get_pokemon_stats(data) {
-    var stats = data["stats"];
-    for (var i = 0; i <= stats.length; i++) {
-        var stat = stats[i]['base_stat'];
-        document.getElementById(stat_dictionary[i]).style.width = stat * 1.2 + "px";
-        document.getElementById(stat_dictionary[i]).textContent = stat;
-    }
-}
-
-async function get_pokemon_moves(data) {
-    var moves = data["moves"];
-
-    for (var i = 0; i <= moves.length; i++) {
-        var move = document.createElement("li");
-        move.id = "move" + i;
-        move.className = "pokemon-move";
-        move.textContent = moves[i]['move']['name'] + "\n";
-        document.getElementById("move-list").appendChild(move);
-    }
-}
-
-        // fetch(moves[i]['move']['url'])
-        // .then(response => response.json())
-        // .then(data => move_data = data)
-
-function get_flavor_text(data) {
+async function get_flavor_text(data) {
     var description = document.getElementById("description");
     var flavor_text_list = data['flavor_text_entries'];
     for (var i = 0; i <= flavor_text_list.length; i++) {
@@ -559,7 +574,7 @@ async function get_evolution_info(data) {
     .then(data => get_evolution_chain(data))
 }
 
-function get_evolution_chain(data) {
+async function get_evolution_chain(data) {
     create_evolution_container(data['chain']['species']['name']);
     for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
         let trigger = document.createElement('div');
@@ -606,7 +621,7 @@ function get_evolution_chain(data) {
     //     print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'])
     //     print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['url'])
 
-function create_evolution_container(pokemon_container) {
+async function create_evolution_container(pokemon_container) {
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
     evolution_container.className = "pokemon-container-placed";
     evolution_container.id = evolution_container.id + "_chain";

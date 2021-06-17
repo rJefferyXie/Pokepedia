@@ -72,10 +72,9 @@ def get_inspect_info():
 #     print(data['chain']['evolves_to'][i]['species'])
 
 
-data = requests.get("https://pokeapi.co/api/v2/location-area/143/").json()
+data = requests.get("https://pokeapi.co/api/v2/move/5/").json()
 
 
-for j in data['pokemon_encounters'][0]['version_details']:
-    print(j, "\n")
+print(data['name'], data['accuracy'])
 
 

@@ -579,13 +579,10 @@ body {
     border-bottom-left-radius: 100px;
     z-index: 10;
     text-align: right;
-    line-height: 120px;
-    font-size: 6vh;
+    line-height: 145px;
+    font-size: 3rem;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: rgb(93, 169, 255);
-    text-shadow: 
-        0 0 2px rgba(255, 255, 255, 0.8), 
-        2px 2px 2px rgba(0,0,0,0.2);
   }
   
   #top-left {
@@ -786,7 +783,6 @@ body {
 #pokemon-list::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 0px 10px 10px 0px;
-
 }
 
 #pokemon-list::-webkit-scrollbar-thumb {
@@ -794,15 +790,15 @@ body {
     border-radius: 10px;
 }
 
-  #cross {
+#cross {
     position: absolute;
     z-index: 130;
     height: 90px;
     width: 90px;
     margin: 390px auto auto 240px;
-  }
-  
-  #mid-cross {
+}
+
+#mid-cross {
     position: absolute;
     z-index: 130;
     background-color: #222222;
@@ -810,9 +806,9 @@ body {
     width: 30px;
     height: 30px;
     box-shadow: -3px 2px #111111;
-  }
-  
-  #top-cross {
+}
+
+#top-cross {
     position: absolute;
     background-color: #222222;
     margin: 0px auto auto 30px;
@@ -822,9 +818,9 @@ body {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     cursor: pointer;
-  }
-  
-  #right-cross {
+}
+
+#right-cross {
     position: absolute;
     background-color: #222222;
     margin: 30px auto auto 60px;
@@ -833,9 +829,9 @@ body {
     box-shadow: -3px 2px #111111;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
-  
-  #bot-cross {
+}
+
+#bot-cross {
     position: absolute;
     z-index: 130;
     background-color: #222222;
@@ -846,9 +842,9 @@ body {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     cursor: pointer;
-  }
-  
-  #left-cross {
+}
+
+#left-cross {
     position: absolute;
     z-index: 130;
     background-color: #222222;
@@ -858,18 +854,18 @@ body {
     box-shadow: -3px 2px #111111;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-  }
-  
-  #mid-circle {
+}
+
+#mid-circle {
     position: absolute;
     margin: 5px auto auto 3px;
     width: 22px;
     height: 22px;
     border-radius: 30px;
     background: radial-gradient(#111111, #222222);
-  }
-  
-  #upC {
+}
+
+#upC {
     position: absolute;
     margin: 8px auto auto 4px;
     width: 0;
@@ -877,9 +873,9 @@ body {
     border-style: solid;
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent #111111 transparent;
-  }
-  
-  #rightC {
+}
+
+#rightC {
     position: absolute;
     margin: 6px auto auto 10px;
     width: 0;
@@ -887,9 +883,9 @@ body {
     border-style: solid;
     border-width: 10px 0 10px 10px;
     border-color: transparent transparent transparent #111111;
-  }
-  
-  #downC {
+}
+
+#downC {
     position: absolute;
     margin: 14px auto auto 4px;
     width: 0;
@@ -897,9 +893,9 @@ body {
     border-style: solid;
     border-width: 10px 10px 0 10px;
     border-color: #111111 transparent transparent transparent;
-  }
-  
-  #leftC {
+}
+
+#leftC {
     position: absolute;
     margin: 6px auto auto 7px;
     width: 0;
@@ -907,16 +903,16 @@ body {
     border-style: solid;
     border-width: 10px 10px 10px 0;
     border-color: transparent #111111 transparent transparent;
-  }
+}
 
-  #right-cross-container {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      margin: 0px 0px 0px 60px;
-  }
+#right-cross-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0px 0px 0px 60px;
+}
 
-  #left-cross-button {
+#left-cross-button {
     background: linear-gradient(#B0B0B0, #494949);
     z-index: 500;
     height: 30px;
@@ -925,16 +921,16 @@ body {
     border-bottom-left-radius: 5px;
     box-shadow: -1px 1px 0px 1px #383838;
     cursor: pointer;
-  }
-  
-  #left-cross-button:active {
+}
+
+#left-cross-button:active {
     box-shadow: none;
     background: linear-gradient(#3d3d3d, #B0B0B0);
     box-shadow: 0px 0px 10px 3px #5a5a5a inset;
     border: #3d3d3d solid 1px;
-  }
-  
-  #right-cross-button {
+}
+
+#right-cross-button {
     background: linear-gradient(#B0B0B0, #494949);
     z-index: 500;
     height: 30px;
@@ -943,16 +939,16 @@ body {
     border-bottom-right-radius: 5px;
     box-shadow: -1px 1px 0px 1px #383838;
     cursor: pointer;
-  }
-  
-  #right-cross-button:active {
+}
+
+#right-cross-button:active {
     box-shadow: none;
     background: linear-gradient(#3d3d3d, #B0B0B0);
     box-shadow: 0px 0px 10px 3px #5a5a5a inset;
     border: #3d3d3d solid 1px;
-  }
-  
-  #rightT {
+}
+
+#rightT {
     position: absolute;
     z-index: 130;
     margin: 5px auto auto 16px;
@@ -961,9 +957,9 @@ body {
     border-style: solid;
     border-width: 10px 0 10px 10px;
     border-color: transparent transparent transparent #23da93;
-  }
-  
-  #leftT {
+}
+
+#leftT {
     position: absolute;
     z-index: 130;
     margin: 5px auto auto 12px;
@@ -972,65 +968,6 @@ body {
     border-style: solid;
     border-width: 10px 10px 10px 0;
     border-color: transparent #23da93 transparent transparent;
-  }
-  
-
-  /* ----- Music Section ----- */
-#music-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    width: 350px;
-}
-
-#song-title-container {
-    width: 80%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-align: center;
-    padding: 6px;
-    font-family: 'digital_dream';
-    background-color: #3786c7;
-    box-shadow: 0 0 10px #295e8a inset;
-    border-radius: 12px;
-}
-
-#song-title-container:hover span {
-    display: inline-block;
-    animation: song-title 10s linear infinite;
-}
-  
-@keyframes song-title {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(-100%, 0);
-    }
-}
-
-#music-controls {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-}
-
-.music-button {
-    font-size: 28px;
-    height: 28px;
-    line-height: 28px;
-    margin: 0px 5px 0px 5px;
-    cursor: pointer;
-    color: rgb(204, 204, 204);
-    background-color: black;
-    border-radius: 100%;
-    box-shadow: -1px 1px 0px 0.5px #131313;
-}
-
-.music-button:active {
-    color: rgb(163, 163, 163);
-    box-shadow: 0px 0px 10px 3px #919191 inset;
 }
 
 /* ----- Utility Section ----- */
@@ -1156,16 +1093,21 @@ body {
     font-size: 14px;
     text-align: center;
     line-height: 25px;
-    border:1px solid black;
-    border-radius: 10px 10px 0px 0px;
+    border: 1px solid black;
     z-index: 999;
     cursor: pointer;
     color: white;
     background-color: #9facb4;
+    margin: 0px -1px 0px -1px;
 }
 
 #intro {
+    border-radius: 10px 0px 0px 0px;
     background-color: #6b77e4;
+}
+
+#chain {
+    border-radius: 0px 10px 0px 0px;
 }
 
 #intro-container {
@@ -1408,16 +1350,21 @@ body {
     font-size: 14px;
     text-align: center;
     line-height: 25px;
-    border:1px solid black;
-    border-radius: 10px 10px 0px 0px;
+    border: 1px solid black;
     z-index: 999;
     cursor: pointer;
     background-color: #9facb4;
     color: white;
+    margin: 0px -1px 0px -1px;
 }
 
 #team {
     background-color: #6b77e4;
+    border-radius: 10px 0px 0px 0px;
+}
+
+#build {
+    border-radius: 0px 10px 0px 0px;
 }
 
 #team-container {
@@ -1453,4 +1400,61 @@ body {
   
 #generate:hover {
     background-color: rgb(154, 208, 253);
+}
+
+/* ----- Music Section ----- */
+#music-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    width: 350px;
+}
+
+#song-title-container {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    padding: 6px;
+    background-color: #3786c7;
+    box-shadow: 0 0 10px #295e8a inset;
+    border-radius: 12px;
+}
+
+#song-title-container:hover span {
+    display: inline-block;
+    animation: song-title 10s linear infinite;
+}
+  
+@keyframes song-title {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
+#music-controls {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.music-button {
+    font-size: 28px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0px 5px 0px 5px;
+    cursor: pointer;
+    color: rgb(204, 204, 204);
+    background-color: black;
+    border-radius: 100%;
+    box-shadow: -1px 1px 0px 0.5px #131313;
+}
+
+.music-button:active {
+    color: rgb(163, 163, 163);
+    box-shadow: 0px 0px 10px 3px #919191 inset;
 }
