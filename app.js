@@ -30,7 +30,7 @@ const stat_dictionary = {
 }
 
 const soundtracks = {
-    "kanto": {
+    "KANTO": {
         0: {name: "Cerulean City", file_path: "soundtrack/kanto/Cerulean City.mp3"},
         1: {name: "Hiwada Town", file_path: "soundtrack/kanto/Hiwada Town.mp3"},
         2: {name: "Pokémon Gym", file_path: "soundtrack/kanto/Pokémon Gym.mp3"},
@@ -39,7 +39,7 @@ const soundtracks = {
         5: {name: "Tanba City", file_path: "soundtrack/kanto/Tanba City.mp3"},
         6: {name: "Title (HeartGold & SoulSilver)", file_path: "soundtrack/kanto/Title.mp3"}
     },
-    "johto": {
+    "JOHTO": {
         0: {name: "Enju City", file_path: "soundtrack/johto/Enju City.mp3"},
         1: {name: "Friendly Shop", file_path: "soundtrack/johto/New Bark Town.mp3"},
         2: {name: "Hall Of Fame", file_path: "soundtrack/johto/Hall Of Fame.mp3"},
@@ -48,7 +48,7 @@ const soundtracks = {
         5: {name: "Pokemon Center", file_path: "soundtrack/johto/Pokemon Center.mp3"},
         6: {name: "Rocket Hideout", file_path: "soundtrack/johto/Rocket Hideout.mp3"}
     },
-    "hoenn": {
+    "HOENN": {
         0: {name: "Kanazumi City", file_path: "soundtrack/hoenn/Kanazumi City.mp3"},
         1: {name: "Minamo City", file_path: "soundtrack/hoenn/Minamo City.mp3"},
         2: {name: "Mt. Chimney", file_path: "soundtrack/hoenn/Mt. Chimney.mp3"},
@@ -57,7 +57,7 @@ const soundtracks = {
         5: {name: "Shidake Town", file_path: "soundtrack/hoenn/Shidake Town.mp3"},
         6: {name: "Touka City", file_path: "soundtrack/hoenn/Touka City.mp3"}
     },
-    "sinnoh": {
+    "SINNOH": {
         0: {name: "Kotobuki City (Night)", file_path: "soundtrack/sinnoh/Kotobuki City (Night).mp3"},
         1: {name: "Kurogane City (Day)", file_path: "soundtrack/sinnoh/Kurogane City (Day).mp3"},
         2: {name: "Lake", file_path: "soundtrack/sinnoh/Lake.mp3"},
@@ -66,7 +66,7 @@ const soundtracks = {
         5: {name: "Route 205 (Day)", file_path: "soundtrack/sinnoh/Route 205 (Day).mp3"},
         6: {name: "Route 206 (Night)", file_path: "soundtrack/sinnoh/Route 206 (Night).mp3"}
     },
-    "unova": {
+    "UNOVA": {
         0: {name: "Accumula Town", file_path: "soundtrack/unova/Accumula Town.mp3"},
         1: {name: "Castelia City", file_path: "soundtrack/unova/Castelia City.mp3"},
         2: {name: "Nimbasa City", file_path: "soundtrack/unova/Nimbasa City.mp3"},
@@ -75,7 +75,7 @@ const soundtracks = {
         5: {name: "Team Plasma Plots", file_path: "soundtrack/unova/Team Plasma Plots.mp3"},
         6: {name: "The Pokémon League", file_path: "soundtrack/unova/The Pokémon League.mp3"}
     },
-    "kalos": {
+    "KALOS": {
         0: {name: "Aquacorde Town", file_path: "soundtrack/kalos/Aquacorde Town.mp3"},
         1: {name: "Cyllage City", file_path: "soundtrack/kalos/Cyllage City.mp3"},
         2: {name: "Kalos", file_path: "soundtrack/kalos/Kalos.mp3"},
@@ -84,7 +84,7 @@ const soundtracks = {
         5: {name: "Santalune City", file_path: "soundtrack/kalos/Santalune City.mp3"},
         6: {name: "Victory Road", file_path: "soundtrack/kalos/Victory Road.mp3"}
     },
-    "alola": {
+    "ALOLA": {
         0: {name: "Festival Plaza (Day)", file_path: "soundtrack/alola/Festival Plaza (Day).mp3"},
         1: {name: "Hau'oli City (Night)", file_path: "soundtrack/alola/Hau'oli City (Night).mp3"},
         2: {name: "Heahea City (Day)", file_path: "soundtrack/alola/Heahea City (Day).mp3"},
@@ -205,6 +205,7 @@ function show_new_section() {
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
     pokedex_page.className = "show";
+    document.getElementById("top-right2").textContent = region;
     hero.className = "hide";
     region_soundtrack = region;
     track_number = Math.floor(Math.random() * 6);

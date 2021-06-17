@@ -107,7 +107,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     height: calc(100vh - 80px);
     width: 100vw;
 }
@@ -117,6 +117,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;
 }
 
 #about-container div {
@@ -127,6 +128,7 @@ body {
     color: rgb(0, 0, 0);
     width: 75%;
     max-width: 640px;
+    height: auto;
 }
 
 .header {
@@ -140,7 +142,7 @@ body {
 }
 
 .about-image {
-    width: 100%;
+    width: 50%;
     max-width: 840px;
     margin-top: 10px;
 }
@@ -167,14 +169,15 @@ body {
 #region-button {
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     background-color: rgb(98, 218, 152);
-    width: min(75%, 420px);
-    height: 10%;
-    font-size: 5vh;
+    width: min(75%, 360px);
+    height: min(50%, 70px);
+    font-size: 4vh;
     color: #fff;
     text-shadow: 
         0 0 2px rgba(255,255,255,0.8), 
         2px 2px 2px rgba(0,0,0,0.2);
     border-radius: 20px;
+    margin: 20px 0px 0px 0px;
     cursor: pointer;
     border: none;
     outline: none;
@@ -198,13 +201,25 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: 20px;
     margin: 0px 0px 10px 0px;
-    border-radius: 40px;
-    width: min(75%, 640px);
+    width: min(min(80%, calc(12vh * 6)), 720px);
+    height: min(12%, 108px);
 }
 
 #alola {
     margin: 0px;
+}
+
+.region-image {
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -o-crisp-edges; /* Opera */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+    width: calc(100% / 6);
+    max-width: 96px;
+    opacity: 0;
 }
 
 .region-name {
@@ -218,53 +233,68 @@ body {
     text-align: center;
 }
 
-.image-region {
-    image-rendering: -moz-crisp-edges; /* Firefox */
-    image-rendering: -o-crisp-edges; /* Opera */
-    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
-    image-rendering: crisp-edges;
-    -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+.region-container:hover .region-name {
     opacity: 0;
-    width: calc(100% / 6);
-    max-width: 96px;
 }
 
-.region-container:hover .image-region, .region-container:active .image-region {
+.region-container:hover .region-image {
     opacity: 1;
-    transition: all ease-in 600ms;
-}
-
-.region-container:hover .region-name, .region-container:active .region-name {
-    opacity: 0;
-    transition: all ease-out 300ms;
 }
 
 #kanto {
     background-color: rgb(255, 214, 139);
+}
+
+#kanto:hover {
+    box-shadow: 0px 0px 1px 2px rgb(241, 206, 140);
 }
   
 #johto {
     background-color: rgb(143, 178, 253);
 }
 
+#johto:hover {
+    box-shadow: 0px 0px 1px 2px rgb(126, 166, 252);
+}
+
 #hoenn {
     background-color: rgb(128, 255, 155);
+}
+
+#hoenn:hover {
+    box-shadow: 0px 0px 1px 2px rgb(110, 250, 140);
 }
 
 #sinnoh {
     background-color: rgb(154, 244, 250);
 }
 
+#sinnoh:hover {
+    box-shadow: 0px 0px 1px 2px rgb(143, 246, 253);
+}
+
 #unova {
     background-color: rgb(203, 185, 253);
+}
+
+#unova:hover {
+    box-shadow: 0px 0px 1px 2px rgb(193, 172, 252);
 }
 
 #kalos {
     background-color: rgb(144, 255, 209);
 }
 
+#kalos:hover {
+    box-shadow: 0px 0px 1px 2px  rgb(127, 253, 201);
+}
+
 #alola {
     background-color: rgb(255, 187, 155);
+}
+
+#alola:hover {
+    box-shadow: 0px 0px 1px 2px rgb(255, 174, 137);
 }
 
 /* ----- Pokedex Section ----- */
@@ -548,6 +578,14 @@ body {
     height: 100px;
     border-bottom-left-radius: 100px;
     z-index: 10;
+    text-align: right;
+    line-height: 120px;
+    font-size: 6vh;
+    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(93, 169, 255);
+    text-shadow: 
+        0 0 2px rgba(255, 255, 255, 0.8), 
+        2px 2px 2px rgba(0,0,0,0.2);
   }
   
   #top-left {
@@ -1294,7 +1332,7 @@ body {
     border-radius: 10px;
 }
 
-/* ----- Evolution Chain Seciton ----- */
+/* ----- Evolution Chain Section ----- */
 #chain-container {
     display: flex;
     align-items: center;

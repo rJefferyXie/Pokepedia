@@ -16,12 +16,12 @@ def get_inspect_info():
 
 # print(data["power"])
 
-data = requests.get("https://pokeapi.co/api/v2/pokemon-species/3/").json()
+# data = requests.get("https://pokeapi.co/api/v2/pokemon-species/3/").json()
 
-print(data["flavor_text_entries"][0]["flavor_text"])
+# print(data["flavor_text_entries"][0]["flavor_text"])
 
-for flavor in data["flavor_text_entries"]:
-    print(flavor)
+# for flavor in data["flavor_text_entries"]:
+#     print(flavor)
 
 
 # for i in range(1, 252):
@@ -70,3 +70,12 @@ for flavor in data["flavor_text_entries"]:
 
 # for i in range(0, len(data['chain']['evolves_to'])):
 #     print(data['chain']['evolves_to'][i]['species'])
+
+
+data = requests.get("https://pokeapi.co/api/v2/location-area/143/").json()
+
+
+for j in data['pokemon_encounters'][0]['version_details']:
+    print(j, "\n")
+
+
