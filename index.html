@@ -148,9 +148,6 @@
         </div>
     </div>
 
-    <!-- Region Info -->
-
-
     <!-- Pokedex Section -->
     <div id="pokedex" class="hide">
         <div id="left">
@@ -220,7 +217,7 @@
                         </div>
                         <div id="inspect-container">
                             <div id="intro-container">
-                                <div id="pokemon0" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                <div id="pokemon0"></div>
                                 <div id="description-container" class="hide">
                                     <div id="description"></div>
                                 </div>
@@ -264,19 +261,35 @@
                         <div id="teambuilder-container">
                             <div id="team-container">
                                 <div class="pokemon-row">
-                                    <div id="pokemon1" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                                    <div id="pokemon2" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon1"></div>
+                                    <div id="pokemon2"></div>
                                 </div>
                                 <div class="pokemon-row">
-                                    <div id="pokemon3" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                                    <div id="pokemon4" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon3"></div>
+                                    <div id="pokemon4"></div>
                                 </div>
                                 <div class="pokemon-row">
-                                    <div id="pokemon5" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
-                                    <div id="pokemon6" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+                                    <div id="pokemon5"></div>
+                                    <div id="pokemon6"></div>
                                 </div>
                             </div>
                             <div id="build-container" class="hide">
+                                <form id="build-form">
+                                    <div id="form-container">
+                                        <label class="build-checkbox">No Legendary Pokemon
+                                            <input id="legendaries_on" type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="build-checkbox">No Mythical Pokemon
+                                            <input id="mythicals_on" type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div id="build-button-container">
+                                        <div id="clear-team-button" class="build-button" onclick="clear_team()">Clear Team</div>
+                                        <div id="submit-button" class="build-button" onclick="generate_team()">Generate</div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

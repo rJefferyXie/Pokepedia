@@ -16,7 +16,10 @@ def get_inspect_info():
 
 # print(data["power"])
 
-# data = requests.get("https://pokeapi.co/api/v2/pokemon-species/3/").json()
+
+for i in range(1, 153):
+    data = requests.get("https://pokeapi.co/api/v2/pokemon-species/" + str(i) + "/").json()
+    print(data['varieties'][0]['pokemon']['url'])
 
 # print(data["flavor_text_entries"][0]["flavor_text"])
 
@@ -72,9 +75,9 @@ def get_inspect_info():
 #     print(data['chain']['evolves_to'][i]['species'])
 
 
-data = requests.get("https://pokeapi.co/api/v2/move/5/").json()
+# data = requests.get("https://pokeapi.co/api/v2/move/5/").json()
 
 
-print(data['name'], data['accuracy'])
+# print(data['name'], data['accuracy'])
 
 

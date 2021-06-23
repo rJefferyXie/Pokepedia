@@ -131,6 +131,16 @@ const hero = document.getElementById("hero");
 const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
 
+var pokemon_team = {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    6: null,
+    "slots_available": 6
+}
+
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.navbar-menu');
 const navLogo = document.querySelector('#navbar-logo');
@@ -143,17 +153,22 @@ const mobileMenu = () => {
 
 menu.addEventListener('click', mobileMenu);
 
+// Used when generating team
+var freezeClicks = false;
+document.addEventListener("click", e => {
+    if (freezeClicks) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+}, true);
+
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
     pokedex_page.className = "hide";
     hero.className = "show";
     clear_inspect();
+    clear_team();
     scroll_to("hero");
-
-    for (var i = 0; i <= 6; i++) {
-        let slot = document.getElementById("pokemon" + i);
-        clear_slot(slot);
-    }
     pause_song();
 }
 
@@ -271,15 +286,15 @@ function find_slot(pokemon_container) {
     if (current_view == "inspect") {
         let slot = document.getElementById("pokemon0");
         clear_slot(slot);
-        insert_slot(slot, pokemon_container);
-        return;
+        insert_slot(slot, 0, pokemon_container);
+        return i;
     } 
     if (current_view == "teambuilder") {
         for (var i = 1; i <= 6; i++) {
             var slot = document.getElementById("pokemon" + i);
             if (slot.childElementCount == 0) {
-                insert_slot(slot, pokemon_container);
-                return;
+                insert_slot(slot, i, pokemon_container);
+                return i;
             }
         }
     }
@@ -300,27 +315,42 @@ function clear_inspect() {
     document.getElementById("description-container").className = "hide";
 }
 
-function insert_slot(slot, pokemon_container) {
-    let original_container = document.getElementById(pokemon_container);
-    let datacopy = original_container.cloneNode(true);
-    datacopy.id = original_container.id + "placed";
-    datacopy.className = original_container.className + "-placed";
+function insert_slot(slot, slot_number, pokemon_container) {
+    let datacopy = pokemon_container.cloneNode(true);
+    datacopy.id = pokemon_container.id + "placed";
+    datacopy.className = "pokemon-container-placed";
     datacopy.removeChild(datacopy.lastChild);
-    datacopy.appendChild(create_clear_button(slot));
+    datacopy.appendChild(create_clear_button(slot, slot_number));
     slot.appendChild(datacopy);
 
-    if (slot.id == "pokemon0") {
-        fetch_inspect(document.getElementById(pokemon_container));
+    if (slot_number == 0) {
+        fetch_inspect(pokemon_container);
+    }
+    else {
+        pokemon_team[slot_number] = pokemon_container.id;
+        pokemon_team["slots_available"] -= 1;
     }
     // else {
     //     eval();
     // }
 }
 
-function clear_slot(pokemon_slot) {
+function clear_team() {
+    for (var i = 0; i <= 6; i++) {
+        clear_slot(document.getElementById("pokemon" + i), i);
+    }
+}
+
+function clear_slot(pokemon_slot, slot_number) {
     if (current_view == "inspect") {
         clear_inspect();
     }
+
+    if (slot_number > 0) {
+        pokemon_team[slot_number] = null;
+        pokemon_team["slots_available"] += 1;
+    }
+
     pokemon_slot.innerHTML = "";
 }
 
@@ -332,52 +362,69 @@ function retrieve_data(gen, region) {
     .then(data => generate_pokedex(data))
 }
 
-async function generate_pokedex(data) {
-    const promiseArray = await get_promise_array(data);
-    for (var i = 0; i < promiseArray.length; i++) {
-        get_pokemon_data(promiseArray[i], i + 1);
-    }
-}
-
-function get_promise_array(data) {
-    var pokedex = data["pokemon_entries"];
+function get_promise_array_species(data) {
     let promiseArray = [];
 
-    for (var i = 0; i < pokedex.length; i++) {
-        let pokemon_number = pokedex[i]["pokemon_species"]["url"].replace("https://pokeapi.co/api/v2/pokemon-species/", "").replace("/", "");
-        promiseArray.push(fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon_number + "/").then(response => response.json()));
+    for (var i = 0; i < data.length; i++) {
+        promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
 }
 
-function get_pokemon_data(data, entry_number) {
-    let pokemon_container = create_pokemon_container();
-    pokemon_container.appendChild(get_image(data));
+function get_promise_array_pokemon(data) {
+    let promiseArray = [];
+
+    for (var i = 0; i < data.length; i++) {
+        promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
+    }
+    return Promise.all(promiseArray);
+}
+
+async function generate_pokedex(data) {
+    const species_data = await get_promise_array_species(data['pokemon_entries']);
+    const pokemon_data = await get_promise_array_pokemon(species_data);
+    for (var i = 0; i < species_data.length; i++) {
+        get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
+    }
+}
+
+function get_pokemon_data(species_data, pokemon_data, entry_number) {
+    let pokemon_container = create_pokemon_container(species_data);
+    pokemon_container.appendChild(get_image(pokemon_data));
     pokemon_container.appendChild(get_entry_number(entry_number));
-    pokemon_container.appendChild(get_name(data, pokemon_container));
-    pokemon_container.appendChild(get_types(data));
+    pokemon_container.appendChild(get_name(pokemon_data, pokemon_container));
+    pokemon_container.appendChild(get_types(pokemon_data));
     pokemon_container.appendChild(create_insert_button(pokemon_container.id));
     pokedex.appendChild(pokemon_container);
 }
 
-function create_pokemon_container() {
+function create_pokemon_container(data) {
     let pokemon_container = document.createElement("li");
     pokemon_container.className = "pokemon-container";
+
+    if (data['is_legendary']) {
+        pokemon_container.classList.add("is_legendary");
+    }
+
+    if (data['is_mythical']) {
+        pokemon_container.classList.add("is_mythical");
+    }
+
     return pokemon_container;
 }
 
 function create_insert_button(pokemon_container) {
     let insert_button = document.createElement("button");
     insert_button.className = "hide insert-button";
-    insert_button.onclick = function() {find_slot(pokemon_container);};
+    insert_button.onclick = function() {find_slot(document.getElementById(pokemon_container));};
     insert_button.textContent = "+";
     return insert_button;
 }
 
-function create_clear_button(pokemon_slot) {
+function create_clear_button(pokemon_slot, slot_number) {
     let clear_button = document.createElement("button");
     clear_button.className = "hide clear-button";
-    clear_button.onclick = function() {clear_slot(pokemon_slot);};
+    clear_button.onclick = function() {clear_slot(pokemon_slot, slot_number);};
     clear_button.textContent = "x";
     return clear_button;
 }
@@ -458,15 +505,15 @@ document.getElementById("top-cross").onmousedown = function() {
 }
 
 function scrollUp() {
-    if (pokedex.scrollTop % 178 == 0) {
+    if (pokedex.scrollTop % 183 == 0) {
         pokedex.scroll({
-            top: pokedex.scrollTop -= 178,
+            top: pokedex.scrollTop -= 183,
             behavior: "smooth"
         });
     }
     else {
         pokedex.scroll({
-            top: pokedex.scrollTop = pokedex.scrollTop - pokedex.scrollTop % 178,
+            top: pokedex.scrollTop = pokedex.scrollTop - pokedex.scrollTop % 183,
             behavior: "smooth"
         });
     }
@@ -479,7 +526,7 @@ document.getElementById("bot-cross").onmousedown = function() {
 
 function scrollDown() {
     pokedex.scroll({
-        top: pokedex.scrollTop = pokedex.scrollTop + (178 - pokedex.scrollTop % 178),
+        top: pokedex.scrollTop = pokedex.scrollTop + (183 - pokedex.scrollTop % 183),
         behavior: "smooth"
     });
 }
@@ -623,7 +670,7 @@ async function get_evolution_chain(data) {
 
 async function create_evolution_container(pokemon_container) {
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
-    evolution_container.className = "pokemon-container-placed";
+    evolution_container.className = "pokemon-container-evolution";
     evolution_container.id = evolution_container.id + "_chain";
     evolution_container.style.display = "block";
     evolution_container.removeChild(evolution_container.lastChild);
@@ -653,6 +700,66 @@ async function create_evolution_container(pokemon_container) {
 // for every duplicate pokemon type: -10 eval, -20 eval, etc.
 // for every pokemon type immunity (one pokemon for each type max): +20 eval
 
+async function generate_team() {
+    change_teambuilder_screen('team', 'team-container');
+
+    let form = document.getElementById("build-form");
+    var settings = {
+        "legendaries_on": true,
+        "mythicals_on": true
+    }
+
+    for (var i = 0; i < form.length; i++) {
+        if (form.elements[i].checked) {
+            settings[form.elements[i].id] = false;
+        }
+    }
+
+    initialize_generation_graphics();
+
+    while (pokemon_team["slots_available"] > 0) {
+        var pokemon_chosen = Math.floor(Math.random() * pokedex.childElementCount);
+        var pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
+        
+        // skip duplicate pokemon
+        if (Object.values(pokemon_team).indexOf(pokemon_container.id) > -1) {
+            continue;
+        }
+
+        // place pokemon for now
+        var pokemon_slot = find_slot(pokemon_container);
+
+        // highlight which slot is currently under consideration
+        document.getElementById("pokemon" + pokemon_slot).style.border = "2px solid #00FF6B";
+
+        // delay for better visual
+        await new Promise(resolve => setTimeout(resolve, 500)); 
+
+        // remove pokemon if rules are not met
+        if (pokemon_container.classList.contains("is_legendary")) {
+            if (!settings["legendaries_on"]) {
+                clear_slot(document.getElementById("pokemon" + pokemon_slot), pokemon_slot);
+            }    
+        }
+        else if (pokemon_container.classList.contains("is_mythical")) {
+            if (!settings["mythicals_on"]) {
+                clear_slot(document.getElementById("pokemon" + pokemon_slot), pokemon_slot);
+            }
+        }
+
+        // remove highlight once slot contains a valid pokemon
+        document.getElementById("pokemon" + pokemon_slot).style.border = "1px solid black";
+    }
+    remove_generation_graphics();
+}
+
+async function initialize_generation_graphics() {
+    freezeClicks = true;
+}
+
+async function remove_generation_graphics() {
+    freezeClicks = false;
+}
 
 /* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {
