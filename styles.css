@@ -1476,7 +1476,6 @@ body {
     justify-content: space-evenly;
     height: 45%;
     width: 100%;
-    z-index: 1;
 }
 
 #help-text {
@@ -1494,7 +1493,6 @@ body {
     justify-content: space-evenly;
     width: 100%;
     margin-top: 10px;
-    z-index: 1;
 }
 
 .build-button {

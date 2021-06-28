@@ -417,6 +417,10 @@ function create_pokemon_container(data) {
         pokemon_container.classList.add("is_mythical");
     }
 
+    if (data['evolves_from_species']) {
+        pokemon_container.classList.add(data['evolves_from_species']['name']);
+    }
+
     return pokemon_container;
 }
 
@@ -733,6 +737,12 @@ async function generate_team_helper(settings) {
         var pokemon_chosen = Math.floor(Math.random() * pokedex.childElementCount);
         var pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         
+        // only get fully evolved forms of pokemon
+        while (document.getElementById(pokedex.childNodes[pokemon_chosen + 1].id).classList.contains(pokemon_container.id)) {
+            pokemon_chosen += 1;
+            pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
+        }
+
         // skip duplicate pokemon
         if (Object.values(pokemon_team).indexOf(pokemon_container.id) > -1) { continue; }
 
