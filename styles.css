@@ -569,18 +569,17 @@ body {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     box-shadow: -10px 8px 1px 3px #4e0000;
-  }
-  
-  #right {
+}
+
+#right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 500px;
     width: 350px;
+}
 
-  }
-  
-  #middle {
+#middle {
     display: flex;
     position: absolute;
     flex-direction: column;
@@ -591,26 +590,26 @@ body {
     background: linear-gradient(to right, #8B0000, #C00D0D, #8B0000);
     box-shadow: 0px 5px 5px 3px #660000;
     z-index: 50;
-  }
-  
- .hinge {
+}
+
+.hinge {
     z-index: 10;
     width: 50px;
     height: 50px;
     background: linear-gradient(to right, #600707, #C00D0D, #600707);
     border-bottom: solid #600707 2px;
     border-top: solid #600707 2px;
-  }
+}
 
-  #top-right-container {
+#top-right-container {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     height: 60px;
     width: 500px;
-  }
+}
 
-  #right-screen {
+#right-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -620,18 +619,18 @@ body {
     border-bottom-right-radius: 30px;
     box-shadow: -10px 8px 1px 3px #4e0000;
     z-index: 5;
-  }
+}
 
-  #top-right1 {
+#top-right1 {
     position: absolute;
     margin: 50px auto auto 0px;
     background-color: #C00D0D;
     width: 200px;
     height: 200px;
     border-top-right-radius: 120px;
-  }
-  
-  #top-right2 {
+}
+
+#top-right2 {
     position: absolute;
     margin: 0px auto auto 120px;
     background-color: #ffffff;
@@ -644,18 +643,18 @@ body {
     font-size: 3rem;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: rgb(93, 169, 255);
-  }
-  
-  #top-left {
+}
+
+#top-left {
     position: absolute;
     z-index: 20;
     width: 350px;
     height: 75px;
     background-color: #8B0000;
     border-top-left-radius: 30px;
-  }
-  
-  #top-left1 {
+}
+
+#top-left1 {
     position: absolute;
     z-index: 110;
     margin: 0px auto auto 0px;
@@ -665,9 +664,9 @@ body {
     border-bottom-right-radius: 100px;
     border-top-left-radius: 30px;
     box-shadow: -10px 8px 1px 3px #4e0000;
-  }
+}
 
-  #top-left2 {
+#top-left2 {
     position: absolute;
     z-index: 20;
     margin: 50px auto auto 150px;
@@ -675,9 +674,9 @@ body {
     width: 200px;
     height: 200px;
     border-top-left-radius: 120px;
-  }
+}
 
-  #glass-button {
+#glass-button {
     position: absolute;
     z-index: 110;
     margin: 17px auto auto 17px;
@@ -689,34 +688,34 @@ body {
     border-color: #FFFFFF;
     border-width: 5px;
     box-shadow: 0px 0px 6px 4px #4e0000;
-  }
+}
 
-  #reflect {
+#reflect {
     z-index: 120;
     margin: 3px auto auto 15px;
     width: 30px;
     height: 17px;
     background-color: #A0F2FA;
     border-radius: 20px 15px;
-  } 
-  
-  #top-buttons {
+} 
+
+#top-buttons {
     display: flex;
     justify-content: space-between;
     width: 85px;
     margin: 12px auto auto 100px;
-  }
-  
-  #top-button-red {
+}
+
+#top-button-red {
     z-index: 120;
     width: 20px;
     height: 20px;
     background: radial-gradient(#FB7575, #C00D0D);
     border-radius: 50px;
     box-shadow: 0px 0px 6px 2px #4e0000;
-  }
-  
-  #top-button-yellow {
+}
+
+#top-button-yellow {
     z-index: 120;
     width: 20px;
     height: 20px;
@@ -724,18 +723,18 @@ body {
     background-color: #A0F2FA;
     border-radius: 50px;
     box-shadow: 0px 0px 6px 2px #4e0000;
-  }
-  
-  #top-button-green {
+}
+
+#top-button-green {
     z-index: 120;
     width: 20px;
     height: 20px;
     background: radial-gradient(#ACFB76, #30DA0C);
     border-radius: 50px;
     box-shadow: 0px 0px 6px 2px #4e0000;
-  }
+}
 
-  #blue-button-left {
+#blue-button-left {
     background: linear-gradient(#2D77F9, #0530E5);
     position: absolute;
     z-index: 130;
@@ -745,16 +744,16 @@ body {
     width: 55px;
     box-shadow: 0px 1px 0px 1px #0000B2;
     cursor: pointer;
-  }
-  
-  #blue-button-left:active {
+}
+
+#blue-button-left:active {
     box-shadow: none;
     background: linear-gradient(#001193, #2D77F9);
     box-shadow: 0px 0px 10px 3px #0017CC inset;
     border: #222222 solid 1px;
-  }
+}
 
-  #green-button-left {
+#green-button-left {
     background: linear-gradient(#30DA0C, #137604);
     position: absolute;
     z-index: 130;
@@ -764,14 +763,14 @@ body {
     width: 50px;
     box-shadow: -1px 1px 0px 1px rgb(12, 75, 2);
     cursor: pointer;
-  }
-  
-  #green-button-left:active {
+}
+
+#green-button-left:active {
     background: linear-gradient(#23a109, #30DA0C);
     box-shadow: 0px 0px 10px 3px #25ac0a inset;
-  }
+}
 
-  #orange-button-left {
+#orange-button-left {
     background: linear-gradient(#ff970e, #d15909);
     position: absolute;
     z-index: 130;
@@ -781,14 +780,14 @@ body {
     width: 50px;
     box-shadow: -1px 1px 0px 1px #6e3313;
     cursor: pointer;
-  }
-  
-  #orange-button-left:active {
+}
+
+#orange-button-left:active {
     background: linear-gradient(#ff8f49, #ff970e);
     box-shadow: 0px 0px 5px 3px #e07330 inset;
-  }
+}
   
-  #pokedex-section {
+#pokedex-section {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -798,9 +797,34 @@ body {
     width: 260px;
     height: 230px;
     margin: 135px 0px 0px 40px;
-  }
+}
 
-  #pokemon-search {
+#loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 242px;
+    height: 181px;
+    top: 0;
+    left: 0;
+}
+
+.loader {
+    width: 96px;
+    height: 96px;
+    animation: load 2s linear infinite;
+}
+
+
+@keyframes load {
+    50% {
+        transform: scale(0.7); 
+    }
+}
+
+#pokemon-search {
     width: 100%;
     font-size: 16px; 
     padding: 12px 20px 12px 40px; 
@@ -808,9 +832,9 @@ body {
     border-radius: 9px;
     outline: none;
     margin-top: 5px;
-  } 
+} 
 
-  #pokemon-list {
+#pokemon-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1450,7 +1474,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 50%;
+    height: 45%;
     width: 100%;
     z-index: 1;
 }
@@ -1469,6 +1493,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    margin-top: 10px;
     z-index: 1;
 }
 

@@ -152,7 +152,6 @@
 
     <!-- Pokedex Section -->
     <div id="pokedex" class="hide">
-        <div id="background-pokedex"></div>
         <div id="left">
             <div id="top-left"></div>
             <div id="top-left1">
@@ -167,6 +166,10 @@
             </div>
             <div id="top-left2"></div>
             <div id="pokedex-section">
+                <div id="loader-container">
+                    <img src="images/undraw/loader.png" class="loader">
+                    <div class="loader-text">Loading...</div>
+                </div>
                 <ul id="pokemon-list"></ul>
                 <input type="text" id="pokemon-search" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
             </div>
