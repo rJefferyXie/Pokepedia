@@ -115,7 +115,7 @@ music.addEventListener("ended", next_song); // play next song after each song en
 music.volume = 0.1;
 
 const first_intro_section = 1; // first intro page
-const final_intro_section = 4; // last intro page
+const final_intro_section = 3; // last intro page
 var current_intro_section = 1;
 
 var current_view = "inspect"; // options: inspect, teambuilder, compare
@@ -138,6 +138,14 @@ var pokemon_team = {
     4: null,
     5: null,
     6: null,
+    "types": {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: []
+    },
     "slots_available": 6
 }
 
@@ -152,15 +160,6 @@ const mobileMenu = () => {
 };
 
 menu.addEventListener('click', mobileMenu);
-
-// Used when generating team
-var freezeClicks = false;
-document.addEventListener("click", e => {
-    if (freezeClicks) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-}, true);
 
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
@@ -327,18 +326,25 @@ function insert_slot(slot, slot_number, pokemon_container) {
         fetch_inspect(pokemon_container);
     }
     else {
+        let types = pokemon_container.childNodes[3];
+        for (var i = 0; i < types.childElementCount; i++) {
+            pokemon_team["types"][slot_number].push(types.childNodes[i].textContent);
+        }
+
         pokemon_team[slot_number] = pokemon_container.id;
         pokemon_team["slots_available"] -= 1;
+        // eval();
     }
-    // else {
-    //     eval();
-    // }
 }
 
-function clear_team() {
+async function clear_team() {
     for (var i = 0; i <= 6; i++) {
         clear_slot(document.getElementById("pokemon" + i), i);
     }
+
+    document.getElementById("help-text").className = "";
+    await new Promise(resolve => setTimeout(resolve, 500));
+    document.getElementById("help-text").className = "hide";
 }
 
 function clear_slot(pokemon_slot, slot_number) {
@@ -349,6 +355,7 @@ function clear_slot(pokemon_slot, slot_number) {
     if (slot_number > 0) {
         pokemon_team[slot_number] = null;
         pokemon_team["slots_available"] += 1;
+        pokemon_team["types"][slot_number].length = 0;
     }
 
     pokemon_slot.innerHTML = "";
@@ -706,7 +713,8 @@ async function generate_team() {
     let form = document.getElementById("build-form");
     var settings = {
         "legendaries_on": true,
-        "mythicals_on": true
+        "mythicals_on": true,
+        "duplicates_on": true,
     }
 
     for (var i = 0; i < form.length; i++) {
@@ -715,25 +723,30 @@ async function generate_team() {
         }
     }
 
-    initialize_generation_graphics();
+    await initialize_generation_graphics();
+    await generate_team_helper(settings);
+    remove_generation_graphics();
+}
 
+async function generate_team_helper(settings) {
     while (pokemon_team["slots_available"] > 0) {
         var pokemon_chosen = Math.floor(Math.random() * pokedex.childElementCount);
         var pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         
         // skip duplicate pokemon
-        if (Object.values(pokemon_team).indexOf(pokemon_container.id) > -1) {
-            continue;
-        }
+        if (Object.values(pokemon_team).indexOf(pokemon_container.id) > -1) { continue; }
 
         // place pokemon for now
         var pokemon_slot = find_slot(pokemon_container);
+
+        // prevent errors from while loop condition
+        if (pokemon_slot === undefined) { break; }
 
         // highlight which slot is currently under consideration
         document.getElementById("pokemon" + pokemon_slot).style.border = "2px solid #00FF6B";
 
         // delay for better visual
-        await new Promise(resolve => setTimeout(resolve, 500)); 
+        await new Promise(resolve => setTimeout(resolve, 250));
 
         // remove pokemon if rules are not met
         if (pokemon_container.classList.contains("is_legendary")) {
@@ -741,24 +754,39 @@ async function generate_team() {
                 clear_slot(document.getElementById("pokemon" + pokemon_slot), pokemon_slot);
             }    
         }
-        else if (pokemon_container.classList.contains("is_mythical")) {
+
+        if (pokemon_container.classList.contains("is_mythical")) {
             if (!settings["mythicals_on"]) {
                 clear_slot(document.getElementById("pokemon" + pokemon_slot), pokemon_slot);
+            }
+        }
+
+        if (!settings["duplicates_on"]) {
+            let types = pokemon_container.childNodes[3];
+            for (var i = 0; i < types.childElementCount; i++) {
+                for (var j = 1; j <= 6; j++) {
+                    if (j == pokemon_slot) {
+                        continue;
+                    }
+                    if (pokemon_team["types"][j].includes(types.childNodes[i].textContent)) {
+                        clear_slot(document.getElementById("pokemon" + pokemon_slot), pokemon_slot);
+                        break;
+                    } 
+                }
             }
         }
 
         // remove highlight once slot contains a valid pokemon
         document.getElementById("pokemon" + pokemon_slot).style.border = "1px solid black";
     }
-    remove_generation_graphics();
 }
 
 async function initialize_generation_graphics() {
-    freezeClicks = true;
+    document.getElementById("overlay").classList.toggle("overlay");
 }
 
 async function remove_generation_graphics() {
-    freezeClicks = false;
+    document.getElementById("overlay").classList.toggle("overlay");
 }
 
 /* --------------------------------------- Music Functions --------------------------------------- */

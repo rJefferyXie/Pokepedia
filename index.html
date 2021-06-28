@@ -34,6 +34,8 @@
         </div>
     </nav>
 
+    <div id="overlay"></div>
+
     <!-- Hero Section -->
     <div id="hero">
         <div id="intro-section">
@@ -64,18 +66,18 @@
                     </p>
                     <img src="images/undraw/teambuilder.svg" class="about-image">
                 </div>
-                <div class="hide" id="about4">
+                <!-- <div class="hide" id="about4">
                     <p class="header">Compare Pokemon</p>
                     <p class="text">
                         Compare pokemon side-by-side to view their core similarities and differences.
                     </p>
                     <img src="images/undraw/compare.svg" class="about-image">
-                </div>
+                </div> -->
                 <div id="circle-container">
                     <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
                     <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
                     <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
-                    <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i>
+                    <!-- <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i> -->
                 </div>
                 <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
             </div>
@@ -284,11 +286,16 @@
                                             <input id="mythicals_on" type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
+                                        <label class="build-checkbox">No Duplicate Types
+                                            <input id="duplicates_on" type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
                                     </div>
                                     <div id="build-button-container">
                                         <div id="clear-team-button" class="build-button" onclick="clear_team()">Clear Team</div>
                                         <div id="submit-button" class="build-button" onclick="generate_team()">Generate</div>
                                     </div>
+                                    <div id="help-text" class="hide">Team Cleared.</div>
                                 </form>
                             </div>
                         </div>
@@ -296,7 +303,7 @@
                     <div id="utility-buttons">
                         <div id="inspect-button" class="extra-button" onclick="inspect_screen()">Inspect</div>
                         <div id="teambuilder-button" class="extra-button" onclick="teambuilder_screen()">Team</div>
-                        <div id="compare-button" class="extra-button" onclick="">Compare</div>
+                        <!-- <div id="compare-button" class="extra-button" onclick="">Compare</div> -->
                     </div>
                     <div id="music-container">
                         <div id="song-title-container">
