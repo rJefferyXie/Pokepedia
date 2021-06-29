@@ -314,6 +314,7 @@ body {
     text-align: center;
     position: relative;
     list-style: none;
+    text-transform: capitalize;
 }
 
 .pokemon-container .pokemon-name, .pokemon-container .pokemon-number, .pokemon-container .pokemon-type {
@@ -857,6 +858,7 @@ body {
     font-size: 18px; 
     color: black; 
     display: block; 
+    text-transform: capitalize;
 }
 
 #pokemon-list::-webkit-scrollbar {
@@ -1175,10 +1177,10 @@ body {
     line-height: 25px;
     border: 1px solid black;
     z-index: 999;
-    cursor: pointer;
     color: white;
     background-color: #9facb4;
     margin: 0px -1px 0px -1px;
+    cursor: pointer;
 }
 
 #intro {
@@ -1336,6 +1338,7 @@ body {
     border: 1px solid #ddd; 
     margin-top: -1px; 
     padding: 12px; 
+    text-transform: capitalize;
 }
 
 #move-list::-webkit-scrollbar {
@@ -1368,6 +1371,7 @@ body {
     width: 100%;
     overflow-x: auto;
     margin: auto;
+    text-transform: capitalize;
 }
 
 #evolution-chain::-webkit-scrollbar {
@@ -1432,10 +1436,10 @@ body {
     line-height: 25px;
     border: 1px solid black;
     z-index: 999;
-    cursor: pointer;
     background-color: #9facb4;
     color: white;
     margin: 0px -1px 0px -1px;
+    cursor: pointer;
 }
 
 #team {

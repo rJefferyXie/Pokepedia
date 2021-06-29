@@ -207,20 +207,20 @@
             </div>
             <div id="right-screen">
                 <div id="right-cross-container">
-                    <div id="left-cross-button" onclick="previous_screen()">
+                    <div id="left-cross-button" onclick="change_screen(0)">
                         <div id="leftT"></div>
                     </div>
-                    <div id="right-cross-button" onclick="next_screen()">
+                    <div id="right-cross-button" onclick="change_screen(1)">
                         <div id="rightT"></div>
                     </div>
                 </div>
                 <div id="utility-section">
                     <div id="inspect-view">
                         <div id="inspect-buttons">
-                            <div id="intro" class="inspect-button" onclick="change_inspect_screen('intro', 'intro-container')">Intro</div>
-                            <div id="stats" class="inspect-button" onclick="change_inspect_screen('stats', 'stats-container')">Stats</div>
-                            <div id="moves" class="inspect-button" onclick="change_inspect_screen('moves', 'moves-container')">Moves</div>
-                            <div id="chain" class="inspect-button" onclick="change_inspect_screen('chain', 'chain-container')">Chain</div>
+                            <div id="intro" class="inspect-button">Intro</div>
+                            <div id="stats" class="inspect-button">Stats</div>
+                            <div id="moves" class="inspect-button">Moves</div>
+                            <div id="chain" class="inspect-button">Chain</div>
                         </div>
                         <div id="inspect-container">
                             <div id="intro-container">
@@ -262,8 +262,8 @@
                     </div>
                     <div id="teambuilder-view" class="hide">
                         <div id="teambuilder-buttons">
-                            <div id="team" class="teambuilder-button" onclick="change_teambuilder_screen('team', 'team-container')">Team</div>
-                            <div id="build" class="teambuilder-button" onclick="change_teambuilder_screen('build', 'build-container')">Build</div>
+                            <div id="team" class="teambuilder-button" onclick="change_screen(1)">Team</div>
+                            <div id="build" class="teambuilder-button" onclick="change_screen(0)">Build</div>
                         </div>
                         <div id="teambuilder-container">
                             <div id="team-container">

@@ -1,23 +1,23 @@
 // --------------------------------------- All Constants / Variables --------------------------------------- // 
 const type_color_schemes = { 
-    "Bug": "#C6D16E",
-    "Dark": "#A29288",
-    "Dragon": "#A27DFA",
-    "Electric": "#FAE078",
-    "Fairy": "#F4BDC9",
-    "Fighting": "#D67873",
-    "Flying": "#C6B7F5",
-    "Fire": "#F5AC78",
-    "Ghost": "#A292BC",
-    "Grass": "#A7DB8D",
-    "Ground": "#EBD69D",
-    "Ice": "#BCE6E6",
-    "Normal": "#C6C6A7",
-    "Poison": "#C183C1",
-    "Psychic": "#FA92B2",
-    "Rock": "#D1C17D",
-    "Steel": "#D1D1E0",
-    "Water": "#9DB7F5"
+    "bug": "#C6D16E",
+    "dark": "#A29288",
+    "dragon": "#A27DFA",
+    "electric": "#FAE078",
+    "fairy": "#F4BDC9",
+    "fighting": "#D67873",
+    "flying": "#C6B7F5",
+    "fire": "#F5AC78",
+    "ghost": "#A292BC",
+    "grass": "#A7DB8D",
+    "ground": "#EBD69D",
+    "ice": "#BCE6E6",
+    "normal": "#C6C6A7",
+    "poison": "#C183C1",
+    "psychic": "#FA92B2",
+    "rock": "#D1C17D",
+    "steel": "#D1D1E0",
+    "water": "#9DB7F5"
 }
 
 const stat_dictionary = {
@@ -95,13 +95,34 @@ const soundtracks = {
     }
 }
 
+var current_view = {
+    "view": "inspect",
+    "active": "intro",
+    "container": "intro-container"
+}
+
+var views = {
+    "inspect": {
+        "active": "intro",
+        "container": "intro-container"
+    },
+    "teambuilder": {
+        "active": "team",
+        "container": "team-container"
+    }
+}
+
 const tabs = {
-    "intro": ["chain", "stats"],
-    "stats": ["intro", "moves"],
-    "moves": ["stats", "chain"],
-    "chain": ["moves", "intro"],
-    "team": ["build", "build"],
-    "build": ["team", "team"]
+    "inspect": {
+        "intro": ["chain", "stats"],
+        "stats": ["intro", "moves"],
+        "moves": ["stats", "chain"],
+        "chain": ["moves", "intro"]
+    },
+    "teambuilder": {
+        "team": ["build", "build"],
+        "build": ["team", "team"]
+    }
 }
 
 const first_song = 0; // start of playlist
@@ -118,12 +139,6 @@ const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
 var current_intro_section = 1;
 
-var current_view = "inspect"; // options: inspect, teambuilder, compare
-var inspect_active = "intro"; // options: intro, stats, moves, chain
-var inspect_container = "intro-container";
-var teambuilder_active = "team"; // options: team, build
-var teambuilder_container = "team-container";
-
 var interval_; // used for holding down the scroll up/down buttons for pokedex
 
 const pokedex_page = document.getElementById("pokedex");
@@ -132,20 +147,11 @@ const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
 
 var pokemon_team = {
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    "types": {
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: []
-    },
+    1: null, 2: null, 3: null,
+    4: null, 5: null, 6: null,
+    "types": { 
+        1: [], 2: [], 3: [],
+        4: [], 5: [], 6: []},
     "slots_available": 6
 }
 
@@ -180,41 +186,36 @@ function region_page() {
 }
 
 function previous_intro_section() {
-    hide_old_section();
+    toggle_section();
     if (current_intro_section == first_intro_section) {
         current_intro_section = final_intro_section;
     }
     else {
         current_intro_section -= 1;
     }
-    show_new_section();
+    toggle_section();
 }
 
 function change_intro_section(new_section) {
-    hide_old_section();
+    toggle_section();
     current_intro_section = new_section;
-    show_new_section();
+    toggle_section();
 }
 
 function next_intro_section() {
-    hide_old_section();
+    toggle_section();
     if (current_intro_section == final_intro_section) {
         current_intro_section = first_intro_section;
     }
     else {
         current_intro_section += 1;
     }
-    show_new_section();
+    toggle_section();
 }
 
-function hide_old_section() {
-    document.getElementById("about" + current_intro_section).className = "hide";
-    document.getElementById("circle-" + current_intro_section).className = "fas fa-circle";
-}
-
-function show_new_section() {
-    document.getElementById("about" + current_intro_section).className = "show";
-    document.getElementById("circle-" + current_intro_section).className = "fas fa-circle active";
+function toggle_section() {
+    document.getElementById("about" + current_intro_section).classList.toggle("hide");
+    document.getElementById("circle-" + current_intro_section).classList.toggle("active");
 }
 
 function initialize_pokedex_page(region) {
@@ -234,62 +235,48 @@ function swap_view(inspect, teambuilder) {
 }
 
 function inspect_screen() {
-    current_view = "inspect";
+    change_current_view("inspect");
     swap_view("show", "hide");
 }
 
 function teambuilder_screen() {
-    current_view = "teambuilder";
+    change_current_view("teambuilder");
     swap_view("hide", "show");
 }
 
-function previous_screen() {
-    if (current_view == "inspect") {
-        change_inspect_screen(tabs[inspect_active][0], tabs[inspect_active][0] + "-container")
-    }
-    else if (current_view == "teambuilder") {
-        change_teambuilder_screen(tabs[teambuilder_active][0], tabs[teambuilder_active][0] + "-container")
-    }
+function change_current_view(name) {
+    current_view["view"] = name;
+    current_view["active"] = views[name]["active"];
+    current_view["container"] = views[name]["container"];
 }
 
-function next_screen() {
-    if (current_view == "inspect") {
-        change_inspect_screen(tabs[inspect_active][1], tabs[inspect_active][1] + "-container")
-    }
-    else if (current_view == "teambuilder") {
-        change_teambuilder_screen(tabs[teambuilder_active][1], tabs[teambuilder_active][1] + "-container")
-    }
+function change_screen(dir) {
+    let new_active = tabs[current_view["view"]][current_view["active"]][dir];
+    let new_container = new_active + "-container";
+    change_screen_helper(new_active, new_container);
 }
 
-function change_inspect_screen(new_active, new_container) {
-    document.getElementById(inspect_active).style.backgroundColor = "#9facb4";
+function change_screen_helper(new_active, new_container) {
+    document.getElementById(current_view["active"]).style.backgroundColor = "#9facb4";
     document.getElementById(new_active).style.backgroundColor = "#6b77e4";
-    inspect_active = new_active;
+    views[current_view["view"]]["active"] = new_active;
 
-    document.getElementById(inspect_container).className = "hide";
+    document.getElementById(current_view["container"]).className = "hide";
     document.getElementById(new_container).className = "show";
-    inspect_container = new_container;
-}
+    views[current_view["view"]]["container"] = new_container;
 
-function change_teambuilder_screen(new_active, new_container) {
-    document.getElementById(teambuilder_active).style.backgroundColor = "#9facb4";
-    document.getElementById(new_active).style.backgroundColor = "#6b77e4";
-    teambuilder_active = new_active;
-
-    document.getElementById(teambuilder_container).className = "hide";
-    document.getElementById(new_container).className = "show";
-    teambuilder_container = new_container;
+    change_current_view(current_view["view"]);
 }
 
 // --------------------------------------- Data Management Functions --------------------------------------- //
 function find_slot(pokemon_container) {
-    if (current_view == "inspect") {
+    if (current_view["view"] == "inspect") {
         let slot = document.getElementById("pokemon0");
         clear_slot(slot);
         insert_slot(slot, 0, pokemon_container);
         return i;
     } 
-    if (current_view == "teambuilder") {
+    if (current_view["view"] == "teambuilder") {
         for (var i = 1; i <= 6; i++) {
             var slot = document.getElementById("pokemon" + i);
             if (slot.childElementCount == 0) {
@@ -459,7 +446,7 @@ function get_entry_number(entry_number) {
 function get_name(data, pokemon_container) {
     let name = document.createElement("a");
     name.className = "pokemon-name";
-    name.innerHTML = data["name"].charAt(0).toUpperCase() + data["name"].slice(1);
+    name.innerHTML = data["name"];
     pokemon_container.id = data["name"];
     return name;
 }
@@ -470,7 +457,6 @@ function get_types(data) {
 
     for (var i = 0; i < data["types"].length; i++) {
         var type_str = data["types"][i]["type"]["name"];
-        type_str = type_str.charAt(0).toUpperCase() + type_str.slice(1);
         type_color = type_color_schemes[type_str];
 
         var type = document.createElement("div");
@@ -604,9 +590,16 @@ async function get_move_stats(data) {
     let move_array = await get_move_array(data);
 
     for (var i = 0; i < move_array.length; i++) {
-        if (move_array[i]['accuracy']) {
-            document.getElementById("_" + move_array[i]['name']).textContent += move_array[i]['accuracy'];
-        }
+        get_move_accuracy(move_array, i);
+    }
+}
+
+async function get_move_accuracy(move_array, move_number) {
+    if (move_array[move_number]['accuracy']) {
+        let accuracy = document.createElement("div");
+        accuracy.className = "move-accuracy";
+        accuracy.textContent = "Accuracy: " + move_array[move_number]['accuracy'];
+        document.getElementById("_" + move_array[move_number]['name']).appendChild(accuracy);
     }
 }
 
@@ -715,7 +708,7 @@ async function fill_evolution_container(data) {
 // for every pokemon type immunity (one pokemon for each type max): +20 eval
 
 async function generate_team() {
-    change_teambuilder_screen('team', 'team-container');
+    change_screen(0);
 
     let form = document.getElementById("build-form");
     var settings = {
