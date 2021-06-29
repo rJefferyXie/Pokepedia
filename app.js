@@ -165,6 +165,7 @@ menu.addEventListener('click', mobileMenu);
 function hero_page() {
     pokedex_page.className = "hide";
     hero.className = "show";
+    document.getElementById("loader-container").style.opacity = 1;
     clear_inspect();
     clear_team();
     scroll_to("hero");
@@ -342,9 +343,9 @@ async function clear_team() {
         clear_slot(document.getElementById("pokemon" + i), i);
     }
 
-    document.getElementById("help-text").className = "";
+    document.getElementById("help-text").classList.toggle("hide");
     await new Promise(resolve => setTimeout(resolve, 1000));
-    document.getElementById("help-text").className = "hide";
+    document.getElementById("help-text").classList.toggle("hide");
 }
 
 function clear_slot(pokemon_slot, slot_number) {
@@ -393,6 +394,7 @@ async function generate_pokedex(data) {
     for (var i = 0; i < species_data.length; i++) {
         get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
     }
+    document.getElementById("loader-container").style.opacity = 0;
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {
@@ -646,6 +648,9 @@ async function get_evolution_chain(data) {
     //     print(data[i]['evolution_details'][0]['item']['url'])
 
 async function create_evolution_container(pokemon_container) {
+    if (document.getElementById(pokemon_container) === null) {
+        return;
+    }
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
     evolution_container.className = "pokemon-container-evolution";
     evolution_container.id = evolution_container.id + "_chain";
@@ -736,7 +741,7 @@ async function generate_team_helper(settings) {
         var pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         
         // only get fully evolved forms of pokemon
-        while (document.getElementById(pokedex.childNodes[pokemon_chosen + 1].id).classList.contains(pokemon_container.id)) {
+        while (pokemon_chosen + 1 <= pokedex.childElementCount && document.getElementById(pokedex.childNodes[pokemon_chosen + 1].id).classList.contains(pokemon_container.id)) {
             pokemon_chosen += 1;
             pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         }
