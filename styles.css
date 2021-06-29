@@ -482,7 +482,7 @@ body {
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: black;
+        background: rgb(255, 255, 255);
     }
 
     .navbar-item {
@@ -1485,7 +1485,7 @@ body {
     position: absolute;
     width: 233.75px;
     height: 170px;
-    color: rgb(44, 224, 125);
+    color: rgb(25, 111, 190);
 }
 
 #build-button-container {

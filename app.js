@@ -343,7 +343,7 @@ async function clear_team() {
     }
 
     document.getElementById("help-text").className = "";
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     document.getElementById("help-text").className = "hide";
 }
 
@@ -634,50 +634,16 @@ async function get_evolution_info(data) {
 
 async function get_evolution_chain(data) {
     create_evolution_container(data['chain']['species']['name']);
-    for (var i = 0; i < data['chain']['evolves_to'].length; i++) {
-        let trigger = document.createElement('div');
-        trigger.className = "evolution-trigger";
-        trigger.textContent = data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
-        if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
-            if (data['chain']['evolves_to'][i]['evolution_details'][0]['min_level']) {
-                trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_level'];
-            }
-            else if (data['chain']['evolves_to'][i]['evolution_details'][0]['location']) {
-                trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['location']['name'];
-            }
-            else if (data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day']) {
-                trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['time_of_day'];
-            }
-            else if (data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection']) {
-                trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['min_affection'];
-            }
-        }
+    fill_evolution_container(data['chain']['evolves_to']);
 
-        if (data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item") {
-            trigger.textContent += ": " + data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'];
-        }
-        evolution_chain.appendChild(trigger);
-        create_evolution_container(data['chain']['evolves_to'][i]['species']['name']);
-    }
-
-    data = data['chain']['evolves_to'][0];
-    if (data['evolves_to'].length > 0) {
-        for (var i = 0; i < data['evolves_to'].length; i++) {
-            let trigger = document.createElement('div');
-            trigger.className = "evolution-trigger";
-            trigger.textContent = data['evolves_to'][i]['evolution_details'][0]['trigger']['name'];
-            if (data['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "level-up") {
-                trigger.textContent += ": " + data['evolves_to'][i]['evolution_details'][0]['min_level'];
-            }
-            evolution_chain.appendChild(trigger);
-            create_evolution_container(data['evolves_to'][i]['species']['name']);
-        }
+    if (data['chain']['evolves_to'].length > 0) {
+        fill_evolution_container(data['chain']['evolves_to'][0]['evolves_to']);
     }
 }
 
-    // if data['chain']['evolves_to'][i]['evolution_details'][0]['trigger']['name'] == "use-item":
-    //     print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['name'])
-    //     print(data['chain']['evolves_to'][i]['evolution_details'][0]['item']['url'])
+    // if data[i]['evolution_details'][0]['trigger']['name'] == "use-item":
+    //     print(data[i]['evolution_details'][0]['item']['name'])
+    //     print(data[i]['evolution_details'][0]['item']['url'])
 
 async function create_evolution_container(pokemon_container) {
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
@@ -686,6 +652,38 @@ async function create_evolution_container(pokemon_container) {
     evolution_container.style.display = "block";
     evolution_container.removeChild(evolution_container.lastChild);
     evolution_chain.appendChild(evolution_container);
+}
+
+async function fill_evolution_container(data) {
+    for (var i = 0; i < data.length; i++) {
+        if (document.getElementById(data[i]['species']['name']) === null) {
+            continue;
+        }
+
+        let trigger = document.createElement('div');
+        trigger.className = "evolution-trigger";
+        trigger.textContent = data[i]['evolution_details'][0]['trigger']['name'];
+        if (data[i]['evolution_details'][0]['trigger']['name'] == "level-up") {
+            if (data[i]['evolution_details'][0]['min_level']) {
+                trigger.textContent += ": " + data[i]['evolution_details'][0]['min_level'];
+            }
+            else if (data[i]['evolution_details'][0]['location']) {
+                trigger.textContent += ": " + data[i]['evolution_details'][0]['location']['name'];
+            }
+            else if (data[i]['evolution_details'][0]['time_of_day']) {
+                trigger.textContent += ": " + data[i]['evolution_details'][0]['time_of_day'];
+            }
+            else if (data[i]['evolution_details'][0]['min_affection']) {
+                trigger.textContent += ": " + data[i]['evolution_details'][0]['min_affection'];
+            }
+        }
+
+        if (data[i]['evolution_details'][0]['trigger']['name'] == "use-item") {
+            trigger.textContent += ": " + data[i]['evolution_details'][0]['item']['name'];
+        }
+        evolution_chain.appendChild(trigger);       
+        create_evolution_container(data[i]['species']['name']);
+    }
 }
 /* --------------------------------------- Team Power --------------------------------------- */
 // function eval() {
