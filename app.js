@@ -95,34 +95,19 @@ const soundtracks = {
     }
 }
 
-var current_view = {
-    "view": "inspect",
-    "active": "intro",
-    "container": "intro-container"
-}
-
-var views = {
-    "inspect": {
-        "active": "intro",
-        "container": "intro-container"
-    },
-    "teambuilder": {
-        "active": "team",
-        "container": "team-container"
-    }
-}
+var current_view = "inspect"; // options: inspect, teambuilder, compare
+var inspect_active = "intro"; // options: intro, stats, moves, chain
+var inspect_container = "intro-container";
+var teambuilder_active = "team"; // options: team, build
+var teambuilder_container = "team-container";
 
 const tabs = {
-    "inspect": {
-        "intro": ["chain", "stats"],
-        "stats": ["intro", "moves"],
-        "moves": ["stats", "chain"],
-        "chain": ["moves", "intro"]
-    },
-    "teambuilder": {
-        "team": ["build", "build"],
-        "build": ["team", "team"]
-    }
+    "intro": ["chain", "stats"],
+    "stats": ["intro", "moves"],
+    "moves": ["stats", "chain"],
+    "chain": ["moves", "intro"],
+    "team": ["build", "build"],
+    "build": ["team", "team"]
 }
 
 const first_song = 0; // start of playlist
@@ -235,48 +220,62 @@ function swap_view(inspect, teambuilder) {
 }
 
 function inspect_screen() {
-    change_current_view("inspect");
+    current_view = "inspect";
     swap_view("show", "hide");
 }
 
 function teambuilder_screen() {
-    change_current_view("teambuilder");
+    current_view = "teambuilder";
     swap_view("hide", "show");
 }
 
-function change_current_view(name) {
-    current_view["view"] = name;
-    current_view["active"] = views[name]["active"];
-    current_view["container"] = views[name]["container"];
+function previous_screen() {
+    if (current_view == "inspect") {
+        change_inspect_screen(tabs[inspect_active][0], tabs[inspect_active][0] + "-container")
+    }
+    else if (current_view == "teambuilder") {
+        change_teambuilder_screen(tabs[teambuilder_active][0], tabs[teambuilder_active][0] + "-container")
+    }
 }
 
-function change_screen(dir) {
-    let new_active = tabs[current_view["view"]][current_view["active"]][dir];
-    let new_container = new_active + "-container";
-    change_screen_helper(new_active, new_container);
+function next_screen() {
+    if (current_view == "inspect") {
+        change_inspect_screen(tabs[inspect_active][1], tabs[inspect_active][1] + "-container")
+    }
+    else if (current_view == "teambuilder") {
+        change_teambuilder_screen(tabs[teambuilder_active][1], tabs[teambuilder_active][1] + "-container")
+    }
 }
 
-function change_screen_helper(new_active, new_container) {
-    document.getElementById(current_view["active"]).style.backgroundColor = "#9facb4";
+function change_inspect_screen(new_active, new_container) {
+    document.getElementById(inspect_active).style.backgroundColor = "#9facb4";
     document.getElementById(new_active).style.backgroundColor = "#6b77e4";
-    views[current_view["view"]]["active"] = new_active;
+    inspect_active = new_active;
 
-    document.getElementById(current_view["container"]).className = "hide";
+    document.getElementById(inspect_container).className = "hide";
     document.getElementById(new_container).className = "show";
-    views[current_view["view"]]["container"] = new_container;
+    inspect_container = new_container;
+}
 
-    change_current_view(current_view["view"]);
+function change_teambuilder_screen(new_active, new_container) {
+    document.getElementById(teambuilder_active).style.backgroundColor = "#9facb4";
+    document.getElementById(new_active).style.backgroundColor = "#6b77e4";
+    teambuilder_active = new_active;
+
+    document.getElementById(teambuilder_container).className = "hide";
+    document.getElementById(new_container).className = "show";
+    teambuilder_container = new_container;
 }
 
 // --------------------------------------- Data Management Functions --------------------------------------- //
 function find_slot(pokemon_container) {
-    if (current_view["view"] == "inspect") {
+    if (current_view == "inspect") {
         let slot = document.getElementById("pokemon0");
         clear_slot(slot);
         insert_slot(slot, 0, pokemon_container);
         return i;
     } 
-    if (current_view["view"] == "teambuilder") {
+    if (current_view == "teambuilder") {
         for (var i = 1; i <= 6; i++) {
             var slot = document.getElementById("pokemon" + i);
             if (slot.childElementCount == 0) {
@@ -708,8 +707,7 @@ async function fill_evolution_container(data) {
 // for every pokemon type immunity (one pokemon for each type max): +20 eval
 
 async function generate_team() {
-    change_screen(0);
-
+    change_teambuilder_screen('team', 'team-container');
     let form = document.getElementById("build-form");
     var settings = {
         "legendaries_on": true,

@@ -13,12 +13,10 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(33, 128, 172);
-    border-left: 1px solid black;
+    background-color: #2180ac;
 }
 
 body {
@@ -40,7 +38,7 @@ body {
     font-size: 1.2rem;
     top: 0;
     z-index: 999;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -86,12 +84,11 @@ body {
 
 .navbar-links {
     cursor: pointer;
-    color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
 .navbar-links:hover {
-    color:rgb(33, 128, 172);
+    color:#2180ac;
     transition: all 0.3s ease;
 }
 
@@ -100,8 +97,11 @@ body {
     -webkit-user-select: none;  
     -moz-user-select: none;     
     -ms-user-select: none;      
-    user-select: none;       
-
+    user-select: none;  
+    background-image: url("images/undraw/hero.svg"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #intro-section {
@@ -110,20 +110,14 @@ body {
     align-items: center;
     justify-content: center;
     height: calc(100vh - 80px);
-    width: 100vw;
-    background-image: url("images/wallpaper/intro_dark.png"); 
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-
 }
 
 #about-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    justify-content: flex-end;
+    height: 75%;
 }
 
 #about-container div {
@@ -131,10 +125,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: rgb(255, 255, 255);
     width: 75%;
     max-width: 640px;
     height: auto;
+    color: white;
 }
 
 .header {
@@ -144,7 +138,6 @@ body {
 
 .text {
     font-size: 1.2rem;
-    width: 100%;
 }
 
 .about-image {
@@ -163,35 +156,32 @@ body {
 }
 
 #circle-container i {
-    color: rgb(255, 255, 255);
     margin-right: 6px;
+    font-size: 20px;
     cursor: pointer;
+    color: rgb(255, 255, 255);
 }
 
 #circle-container .active {
-    color: rgb(33, 128, 172);
+    color: #23b1ca;
 }
 
 #region-button {
-    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    background-color: rgb(98, 218, 152);
+    background-color: rgb(75, 165, 206);
     width: min(75%, 360px);
     height: min(50%, 70px);
-    font-size: 4vh;
+    font-size: 1.6rem;
     color: #fff;
-    text-shadow: 
-        0 0 2px rgba(255,255,255,0.8), 
-        2px 2px 2px rgba(0,0,0,0.2);
     border-radius: 20px;
-    margin: 20px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     cursor: pointer;
-    border: none;
     outline: none;
+    border: none;
     text-align: center;
 }
 
 #region-button:hover {
-    background-color: rgb(101, 226, 157);
+    background-color: rgb(79, 174, 218);
 }
 
 #region-section {
@@ -200,10 +190,6 @@ body {
     align-items: center;
     justify-content: center;    
     height: calc(100vh - 80px);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/wallpaper/82038.jpg"); 
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .region-container {
@@ -465,7 +451,7 @@ body {
     }
 
     .navbar-menu.active {
-        background: #000000;
+        background: #ffffff;
         top: 100%;
         opacity: 1;
         transition: all 0.5s ease;
@@ -483,7 +469,7 @@ body {
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: rgb(255, 255, 255);
+        background: rgb(0, 0, 0);
     }
 
     .navbar-item {
@@ -520,6 +506,10 @@ body {
     #mobile-menu.is-active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
+
+    #about-container {
+        height: 90%;
+    }
 }
 
 
@@ -555,7 +545,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: calc(100vh - 80px);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
