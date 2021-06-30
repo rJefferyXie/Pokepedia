@@ -1604,5 +1604,8 @@ body {
         line-height: 60px;
         background-color: #41badf;
         border-radius: 20px;
+        cursor: pointer;
+        color: white;
+        font-size: 1.4rem;
     }
 }

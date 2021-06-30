@@ -118,7 +118,7 @@ var region_soundtrack; // soundtrack for selected region
 var track_number; // track number (from soundtracks dictionary) of current song being played
 var music_playing = false;
 music.addEventListener("ended", next_song); // play next song after each song ends
-music.volume = 0.1;
+music.volume = 0.05;
 
 const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
