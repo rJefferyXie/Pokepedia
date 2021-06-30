@@ -127,6 +127,7 @@ var current_intro_section = 1;
 var interval_; // used for holding down the scroll up/down buttons for pokedex
 
 const pokedex_page = document.getElementById("pokedex");
+const pokedex_page_mobile = document.getElementById("pokedex-mobile");
 const hero = document.getElementById("hero");
 const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
@@ -155,6 +156,7 @@ menu.addEventListener('click', mobileMenu);
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
     pokedex_page.className = "hide";
+    pokedex_page_mobile.className = "hide";
     hero.className = "show";
     document.getElementById("loader-container").style.opacity = 1;
     clear_inspect();
@@ -206,6 +208,7 @@ function toggle_section() {
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
     pokedex_page.className = "show";
+    pokedex_page_mobile.className = "show";
     document.getElementById("top-right2").textContent = region;
     hero.className = "hide";
     region_soundtrack = region;

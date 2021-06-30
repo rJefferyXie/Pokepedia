@@ -41,16 +41,15 @@
                 <div id="about1">
                     <p class="header">About Pokepedia</p>
                     <p class="text">
-                        Learn about all of your favorite pokemon's strengths, weaknesses, and backgrounds. 
-                        This website offers a fully interactive pokedex with many different features such as
-                        pokemon lookup, team generation, and more.
+                        Learn about all of your favorite pokemon's strengths, weaknesses, and stories. 
+                        Our fully interactive pokedex includes many different features such as pokemon lookup, team generation, and more.
                     </p>
                     <img src="images/undraw/about.svg" class="about-image">
                 </div>
                 <div class="hide" id="about2">
                     <p class="header">Pokemon Lookup</p>
                     <p class="text">
-                        With a fully functional pokedex specific to your selected region, you can find information on any pokemon.
+                        With a fully functional pokedex specific to your selected region, you can find information on any pokemon. 
                         Learn about each pokemon's background, stats, moveset, and evolution chain with one click.
                     </p>
                     <img src="images/undraw/lookup.svg" class="about-image">
@@ -59,8 +58,7 @@
                     <p class="header">Team Generation</p>
                     <p class="text">
                         Automatically generate a team of six pokemon with one click.
-                        Customize the generator with options such as banning legendary pokemon, allowing duplicate pokemon, 
-                        allowing more than one starter pokemon, and much more.
+                        Customize the team generator with options such as banning legendary pokemon, duplicate pokemon types, and more.
                     </p>
                     <img src="images/undraw/teambuilder.svg" class="about-image">
                 </div>
@@ -151,7 +149,16 @@
     <!-- Overlay During Team Generation -->
     <div id="overlay"></div>
 
-    <!-- Pokedex Section -->
+    <!-- Pokedex Mobile Section -->
+    <div id="pokedex-mobile" class="hide">
+        <div class="error-text">
+            Mobile pokedex is under development. 
+            Feel free try the desktop version out!</div>
+        <img src="images/undraw/error.png" class="error-image"></img>
+        <div id="error-button" onclick="hero_page()">Home</div>
+    </div>
+
+    <!-- Pokedex Computer Section -->
     <div id="pokedex" class="hide">
         <div id="left">
             <div id="top-left"></div>

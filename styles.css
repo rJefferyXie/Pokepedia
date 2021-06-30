@@ -16,7 +16,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #2180ac;
+    background-color: #ec5858;
 }
 
 body {
@@ -1565,4 +1565,44 @@ body {
     right: 0;
     top: 0;
     z-index: 9999;
+}
+
+#pokedex-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    #pokedex {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #pokedex-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 80px);
+        width: 100%;
+    }
+
+    .error-text {
+        white-space: pre-line;
+    }
+
+    .error-image {
+        width: 20%;
+        height: auto;
+    }
+
+    #error-button {
+        margin-top: 20px;
+        width: 200px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        background-color: #41badf;
+        border-radius: 20px;
+    }
 }
