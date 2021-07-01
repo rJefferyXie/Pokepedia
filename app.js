@@ -30,7 +30,7 @@ const stat_dictionary = {
 }
 
 const soundtracks = {
-    "KANTO": {
+    "kanto": {
         0: {name: "Cerulean City", file_path: "soundtrack/kanto/Cerulean City.mp3"},
         1: {name: "Hiwada Town", file_path: "soundtrack/kanto/Hiwada Town.mp3"},
         2: {name: "Pokémon Gym", file_path: "soundtrack/kanto/Pokémon Gym.mp3"},
@@ -39,7 +39,7 @@ const soundtracks = {
         5: {name: "Tanba City", file_path: "soundtrack/kanto/Tanba City.mp3"},
         6: {name: "Title (HeartGold & SoulSilver)", file_path: "soundtrack/kanto/Title.mp3"}
     },
-    "JOHTO": {
+    "johto": {
         0: {name: "Enju City", file_path: "soundtrack/johto/Enju City.mp3"},
         1: {name: "Friendly Shop", file_path: "soundtrack/johto/New Bark Town.mp3"},
         2: {name: "Hall Of Fame", file_path: "soundtrack/johto/Hall Of Fame.mp3"},
@@ -48,7 +48,7 @@ const soundtracks = {
         5: {name: "Pokemon Center", file_path: "soundtrack/johto/Pokemon Center.mp3"},
         6: {name: "Rocket Hideout", file_path: "soundtrack/johto/Rocket Hideout.mp3"}
     },
-    "HOENN": {
+    "hoenn": {
         0: {name: "Kanazumi City", file_path: "soundtrack/hoenn/Kanazumi City.mp3"},
         1: {name: "Minamo City", file_path: "soundtrack/hoenn/Minamo City.mp3"},
         2: {name: "Mt. Chimney", file_path: "soundtrack/hoenn/Mt. Chimney.mp3"},
@@ -57,7 +57,7 @@ const soundtracks = {
         5: {name: "Shidake Town", file_path: "soundtrack/hoenn/Shidake Town.mp3"},
         6: {name: "Touka City", file_path: "soundtrack/hoenn/Touka City.mp3"}
     },
-    "SINNOH": {
+    "sinnoh": {
         0: {name: "Kotobuki City (Night)", file_path: "soundtrack/sinnoh/Kotobuki City (Night).mp3"},
         1: {name: "Kurogane City (Day)", file_path: "soundtrack/sinnoh/Kurogane City (Day).mp3"},
         2: {name: "Lake", file_path: "soundtrack/sinnoh/Lake.mp3"},
@@ -66,7 +66,7 @@ const soundtracks = {
         5: {name: "Route 205 (Day)", file_path: "soundtrack/sinnoh/Route 205 (Day).mp3"},
         6: {name: "Route 206 (Night)", file_path: "soundtrack/sinnoh/Route 206 (Night).mp3"}
     },
-    "UNOVA": {
+    "unova": {
         0: {name: "Accumula Town", file_path: "soundtrack/unova/Accumula Town.mp3"},
         1: {name: "Castelia City", file_path: "soundtrack/unova/Castelia City.mp3"},
         2: {name: "Nimbasa City", file_path: "soundtrack/unova/Nimbasa City.mp3"},
@@ -75,7 +75,7 @@ const soundtracks = {
         5: {name: "Team Plasma Plots", file_path: "soundtrack/unova/Team Plasma Plots.mp3"},
         6: {name: "The Pokémon League", file_path: "soundtrack/unova/The Pokémon League.mp3"}
     },
-    "KALOS": {
+    "kalos": {
         0: {name: "Aquacorde Town", file_path: "soundtrack/kalos/Aquacorde Town.mp3"},
         1: {name: "Cyllage City", file_path: "soundtrack/kalos/Cyllage City.mp3"},
         2: {name: "Kalos", file_path: "soundtrack/kalos/Kalos.mp3"},
@@ -84,7 +84,7 @@ const soundtracks = {
         5: {name: "Santalune City", file_path: "soundtrack/kalos/Santalune City.mp3"},
         6: {name: "Victory Road", file_path: "soundtrack/kalos/Victory Road.mp3"}
     },
-    "ALOLA": {
+    "alola": {
         0: {name: "Festival Plaza (Day)", file_path: "soundtrack/alola/Festival Plaza (Day).mp3"},
         1: {name: "Hau'oli City (Night)", file_path: "soundtrack/alola/Hau'oli City (Night).mp3"},
         2: {name: "Heahea City (Day)", file_path: "soundtrack/alola/Heahea City (Day).mp3"},
@@ -361,7 +361,6 @@ function retrieve_data(gen, region) {
 
 function get_promise_array_species(data) {
     let promiseArray = [];
-
     for (var i = 0; i < data.length; i++) {
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
@@ -370,7 +369,6 @@ function get_promise_array_species(data) {
 
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
-
     for (var i = 0; i < data.length; i++) {
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
@@ -664,7 +662,7 @@ async function get_evolution_chain(data) {
 
     // if data[i]['evolution_details'][0]['trigger']['name'] == "use-item":
     //     print(data[i]['evolution_details'][0]['item']['name'])
-    //     print(data[i]['evolution_details'][0]['item']['url'])
+    //     
 
 async function create_evolution_container(pokemon_container) {
     if (document.getElementById(pokemon_container) === null) {
@@ -703,12 +701,26 @@ async function fill_evolution_container(data) {
         }
 
         if (data[i]['evolution_details'][0]['trigger']['name'] == "use-item") {
-            trigger.textContent += ": " + data[i]['evolution_details'][0]['item']['name'];
+            get_item_image(data[i]['evolution_details'][0]['item']['url'], trigger);
+            // trigger.textContent += ": " + data[i]['evolution_details'][0]['item']['name'];
         }
         evolution_chain.appendChild(trigger);       
         create_evolution_container(data[i]['species']['name']);
     }
 }
+
+async function get_item_image(data_url, trigger) {
+    console.log(data_url);
+    fetch(data_url)
+    .then(response => response.json())
+    .then(function (data) {
+        let item_image = document.createElement('img');
+        item_image.className = "item-image";
+        item_image.src = data['sprites']['default'];
+        trigger.appendChild(item_image);
+    });
+}
+
 /* --------------------------------------- Team Power --------------------------------------- */
 // function eval() {
 //     for (var i = 1; i <= 6; i++) {

@@ -632,7 +632,8 @@ body {
     line-height: 145px;
     font-size: 3rem;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(93, 169, 255);
+    color: rgb(214, 40, 69);
+    text-transform: uppercase;
 }
 
 #top-left {
@@ -1385,7 +1386,9 @@ body {
 
 .evolution-trigger {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-size: 16px;
     width: 100%;
 }
