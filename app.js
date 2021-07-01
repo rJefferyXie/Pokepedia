@@ -306,7 +306,7 @@ function clear_inspect() {
 
 function insert_slot(slot, slot_number, pokemon_container) {
     let datacopy = pokemon_container.cloneNode(true);
-    datacopy.id = pokemon_container.id + "placed";
+    datacopy.id = pokemon_container.id + "-placed";
     datacopy.className = "pokemon-container-placed";
     datacopy.removeChild(datacopy.lastChild);
     datacopy.appendChild(create_clear_button(slot, slot_number));
@@ -458,13 +458,10 @@ function get_types(data) {
     types.className = "type-container";
 
     for (var i = 0; i < data["types"].length; i++) {
-        var type_str = data["types"][i]["type"]["name"];
-        type_color = type_color_schemes[type_str];
-
         var type = document.createElement("div");
-        type.style.backgroundColor = type_color;
+        type.style.backgroundColor = type_color_schemes[data["types"][i]["type"]["name"]];
         type.className = "pokemon-type";
-        type.textContent = type_str;
+        type.textContent = data["types"][i]["type"]["name"];
         types.appendChild(type);
     }
     return types;
@@ -593,16 +590,43 @@ async function get_move_stats(data) {
 
     for (var i = 0; i < move_array.length; i++) {
         get_move_accuracy(move_array, i);
+        get_move_power(move_array, i);
+        get_move_type(move_array, i);
     }
 }
 
 async function get_move_accuracy(move_array, move_number) {
+    let accuracy = document.createElement("div");
+    accuracy.className = "move-accuracy";
     if (move_array[move_number]['accuracy']) {
-        let accuracy = document.createElement("div");
-        accuracy.className = "move-accuracy";
         accuracy.textContent = "Accuracy: " + move_array[move_number]['accuracy'];
-        document.getElementById("_" + move_array[move_number]['name']).appendChild(accuracy);
     }
+    else {
+        accuracy.textContent = "Accuracy: N/A";
+    }
+    document.getElementById("_" + move_array[move_number]['name']).appendChild(accuracy);
+}
+
+async function get_move_power(move_array, move_number) {
+    let power = document.createElement("div");
+    power.className = "move-power";
+    if (move_array[move_number]['power']) {
+        power.textContent = "Power: " + move_array[move_number]['power'];
+    }
+    else {
+        power.textContent = "Power: N/A";
+    }
+    document.getElementById("_" + move_array[move_number]['name']).appendChild(power);
+}
+
+async function get_move_type(move_array, move_number) {
+    let type = document.createElement("div");
+    type.className = "move-type";
+    if (move_array[move_number]['type']) {
+        type.textContent = move_array[move_number]['type']['name'];
+    }
+    type.style.backgroundColor = type_color_schemes[move_array[move_number]['type']['name']];
+    document.getElementById("_" + move_array[move_number]['name']).appendChild(type);
 }
 
 async function get_species_info(data) {
@@ -613,7 +637,7 @@ async function get_species_info(data) {
 async function get_flavor_text(data) {
     var description = document.getElementById("description");
     var flavor_text_list = data['flavor_text_entries'];
-    for (var i = 0; i <= flavor_text_list.length; i++) {
+    for (var i = 0; i < flavor_text_list.length; i++) {
         if (flavor_text_list[i]['language']['name'] == "en") {
             var flavor_text = flavor_text_list[i]['flavor_text'];
             break;

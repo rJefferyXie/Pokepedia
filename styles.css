@@ -16,7 +16,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #ec5858;
+    background-color: #ff8383;
 }
 
 body {
@@ -88,7 +88,7 @@ body {
 }
 
 .navbar-links:hover {
-    color:#2180ac;
+    color:#ff8383;
     transition: all 0.3s ease;
 }
 
@@ -1330,6 +1330,10 @@ body {
     text-transform: capitalize;
 }
 
+.move-type {
+    padding: 6px;
+}
+
 #move-list::-webkit-scrollbar {
     width: 16px;
     border-radius: 0px 10px 10px 0px;
@@ -1383,6 +1387,7 @@ body {
     display: flex;
     align-items: center;
     font-size: 16px;
+    width: 100%;
 }
 
 /* ----- Teambuilder Section ----- */
