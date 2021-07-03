@@ -118,7 +118,18 @@ var region_soundtrack; // soundtrack for selected region
 var track_number; // track number (from soundtracks dictionary) of current song being played
 var music_playing = false;
 music.addEventListener("ended", next_song); // play next song after each song ends
-music.volume = 0.05;
+music.volume = 0.10;
+
+const volume_control = document.getElementById("volume-control");
+const changeVolume = () => {
+    music.volume = volume_control.value / 100;
+}
+
+var delay = 500;
+const delay_control = document.getElementById("delay-control");
+const changeDelay = () => {
+    delay = delay_control.value;
+}
 
 const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
@@ -158,6 +169,7 @@ function hero_page() {
     pokedex_page.className = "hide";
     pokedex_page_mobile.className = "hide";
     hero.className = "show";
+    document.getElementById("contact").classList.toggle("hide");
     document.getElementById("loader-container").style.opacity = 1;
     clear_inspect();
     clear_team();
@@ -209,6 +221,7 @@ function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
     pokedex_page.className = "show";
     pokedex_page_mobile.className = "show";
+    document.getElementById("contact").classList.toggle("hide");
     document.getElementById("top-right2").textContent = region;
     hero.className = "hide";
     region_soundtrack = region;
@@ -771,7 +784,7 @@ async function generate_team_helper(settings) {
         var pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         
         // only get fully evolved forms of pokemon
-        while (pokemon_chosen + 1 <= pokedex.childElementCount && document.getElementById(pokedex.childNodes[pokemon_chosen + 1].id).classList.contains(pokemon_container.id)) {
+        while (pokemon_chosen + 1 < pokedex.childElementCount && document.getElementById(pokedex.childNodes[pokemon_chosen + 1].id).classList.contains(pokemon_container.id)) {
             pokemon_chosen += 1;
             pokemon_container = document.getElementById(pokedex.childNodes[pokemon_chosen].id);
         }
@@ -789,7 +802,7 @@ async function generate_team_helper(settings) {
         document.getElementById("pokemon" + pokemon_slot).style.border = "2px solid #00FF6B";
 
         // delay for better visual
-        await new Promise(resolve => setTimeout(resolve, 250));
+        await new Promise(resolve => setTimeout(resolve, delay));
 
         // remove pokemon if rules are not met
         if (pokemon_container.classList.contains("is_legendary")) {

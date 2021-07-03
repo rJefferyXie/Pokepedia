@@ -27,9 +27,9 @@
                 <li class="navbar-item">
                     <a onclick="region_page()" class="navbar-links">Regions</a>
                 </li>
-                <!-- <li class="navbar-item">
-                    <a onclick="scroll_to('#dijkstras')" class="navbar-links">Contact</a>
-                </li> -->
+                <li class="navbar-item">
+                    <a onclick="scroll_to('contact')" class="navbar-links">Contact</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -37,46 +37,51 @@
     <!-- Hero Section -->
     <div id="hero">
         <div id="intro-section">
-            <div id="about-container">
-                <div id="about1">
-                    <p class="header">About Pokepedia</p>
-                    <p class="text">
-                        Learn about all of your favorite pokemon's strengths, weaknesses, and stories. 
-                        Our fully interactive pokedex includes many different features such as pokemon lookup, team generation, and more.
-                    </p>
-                    <img src="images/undraw/about.svg" class="about-image">
+            <div id="about-wrapper">
+                <div id="left-arrow" class="intro-arrow" onclick="previous_intro_section()"><i class="fas fa-chevron-circle-left"></i></div>
+                <div id="about-container">
+                    <div id="about1">
+                        <p class="header">About Pokepedia</p>
+                        <p class="text">
+                            Learn about all of your favorite pokemon's strengths, weaknesses, and stories. 
+                            Our fully interactive pokedex includes many different features such as pokemon lookup, team generation, and more.
+                        </p>
+                        <img src="images/undraw/about.svg" class="about-image">
+                    </div>
+                    <div class="hide" id="about2">
+                        <p class="header">Pokemon Lookup</p>
+                        <p class="text">
+                            With a fully functional pokedex specific to your selected region, you can find information on any pokemon. 
+                            Learn about each pokemon's background, stats, moveset, and evolution chain with one click.
+                        </p>
+                        <img src="images/undraw/lookup.svg" class="about-image">
+                    </div>
+                    <div class="hide" id="about3">
+                        <p class="header">Team Generation</p>
+                        <p class="text">
+                            Automatically generate a team of six pokemon with one click.
+                            Customize the team generator with options such as banning legendary pokemon, duplicate pokemon types, and more.
+                        </p>
+                        <img src="images/undraw/teambuilder.svg" class="about-image">
+                    </div>
+                    <!-- <div class="hide" id="about4">
+                        <p class="header">Compare Pokemon</p>
+                        <p class="text">
+                            Compare pokemon side-by-side to view their core similarities and differences.
+                        </p>
+                        <img src="images/undraw/compare.svg" class="about-image">
+                    </div> -->
+                    <div id="circle-container">
+                        <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
+                        <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
+                        <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
+                        <!-- <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i> -->
+                    </div>
+                    <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
                 </div>
-                <div class="hide" id="about2">
-                    <p class="header">Pokemon Lookup</p>
-                    <p class="text">
-                        With a fully functional pokedex specific to your selected region, you can find information on any pokemon. 
-                        Learn about each pokemon's background, stats, moveset, and evolution chain with one click.
-                    </p>
-                    <img src="images/undraw/lookup.svg" class="about-image">
-                </div>
-                <div class="hide" id="about3">
-                    <p class="header">Team Generation</p>
-                    <p class="text">
-                        Automatically generate a team of six pokemon with one click.
-                        Customize the team generator with options such as banning legendary pokemon, duplicate pokemon types, and more.
-                    </p>
-                    <img src="images/undraw/teambuilder.svg" class="about-image">
-                </div>
-                <!-- <div class="hide" id="about4">
-                    <p class="header">Compare Pokemon</p>
-                    <p class="text">
-                        Compare pokemon side-by-side to view their core similarities and differences.
-                    </p>
-                    <img src="images/undraw/compare.svg" class="about-image">
-                </div> -->
-                <div id="circle-container">
-                    <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
-                    <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
-                    <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
-                    <!-- <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i> -->
-                </div>
-                <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
+                <div id="right-arrow" class="intro-arrow" onclick="next_intro_section()"><i class="fas fa-chevron-circle-right"></i></div>
             </div>
+            
         </div>
         <div id="region-section">
             <div id="kanto" class="region-container" onclick="retrieve_data('2', 'kanto')">
@@ -302,6 +307,9 @@
                                             <input id="duplicates_on" type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
+                                        <label class="slide-container">
+                                            <input type="range" min="0" max="1000" value="500" class="slider" id="delay-control" onchange="changeDelay()" oninput="changeDelay()">
+                                        </label>
                                     </div>
                                     <div id="build-button-container">
                                         <div id="clear-team-button" class="build-button" onclick="clear_team()">Clear Team</div>
@@ -321,6 +329,9 @@
                         <div id="song-title-container">
                             <span id="song-title"></span>
                         </div>
+                        <div class="slide-container">
+                            <input type="range" min="0" max="100" value="10" class="slider" id="volume-control" onchange="changeVolume()" oninput="changeVolume()">
+                        </div>
                         <div id="music-controls">
                             <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
                             <div id="pause" class="music-button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
@@ -333,7 +344,14 @@
         </div>
     </div>
 
-    <form id="contact-form"></form>
+    <div id="contact">
+        <form id="contact-form">
+            <input class="contact-input" type="text" id="fname" name="firstname" placeholder="First Name">
+            <input class="contact-input" type="text" id="lname" name="lastname" placeholder="Last Name">
+            <input class="contact-input" type="text" id="email" name="email" placeholder="Email Address">
+            <textarea name="message" id="message" placeholder="Message"></textarea>
+        </form>
+    </div>
 
     <script src="app.js"></script>
 </body>
