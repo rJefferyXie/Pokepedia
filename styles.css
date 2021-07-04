@@ -38,7 +38,7 @@ body {
     font-size: 1.2rem;
     top: 0;
     z-index: 999;
-    background-color: aliceblue;
+    background-color: rgb(14, 14, 14);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -84,6 +84,7 @@ body {
 
 .navbar-links {
     cursor: pointer;
+    color: white;
     text-decoration: none;
 }
 
@@ -98,11 +99,6 @@ body {
     -moz-user-select: none;     
     -ms-user-select: none;      
     user-select: none;  
-    background-image: url("images/undraw/hero.svg"); 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: aliceblue;
 }
 
 #intro-section {
@@ -111,22 +107,35 @@ body {
     align-items: center;
     justify-content: center;
     height: calc(100vh - 80px);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/undraw/intro.jpg"); 
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 #about-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 90%;
+    height: min(90%, 640px);
+    width: min(90%, 760px);
+    border-radius: 20px;
+    opacity: 0.7;
+    background-color: rgb(255, 240, 240);
+    border: 2px solid black
+}
+
+#about-wrapper:active, #about-wrapper:hover {
+    opacity: 1;
 }
 
 #about-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    height: 80%;
+    justify-content: center;
+    width: 80%;
 }
 
 #about-container div {
@@ -134,15 +143,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 95%;
-    max-width: 640px;
-    color: white;
 }
 
 .intro-arrow {
     font-size: 32px;
-    color: rgb(255, 255, 255);
     cursor: pointer;
+    margin: auto;
+    color: #23b1ca;
 }
 
 .header {
@@ -155,8 +162,9 @@ body {
 }
 
 .about-image {
-    width: 75%;
-    max-width: 840px;
+    width: 95%;
+    height: 75%;
+    max-height: 340px;
     margin-top: 10px;
 }
 
@@ -173,7 +181,7 @@ body {
     margin-right: 6px;
     font-size: 20px;
     cursor: pointer;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 #circle-container .active {
@@ -183,7 +191,7 @@ body {
 #region-button {
     background-color: rgb(75, 165, 206);
     width: min(75%, 360px);
-    height: min(50%, 70px);
+    height: 70px;
     font-size: 1.6rem;
     color: #fff;
     border-radius: 20px;
@@ -204,6 +212,11 @@ body {
     align-items: center;
     justify-content: center;    
     height: calc(100vh - 80px);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/undraw/region.png"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .region-container {
@@ -215,6 +228,7 @@ body {
     margin: 0px 0px 10px 0px;
     width: min(min(80%, calc(12vh * 6)), 720px);
     height: min(11%, 108px);
+    opacity: 0.8;
 }
 
 #alola {
@@ -241,6 +255,10 @@ body {
         0 0 2px rgba(255,255,255,0.8), 
         2px 2px 2px rgba(0,0,0,0.2);
     text-align: center;
+}
+
+.region-container:hover {
+    opacity: 1;
 }
 
 .region-container:hover .region-name {
@@ -465,7 +483,7 @@ body {
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: rgb(0, 0, 0);
+        background: rgb(255, 255, 255);
     }
 
     .navbar-item {
@@ -476,6 +494,7 @@ body {
         text-align: center;
         padding: 2rem;
         width: 100%;
+        color: black;
         display: table;
     }
 
@@ -503,8 +522,8 @@ body {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    #about-container {
-        height: 90%;
+    #intro-container, #about-container {
+        background-attachment: scroll;
     }
 }
 
@@ -1485,8 +1504,8 @@ body {
 #form-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 45%;
+    justify-content: center;
+    height: 65%;
     width: 100%;
 }
 
@@ -1496,7 +1515,7 @@ body {
     justify-content: center;
     position: absolute;
     width: 233.75px;
-    height: 170px;
+    height: 190px;
     color: rgb(25, 111, 190);
 }
 
@@ -1504,7 +1523,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .build-button {
@@ -1603,23 +1622,23 @@ body {
     appearance: none;
     outline: none;
     height: 15px;
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(39, 39, 39);
     border-radius: 20px;
 }
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 15px; /* Set a specific slider handle width */
-    height: 15px; /* Slider handle height */
-    background: #2a9cdf; /* Green background */
+    width: 14px; /* Set a specific slider handle width */
+    height: 14px; /* Slider handle height */
+    background: #ffffff; /* Green background */
     cursor: pointer; /* Cursor on hover */
     border-radius: 20px;
 }
   
 .slider::-moz-range-thumb {
-    width: 15px; /* Set a specific slider handle width */
-    height: 15px; /* Slider handle height */
+    width: 14px; /* Set a specific slider handle width */
+    height: 14px; /* Slider handle height */
     background: #00291a; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
