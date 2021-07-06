@@ -716,7 +716,7 @@ async function fill_evolution_container(data) {
 
         if (data[i]['evolution_details'][0]['trigger']['name'] == "use-item") {
             get_item_image(data[i]['evolution_details'][0]['item']['url'], trigger);
-            // trigger.textContent += ": " + data[i]['evolution_details'][0]['item']['name'];
+            trigger.textContent += ": " + data[i]['evolution_details'][0]['item']['name'];
         }
         evolution_chain.appendChild(trigger);       
         create_evolution_container(data[i]['species']['name']);
@@ -724,7 +724,6 @@ async function fill_evolution_container(data) {
 }
 
 async function get_item_image(data_url, trigger) {
-    console.log(data_url);
     fetch(data_url)
     .then(response => response.json())
     .then(function (data) {
