@@ -122,7 +122,7 @@ body {
     width: min(90%, 760px);
     border-radius: 20px;
     opacity: 0.7;
-    background-color: rgb(255, 240, 240);
+    background-color: rgb(204, 229, 233);
     border: 2px solid black
 }
 
@@ -228,7 +228,7 @@ body {
     margin: 0px 0px 10px 0px;
     width: min(min(80%, calc(12vh * 6)), 720px);
     height: min(11%, 108px);
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #alola {
