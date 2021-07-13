@@ -1,4 +1,5 @@
 import requests
+import json
 
 def get_inspect_info():
     data = requests.get("https://pokeapi.co/api/v2/pokemon/3/")
@@ -75,9 +76,9 @@ def get_inspect_info():
 #     print(data['chain']['evolves_to'][i]['species'])
 
 
-for i in range(1, 10):
-    data = requests.get("https://pokeapi.co/api/v2/move/" + str(i) + "/").json()
-    print(data['name'], data['effect_entries'][0]["effect"])
+# for i in range(1, 10):
+#     data = requests.get("https://pokeapi.co/api/v2/move/" + str(i) + "/").json()
+#     print(data['name'], data['effect_entries'][0]["effect"])
 
 # data = requests.get("https://pokeapi.co/api/v2/move/5/").json()
 # print(data['name'], data['effect_entries'])
@@ -85,3 +86,20 @@ for i in range(1, 10):
 # print(data['name'], data['accuracy'])
 
 
+
+data = requests.get("https://pokeapi.co/api/v2/pokedex/2/").json()
+
+for i in range(0, len(data['pokemon_entries'])):
+    with open(str(i) + ".json", "w") as my_file:
+        json.dump(requests.get(data['pokemon_entries'][i]['pokemon_species']['url']).json(), my_file)
+
+# xd = open("0.json", "r")
+
+# data2 = json.load(xd)
+
+# print(data2['base_happiness'])
+
+# for i in xd:
+#     print(i)
+
+# print(xd['name'])
