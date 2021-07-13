@@ -111,7 +111,7 @@ const tabs = {
 }
 
 const first_song = 0; // start of playlist
-const final_song = 6; // end of playlist
+const last_song = 6; // end of playlist
 const music = document.getElementById("background-music"); // audio source for music
 const track_name = document.getElementById("song-title");  
 var region_soundtrack; // soundtrack for selected region
@@ -346,8 +346,9 @@ async function clear_team() {
         clear_slot(document.getElementById("pokemon" + i), i);
     }
 
+    // Display visual that team was cleared
     document.getElementById("help-text").classList.toggle("hide");
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 750));
     document.getElementById("help-text").classList.toggle("hide");
 }
 
@@ -481,7 +482,6 @@ function get_types(data) {
 
 // --------------------------------------- Utility Functions --------------------------------------- // 
 function search_pokemon() {
-    // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('pokemon-search');
     filter = input.value.toUpperCase();
@@ -610,11 +610,9 @@ async function get_move_stats(data) {
 async function get_move_accuracy(move_array, move_number) {
     let accuracy = document.createElement("div");
     accuracy.className = "move-accuracy";
+    accuracy.textContent = "Accuracy: N/A";
     if (move_array[move_number]['accuracy']) {
         accuracy.textContent = "Accuracy: " + move_array[move_number]['accuracy'];
-    }
-    else {
-        accuracy.textContent = "Accuracy: N/A";
     }
     document.getElementById("_" + move_array[move_number]['name']).appendChild(accuracy);
 }
@@ -622,11 +620,9 @@ async function get_move_accuracy(move_array, move_number) {
 async function get_move_power(move_array, move_number) {
     let power = document.createElement("div");
     power.className = "move-power";
+    power.textContent = "Power: N/A";
     if (move_array[move_number]['power']) {
         power.textContent = "Power: " + move_array[move_number]['power'];
-    }
-    else {
-        power.textContent = "Power: N/A";
     }
     document.getElementById("_" + move_array[move_number]['name']).appendChild(power);
 }
@@ -649,6 +645,8 @@ async function get_species_info(data) {
 async function get_flavor_text(data) {
     var description = document.getElementById("description");
     var flavor_text_list = data['flavor_text_entries'];
+
+    // find the first english flavor text entry
     for (var i = 0; i < flavor_text_list.length; i++) {
         if (flavor_text_list[i]['language']['name'] == "en") {
             var flavor_text = flavor_text_list[i]['flavor_text'];
@@ -672,11 +670,7 @@ async function get_evolution_chain(data) {
     if (data['chain']['evolves_to'].length > 0) {
         fill_evolution_container(data['chain']['evolves_to'][0]['evolves_to']);
     }
-}
-
-    // if data[i]['evolution_details'][0]['trigger']['name'] == "use-item":
-    //     print(data[i]['evolution_details'][0]['item']['name'])
-    //     
+} 
 
 async function create_evolution_container(pokemon_container) {
     if (document.getElementById(pokemon_container) === null) {
@@ -869,7 +863,7 @@ function toggle_play_pause(pause, play) {
 
 function previous_song() {
     if (track_number == first_song) {
-        track_number = final_song;
+        track_number = last_song;
     }
     else {
         track_number -= 1;
@@ -879,7 +873,7 @@ function previous_song() {
 }
 
 function next_song() {
-    if (track_number == final_song) {
+    if (track_number == last_song) {
         track_number = first_song;
     } 
     else {
