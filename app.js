@@ -125,11 +125,11 @@ const changeVolume = () => {
     music.volume = volume_control.value / 100;
 }
 
-var delay = 500;
-const delay_control = document.getElementById("delay-control");
-const changeDelay = () => {
-    delay = delay_control.value;
-}
+// var delay = 500;
+// const delay_control = document.getElementById("delay-control");
+// const changeDelay = () => {
+//     delay = delay_control.value;
+// }
 
 const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
@@ -170,12 +170,14 @@ function hero_page() {
     pokedex_page.className = "hide";
     pokedex_page_mobile.className = "hide";
     hero.className = "show";
+    pause_song();
+    document.getElementById("music-container").className = "hide";
+    document.getElementById("search-container").className = "hide";
     document.getElementById("contact").className = "show";
-    document.getElementById("loader-container").style.opacity = 1;
+    document.getElementById("loader-container").className = "show";
     clear_inspect();
     clear_team();
     scroll_to("hero");
-    pause_song();
 }
 
 function region_page() {
@@ -223,7 +225,6 @@ function initialize_pokedex_page(region) {
     pokedex_page.className = "show";
     pokedex_page_mobile.className = "show";
     document.getElementById("contact").className = "hide";
-    document.getElementById("top-right2").textContent = region;
     hero.className = "hide";
     region_soundtrack = region;
     track_number = Math.floor(Math.random() * 6);
@@ -231,114 +232,38 @@ function initialize_pokedex_page(region) {
     play_song();
 }
 
-function swap_view(inspect, teambuilder) {
-    document.getElementById("inspect-view").className = inspect;
-    document.getElementById("teambuilder-view").className = teambuilder;
-}
-
-function inspect_screen() {
-    current_view = "inspect";
-    swap_view("show", "hide");
-}
-
-function teambuilder_screen() {
-    current_view = "teambuilder";
-    swap_view("hide", "show");
-}
-
-function previous_screen() {
-    if (current_view == "inspect") {
-        change_inspect_screen(tabs[inspect_active][0], tabs[inspect_active][0] + "-container")
-    }
-    else if (current_view == "teambuilder") {
-        change_teambuilder_screen(tabs[teambuilder_active][0], tabs[teambuilder_active][0] + "-container")
-    }
-}
-
-function next_screen() {
-    if (current_view == "inspect") {
-        change_inspect_screen(tabs[inspect_active][1], tabs[inspect_active][1] + "-container")
-    }
-    else if (current_view == "teambuilder") {
-        change_teambuilder_screen(tabs[teambuilder_active][1], tabs[teambuilder_active][1] + "-container")
-    }
-}
-
-function change_inspect_screen(new_active, new_container) {
-    document.getElementById(inspect_active).style.backgroundColor = "#9facb4";
-    document.getElementById(new_active).style.backgroundColor = "#6b77e4";
-    inspect_active = new_active;
-
-    document.getElementById(inspect_container).className = "hide";
-    document.getElementById(new_container).className = "show";
-    inspect_container = new_container;
-}
-
-function change_teambuilder_screen(new_active, new_container) {
-    document.getElementById(teambuilder_active).style.backgroundColor = "#9facb4";
-    document.getElementById(new_active).style.backgroundColor = "#6b77e4";
-    teambuilder_active = new_active;
-
-    document.getElementById(teambuilder_container).className = "hide";
-    document.getElementById(new_container).className = "show";
-    teambuilder_container = new_container;
-}
 
 // --------------------------------------- Data Management Functions --------------------------------------- //
 function find_slot(pokemon_container) {
-    if (current_view == "inspect") {
-        let slot = document.getElementById("pokemon0");
-        clear_slot(slot);
-        insert_slot(slot, 0, pokemon_container);
-        return i;
-    } 
-    if (current_view == "teambuilder") {
-        for (var i = 1; i <= 6; i++) {
-            var slot = document.getElementById("pokemon" + i);
-            if (slot.childElementCount == 0) {
-                insert_slot(slot, i, pokemon_container);
-                return i;
-            }
+    for (var i = 1; i <= 6; i++) {
+        var slot = document.getElementById("pokemon" + i);
+        if (slot.childElementCount == 0) {
+            insert_slot(slot, i, pokemon_container);
+            return i;
         }
     }
 }
 
 function clear_inspect() {
-    document.getElementById("moves-default").className = "show";
-    document.getElementById("move-list").className = "hide";
     document.getElementById("move-list").innerHTML = "";
-
-    document.getElementById("stats-default").className = "show";
-    document.getElementById("stat-list").className = "hide";
-
-    document.getElementById("evolution-default").className = "show";
-    document.getElementById("evolution-chain").className = "hide";
     document.getElementById("evolution-chain").innerHTML = "";
-
-    document.getElementById("description-container").className = "hide";
 }
 
 function insert_slot(slot, slot_number, pokemon_container) {
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
-    datacopy.className = "pokemon-container-placed";
-    datacopy.removeChild(datacopy.lastChild);
-    datacopy.appendChild(create_clear_button(slot, slot_number));
+    datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
+    datacopy.lastChild.appendChild(create_clear_button(slot, 0));
     slot.appendChild(datacopy);
 
-    if (slot_number == 0) {
-        fetch_inspect(pokemon_container);
+    let types = pokemon_container.childNodes[0];
+    for (var i = 0; i < types.childElementCount; i++) {
+        pokemon_team["types"][slot_number].push(types.childNodes[i].textContent);
     }
-    else {
-        let types = pokemon_container.childNodes[3];
-        for (var i = 0; i < types.childElementCount; i++) {
-            pokemon_team["types"][slot_number].push(types.childNodes[i].textContent);
-        }
 
-        pokemon_team[slot_number] = pokemon_container.id;
-        pokemon_team["slots_available"] -= 1;
-        // eval();
-    }
+    pokemon_team[slot_number] = pokemon_container.id;
+    pokemon_team["slots_available"] -= 1;
+    // eval();
 }
 
 async function clear_team() {
@@ -353,10 +278,6 @@ async function clear_team() {
 }
 
 function clear_slot(pokemon_slot, slot_number) {
-    if (current_view == "inspect") {
-        clear_inspect();
-    }
-
     if (slot_number > 0) {
         pokemon_team[slot_number] = null;
         pokemon_team["slots_available"] += 1;
@@ -377,6 +298,7 @@ function retrieve_data(gen, region) {
 function get_promise_array_species(data) {
     let promiseArray = [];
     for (var i = 0; i < data.length; i++) {
+        document.getElementById("load-percentage").textContent = i + "/" + data.length * 2 + " pokemon downloaded.";
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -385,6 +307,7 @@ function get_promise_array_species(data) {
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
     for (var i = 0; i < data.length; i++) {
+        document.getElementById("load-percentage").textContent = i + data.length + "/" + data.length * 2 + " pokemon downloaded.";
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -396,16 +319,19 @@ async function generate_pokedex(data) {
     for (var i = 0; i < species_data.length; i++) {
         get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
     }
-    document.getElementById("loader-container").style.opacity = 0;
+    document.getElementById("loader-container").className = "hide";
+    document.getElementById("music-container").className = "show";
+    document.getElementById("search-container").className = "show";
+    document.getElementById("load-percentage").textContent = "Loading...";
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {
     let pokemon_container = create_pokemon_container(species_data);
-    pokemon_container.appendChild(get_image(pokemon_data));
-    pokemon_container.appendChild(get_entry_number(entry_number));
+    pokemon_container.appendChild(get_types(pokemon_data, pokemon_container));
     pokemon_container.appendChild(get_name(pokemon_data, pokemon_container));
-    pokemon_container.appendChild(get_types(pokemon_data));
-    pokemon_container.appendChild(create_insert_button(pokemon_container.id));
+    pokemon_container.appendChild(get_entry_number(entry_number));
+    pokemon_container.appendChild(get_image(pokemon_data));
+    pokemon_container.appendChild(create_buttons(pokemon_container.id));
     pokedex.appendChild(pokemon_container);
 }
 
@@ -428,17 +354,46 @@ function create_pokemon_container(data) {
     return pokemon_container;
 }
 
-function create_insert_button(pokemon_container) {
+function create_buttons(pokemon_container) {
+    let button_container = document.createElement("div");
+    button_container.className = "pokemon-button-container";
+    create_inspect_button(pokemon_container, button_container);
+    create_insert_button(pokemon_container, button_container);
+    return button_container;
+}
+
+function create_insert_button(pokemon_container, button_container) {
     let insert_button = document.createElement("button");
-    insert_button.className = "hide insert-button";
+    insert_button.className = "insert-button";
     insert_button.onclick = function() {find_slot(document.getElementById(pokemon_container));};
     insert_button.textContent = "+";
-    return insert_button;
+    button_container.appendChild(insert_button);
 }
+
+function create_inspect_button(pokemon_container, button_container) {
+    let inspect_button = document.createElement("button");
+    inspect_button.className = "inspect-button";
+    inspect_button.onclick = function() {inspect(document.getElementById(pokemon_container));};
+    inspect_button.innerHTML = '<i class="fas fa-search"></i>';
+    button_container.appendChild(inspect_button);
+}
+
+function inspect() {
+    clear_inspect();
+    let slot = document.getElementById("pokemon0");
+    clear_slot(slot);
+    let datacopy = pokemon_container.cloneNode(true);
+    datacopy.id = pokemon_container.id + "-placed";
+    datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
+    datacopy.lastChild.appendChild(create_clear_button(slot, 0));
+    slot.appendChild(datacopy);
+    fetch_inspect(pokemon_container);
+}
+
 
 function create_clear_button(pokemon_slot, slot_number) {
     let clear_button = document.createElement("button");
-    clear_button.className = "hide clear-button";
+    clear_button.className = "clear-button";
     clear_button.onclick = function() {clear_slot(pokemon_slot, slot_number);};
     clear_button.textContent = "x";
     return clear_button;
@@ -466,37 +421,38 @@ function get_name(data, pokemon_container) {
     return name;
 }
 
-function get_types(data) {
+function get_types(data, pokemon_container) {
     let types = document.createElement("div");
     types.className = "type-container";
 
     for (var i = 0; i < data["types"].length; i++) {
-        var type = document.createElement("div");
-        type.style.backgroundColor = type_color_schemes[data["types"][i]["type"]["name"]];
+        var type = document.createElement("img");
         type.className = "pokemon-type";
-        type.textContent = data["types"][i]["type"]["name"];
+        type.src = "images/types/" + data["types"][i]["type"]["name"] + ".png";
         types.appendChild(type);
+        if (i == 0) {
+            pokemon_container.style.backgroundColor = type_color_schemes[data["types"][i]["type"]["name"]];
+        }
     }
     return types;
 }
 
 // --------------------------------------- Utility Functions --------------------------------------- // 
 function search_pokemon() {
-    var input, filter, ul, li, a, i, txtValue;
+    var input, filter, list_items, a, txtValue;
     input = document.getElementById('pokemon-search');
     filter = input.value.toUpperCase();
-    ul = pokedex;
-    li = ul.getElementsByTagName('li');
+    list_items = pokedex.getElementsByTagName('li');
   
     // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
+    for (var i = 0; i < list_items.length; i++) {
+      a = list_items[i].getElementsByTagName("a")[0];
       txtValue = a.textContent || a.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
+        list_items[i].style.display = "";
       } 
       else {
-        li[i].style.display = "none";
+        list_items[i].style.display = "none";
         }
     }
 }
@@ -509,50 +465,10 @@ function scroll_to(section) {
     });
 }
 
-document.getElementById("top-cross").onmousedown = function() {
-    scrollUp();
-    interval_ = setInterval(scrollUp, 200);
-}
-
-function scrollUp() {
-    if (pokedex.scrollTop % 183 == 0) {
-        pokedex.scroll({
-            top: pokedex.scrollTop -= 183,
-            behavior: "smooth"
-        });
-    }
-    else {
-        pokedex.scroll({
-            top: pokedex.scrollTop = pokedex.scrollTop - pokedex.scrollTop % 183,
-            behavior: "smooth"
-        });
-    }
-}
-
-document.getElementById("bot-cross").onmousedown = function() {
-    scrollDown();
-    interval_ = setInterval(scrollDown, 200);
-}
-
-function scrollDown() {
-    pokedex.scroll({
-        top: pokedex.scrollTop = pokedex.scrollTop + (183 - pokedex.scrollTop % 183),
-        behavior: "smooth"
-    });
-}
-
 // --------------------------------------- Utility Data Retrieval Functions --------------------------------------- //
 function fetch_inspect(data) {
     var pokedex_entry = data.id.replace("pokemon-container", "");
     pokedex_entry = pokedex_entry.replace("placed", "");
-
-    document.getElementById("description-container").className = "show";
-    document.getElementById("moves-default").className = "hide";
-    document.getElementById("stats-default").className = "hide";
-    document.getElementById("evolution-default").className = "hide";
-    document.getElementById("move-list").className = "show";
-    document.getElementById("stat-list").className = "show";
-    document.getElementById("evolution-chain").className = "show";
 
     fetch("https://pokeapi.co/api/v2/pokemon/" + pokedex_entry + "/")
     .then(response => response.json())

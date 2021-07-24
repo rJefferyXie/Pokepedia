@@ -20,6 +20,9 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
+            <div id="search-container" class="hide">
+                <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
+            </div>
             <ul class="navbar-menu">
                 <li class="navbar-item">
                     <a onclick="hero_page()" class="navbar-links">About</a>
@@ -165,8 +168,7 @@
         <div id="error-button" onclick="hero_page()">Home</div>
     </div>
 
-    <!-- Pokedex Computer Section -->
-    <div id="pokedex" class="hide">
+    <!-- <div id="pokedex" class="hide">
         <div id="left">
             <div id="top-left"></div>
             <div id="top-left1">
@@ -280,20 +282,7 @@
                             <div id="build" class="teambuilder-button" onclick="change_teambuilder_screen('build', 'build-container')">Build</div>
                         </div>
                         <div id="teambuilder-container">
-                            <div id="team-container">
-                                <div class="pokemon-row">
-                                    <div id="pokemon1"></div>
-                                    <div id="pokemon2"></div>
-                                </div>
-                                <div class="pokemon-row">
-                                    <div id="pokemon3"></div>
-                                    <div id="pokemon4"></div>
-                                </div>
-                                <div class="pokemon-row">
-                                    <div id="pokemon5"></div>
-                                    <div id="pokemon6"></div>
-                                </div>
-                            </div>
+  
                             <div id="build-container" class="hide">
                                 <form id="build-form">
                                     <div id="form-container">
@@ -326,7 +315,6 @@
                     <div id="utility-buttons">
                         <div id="inspect-button" class="extra-button" onclick="inspect_screen()">Inspect</div>
                         <div id="teambuilder-button" class="extra-button" onclick="teambuilder_screen()">Team</div>
-                        <!-- <div id="compare-button" class="extra-button" onclick="">Compare</div> -->
                     </div>
                     <div id="music-container">
                         <div id="song-title-container">
@@ -343,6 +331,42 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div id="pokedex" class="hide">
+        <div id="pokedex-section">
+            <div id="loader-container">
+                <img src="images/undraw/loader.png" class="loader">
+                <div id="load-percentage" class="loader-text">Loading...</div>
+                <div class="loader-text">Created by <a href="https://github.com/rJefferyXie" class="loader-link" target="_blank">Jeffery Xie</a></div>
+                <div class="loader-text">Powered by <a href="https://pokeapi.co/" class="loader-link" target="_blank">Pokeapi</a></div>
+            </div>
+            <div id="pokemon-list"></div>
+        </div>
+        <div id="teambuilder-view" class="hide">
+            <div id="team-container">
+                <div id="pokemon1" class="team-slot"></div>
+                <div id="pokemon2" class="team-slot"></div>
+                <div id="pokemon3" class="team-slot"></div>
+                <div id="pokemon4" class="team-slot"></div>
+                <div id="pokemon5" class="team-slot"></div>
+                <div id="pokemon6" class="team-slot"></div>
+            </div>
+        </div>
+        <div id="music-container" class="hide">
+            <div id="song-title-container">
+                <span id="song-title"></span>
+            </div>
+            <div id="music-slider" class="slide-container">
+                <input type="range" min="0" max="100" value="10" class="slider" id="volume-control" onchange="changeVolume()" oninput="changeVolume()">
+            </div>
+            <div id="music-controls">
+                <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
+                <div id="pause" class="music-button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
+                <div id="play" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                <div class="music-button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
             </div>
         </div>
     </div>
