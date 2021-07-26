@@ -95,21 +95,6 @@ const soundtracks = {
     }
 }
 
-var current_view = "inspect"; // options: inspect, teambuilder, compare
-var inspect_active = "intro"; // options: intro, stats, moves, chain
-var inspect_container = "intro-container";
-var teambuilder_active = "team"; // options: team, build
-var teambuilder_container = "team-container";
-
-const tabs = {
-    "intro": ["chain", "stats"],
-    "stats": ["intro", "moves"],
-    "moves": ["stats", "chain"],
-    "chain": ["moves", "intro"],
-    "team": ["build", "build"],
-    "build": ["team", "team"]
-}
-
 const first_song = 0; // start of playlist
 const last_song = 6; // end of playlist
 const music = document.getElementById("background-music"); // audio source for music
@@ -121,15 +106,15 @@ music.addEventListener("ended", next_song); // play next song after each song en
 music.volume = 0.10;
 
 const volume_control = document.getElementById("volume-control");
-const changeVolume = () => {
+const change_volume = () => {
     music.volume = volume_control.value / 100;
 }
 
-// var delay = 500;
-// const delay_control = document.getElementById("delay-control");
-// const changeDelay = () => {
-//     delay = delay_control.value;
-// }
+var delay = 500;
+const delay_control = document.getElementById("delay-control");
+const changeDelay = () => {
+    delay = delay_control.value;
+}
 
 const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
@@ -173,6 +158,7 @@ function hero_page() {
     pause_song();
     document.getElementById("music-container").className = "hide";
     document.getElementById("search-container").className = "hide";
+    document.getElementById("inspect-view").className = "hide";
     document.getElementById("contact").className = "show";
     document.getElementById("loader-container").className = "show";
     clear_inspect();
@@ -253,6 +239,7 @@ function insert_slot(slot, slot_number, pokemon_container) {
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
     datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
+    datacopy.lastChild.lastChild.onclick = function() {inspect(document.getElementById(pokemon_container.id));};
     datacopy.lastChild.appendChild(create_clear_button(slot, 0));
     slot.appendChild(datacopy);
 
@@ -272,9 +259,9 @@ async function clear_team() {
     }
 
     // Display visual that team was cleared
-    document.getElementById("help-text").classList.toggle("hide");
+    document.getElementById("help-text").style.display = "flex";
     await new Promise(resolve => setTimeout(resolve, 750));
-    document.getElementById("help-text").classList.toggle("hide");
+    document.getElementById("help-text").style.display = "none";
 }
 
 function clear_slot(pokemon_slot, slot_number) {
@@ -298,7 +285,7 @@ function retrieve_data(gen, region) {
 function get_promise_array_species(data) {
     let promiseArray = [];
     for (var i = 0; i < data.length; i++) {
-        document.getElementById("load-percentage").textContent = i + "/" + data.length * 2 + " pokemon downloaded.";
+        document.getElementById("load-percentage").textContent = i + "/" + data.length * 2 + " files downloaded.";
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -307,7 +294,7 @@ function get_promise_array_species(data) {
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
     for (var i = 0; i < data.length; i++) {
-        document.getElementById("load-percentage").textContent = i + data.length + "/" + data.length * 2 + " pokemon downloaded.";
+        document.getElementById("load-percentage").textContent = i + data.length + "/" + data.length * 2 + " files downloaded.";
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -378,7 +365,7 @@ function create_inspect_button(pokemon_container, button_container) {
     button_container.appendChild(inspect_button);
 }
 
-function inspect() {
+function inspect(pokemon_container) {
     clear_inspect();
     let slot = document.getElementById("pokemon0");
     clear_slot(slot);
@@ -387,6 +374,7 @@ function inspect() {
     datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
     datacopy.lastChild.appendChild(create_clear_button(slot, 0));
     slot.appendChild(datacopy);
+    document.getElementById("inspect-view").className = "show";
     fetch_inspect(pokemon_container);
 }
 
@@ -429,6 +417,7 @@ function get_types(data, pokemon_container) {
         var type = document.createElement("img");
         type.className = "pokemon-type";
         type.src = "images/types/" + data["types"][i]["type"]["name"] + ".png";
+        type.textContent = data["types"][i]["type"]["name"];
         types.appendChild(type);
         if (i == 0) {
             pokemon_container.style.backgroundColor = type_color_schemes[data["types"][i]["type"]["name"]];
@@ -488,7 +477,7 @@ async function get_pokemon_stats(data) {
     var stats = data["stats"];
     for (var i = 0; i < stats.length; i++) {
         var stat = stats[i]['base_stat'];
-        document.getElementById(stat_dictionary[i]).style.width = stat * 1.2 + "px";
+        document.getElementById(stat_dictionary[i]).style.width = stat + "%";
         document.getElementById(stat_dictionary[i]).textContent = stat;
     }
 }
@@ -544,12 +533,9 @@ async function get_move_power(move_array, move_number) {
 }
 
 async function get_move_type(move_array, move_number) {
-    let type = document.createElement("div");
+    let type = document.createElement("img");
     type.className = "move-type";
-    if (move_array[move_number]['type']) {
-        type.textContent = move_array[move_number]['type']['name'];
-    }
-    type.style.backgroundColor = type_color_schemes[move_array[move_number]['type']['name']];
+    type.src = "images/types/" + move_array[move_number]['type']['name'] + ".png";
     document.getElementById("_" + move_array[move_number]['name']).appendChild(type);
 }
 
@@ -593,9 +579,9 @@ async function create_evolution_container(pokemon_container) {
         return;
     }
     let evolution_container = document.getElementById(pokemon_container).cloneNode(true);
-    evolution_container.className = "pokemon-container-evolution";
     evolution_container.id = evolution_container.id + "_chain";
-    evolution_container.style.display = "block";
+    evolution_container.style.display = "flex";
+    evolution_container.onclick = function() {inspect(document.getElementById(pokemon_container));};
     evolution_container.removeChild(evolution_container.lastChild);
     evolution_chain.appendChild(evolution_container);
 }
@@ -669,8 +655,6 @@ async function get_item_image(data_url, trigger) {
 // for every pokemon type immunity (one pokemon for each type max): +20 eval
 
 async function generate_team() {
-    change_teambuilder_screen('team', 'team-container');
-
     let form = document.getElementById("build-form");
     var settings = {
         "legendaries_on": true,
@@ -731,13 +715,15 @@ async function generate_team_helper(settings) {
         }
 
         if (!settings["duplicates_on"]) {
-            let types = pokemon_container.childNodes[3];
+            let types = pokemon_container.childNodes[0];
+            console.log(pokemon_container.childNodes[0]);
             for (var i = 0; i < types.childElementCount; i++) {
                 for (var j = 1; j <= 6; j++) {
                     if (j == slot_number) {
                         continue;
                     }
                     if (pokemon_team["types"][j].includes(types.childNodes[i].textContent)) {
+                        console.log(pokemon_team["types"][j], types.childNodes[i].textContent)
                         clear_slot(pokemon_slot, slot_number);
                         break;
                     } 
@@ -803,4 +789,21 @@ function change_song_title() {
         track_name.innerHTML = '<i class="fas fa-music"></i> ' + 
         "Currently Playing: " + soundtracks[region_soundtrack][track_number]['name'] + 
         ' <i class="fas fa-music"></i>';
+}
+
+function show_hide_music() {
+    document.getElementById("music-container").classList.toggle("hide");
+    document.getElementById("show-music").classList.toggle("hide");
+}
+
+function show_hide_search() {
+    document.getElementById("pokemon-search").value = "";
+    search_pokemon();
+    document.getElementById("search-container").classList.toggle("hide");
+    document.getElementById("show-search").classList.toggle("hide");
+}
+
+function show_hide_team() {
+    document.getElementById("teambuilder-view").classList.toggle("hide");
+    document.getElementById("show-team").classList.toggle("hide");
 }

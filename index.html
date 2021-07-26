@@ -20,9 +20,6 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            <div id="search-container" class="hide">
-                <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
-            </div>
             <ul class="navbar-menu">
                 <li class="navbar-item">
                     <a onclick="hero_page()" class="navbar-links">About</a>
@@ -345,6 +342,46 @@
             </div>
             <div id="pokemon-list"></div>
         </div>
+        <div id="inspect-view" class="hide">
+            <div id="inspect-container">
+                <div id="intro-stats-container">
+                    <div id="intro-container">
+                        <div id="pokemon0"></div>
+                        <div id="description-container">
+                            <div id="description"></div>
+                        </div>
+                    </div>
+                    <div id="stats-container">
+                        <ul id="stat-list">
+                            <div id="stat-name-container">
+                                <div class="stat-header">Health</div>
+                                <div class="stat-header">Attack</div>
+                                <div class="stat-header">Defense</div>
+                                <div class="stat-header">Sp. Atk</div>
+                                <div class="stat-header">Sp. Def</div>
+                                <div class="stat-header">Speed</div>
+                            </div>
+                            <div id="stat-bar-container">
+                                <div id="health" class="stat-bar"></div>
+                                <div id="attack" class="stat-bar"></div>
+                                <div id="defense" class="stat-bar"></div>
+                                <div id="special-attack" class="stat-bar"></div>
+                                <div id="special-defense" class="stat-bar"></div>
+                                <div id="speed" class="stat-bar"></div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div id="moves-chain-container">
+                    <div id="moves-container">
+                        <ul id="move-list"></ul>
+                    </div>
+                    <div id="chain-container">
+                        <ul id="evolution-chain"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="teambuilder-view" class="hide">
             <div id="team-container">
                 <div id="pokemon1" class="team-slot"></div>
@@ -354,13 +391,47 @@
                 <div id="pokemon5" class="team-slot"></div>
                 <div id="pokemon6" class="team-slot"></div>
             </div>
+            <form id="build-form">
+                <div id="form-container">
+                    <label class="build-checkbox">No Legendary Pokemon
+                        <input id="legendaries_on" type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="build-checkbox">No Mythical Pokemon
+                        <input id="mythicals_on" type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="build-checkbox">No Duplicate Types
+                        <input id="duplicates_on" type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="slide-container">
+                        <div id="delay-title">Generation Delay</div>
+                        <input type="range" min="0" max="1000" value="500" class="slider" id="delay-control" onchange="changeDelay()" oninput="changeDelay()">
+                    </label>
+                </div>
+                <div id="help-text">Team Cleared.</div>
+                <div id="build-button-container">
+                    <div id="clear-team-button" class="build-button" onclick="clear_team()">Clear Team</div>
+                    <div id="submit-button" class="build-button" onclick="generate_team()">Generate</div>
+                    <div id="hide-team" class="build-button" onclick="show_hide_team()">Hide</div>
+                </div>
+            </form>
+        </div>
+        <div id="search-container" class="hide">
+            <div id="search-icon"><i class="fas fa-search"></i></div>
+            <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
+            <div id="hide-search" onclick="show_hide_search()"><i class="fas fa-times"></i></div>
         </div>
         <div id="music-container" class="hide">
-            <div id="song-title-container">
-                <span id="song-title"></span>
+            <div id="title-button-container">
+                <div id="song-title-container">
+                    <span id="song-title"></span>
+                </div>
+                <div id="hide-music" onclick="show_hide_music()"><i class="fas fa-times"></i></div>
             </div>
             <div id="music-slider" class="slide-container">
-                <input type="range" min="0" max="100" value="10" class="slider" id="volume-control" onchange="changeVolume()" oninput="changeVolume()">
+                <input type="range" min="0" max="100" value="10" class="slider" id="volume-control" onchange="change_volume()" oninput="change_volume()">
             </div>
             <div id="music-controls">
                 <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
@@ -369,6 +440,9 @@
                 <div class="music-button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
             </div>
         </div>
+        <div id="show-music" class="hide" onclick="show_hide_music()"><i class="fas fa-music"></i></div>
+        <div id="show-search" class="hide" onclick="show_hide_search()"><i class="fas fa-search"></i></div>
+        <div id="show-team" onclick="show_hide_team()"><i class="fab fa-pinterest"></i></div>
     </div>
 
     <div id="contact">
