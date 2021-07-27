@@ -240,7 +240,7 @@ function insert_slot(slot, slot_number, pokemon_container) {
     datacopy.id = pokemon_container.id + "-placed";
     datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
     datacopy.lastChild.lastChild.onclick = function() {inspect(document.getElementById(pokemon_container.id));};
-    datacopy.lastChild.appendChild(create_clear_button(slot, 0));
+    datacopy.lastChild.appendChild(create_clear_button(slot, slot_number));
     slot.appendChild(datacopy);
 
     let types = pokemon_container.childNodes[0];
@@ -254,7 +254,7 @@ function insert_slot(slot, slot_number, pokemon_container) {
 }
 
 async function clear_team() {
-    for (var i = 0; i <= 6; i++) {
+    for (var i = 1; i <= 6; i++) {
         clear_slot(document.getElementById("pokemon" + i), i);
     }
 
@@ -371,8 +371,6 @@ function inspect(pokemon_container) {
     clear_slot(slot);
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
-    datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
-    datacopy.lastChild.appendChild(create_clear_button(slot, 0));
     slot.appendChild(datacopy);
     document.getElementById("inspect-view").className = "show";
     fetch_inspect(pokemon_container);
