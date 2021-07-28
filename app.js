@@ -154,9 +154,15 @@ function hero_page() {
     pokedex_page.className = "hide";
     hero.className = "show";
     pause_song();
+
+    document.getElementById("show-team").className = "hide";
     document.getElementById("music-container").className = "hide";
     document.getElementById("search-container").className = "hide";
-    document.getElementById("show-team").className = "hide";
+
+    document.getElementById("teambuilder-view").className = "hide";
+    document.getElementById("show-music").className = "hide";
+    document.getElementById("show-search").className = "hide";
+
     document.getElementById("inspect-view").className = "hide";
     document.getElementById("contact").className = "show";
     document.getElementById("loader-container").className = "show";
@@ -711,14 +717,12 @@ async function generate_team_helper(settings) {
 
         else if (!settings["duplicates_on"]) {
             let types = pokemon_container.childNodes[0];
-            console.log(pokemon_container.childNodes[0]);
             for (var i = 0; i < types.childElementCount; i++) {
                 for (var j = 1; j <= 6; j++) {
                     if (j == slot_number) {
                         continue;
                     }
                     if (pokemon_team["types"][j].includes(types.childNodes[i].textContent)) {
-                        console.log(pokemon_team["types"][j], types.childNodes[i].textContent)
                         clear_slot(pokemon_slot, slot_number);
                         break;
                     } 
