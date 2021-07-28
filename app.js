@@ -123,7 +123,6 @@ var current_intro_section = 1;
 var interval_; // used for holding down the scroll up/down buttons for pokedex
 
 const pokedex_page = document.getElementById("pokedex");
-const pokedex_page_mobile = document.getElementById("pokedex-mobile");
 const hero = document.getElementById("hero");
 const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
@@ -153,11 +152,11 @@ menuLinks.addEventListener('click', mobileMenu);
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
     pokedex_page.className = "hide";
-    pokedex_page_mobile.className = "hide";
     hero.className = "show";
     pause_song();
     document.getElementById("music-container").className = "hide";
     document.getElementById("search-container").className = "hide";
+    document.getElementById("show-team").className = "hide";
     document.getElementById("inspect-view").className = "hide";
     document.getElementById("contact").className = "show";
     document.getElementById("loader-container").className = "show";
@@ -170,7 +169,7 @@ function region_page() {
     if (hero.classList.contains("hide")) {
         hero_page();
     }
-    scroll_to('region-section');
+    scroll_to("region-section");
 }
 
 function previous_intro_section() {
@@ -209,7 +208,6 @@ function toggle_section() {
 function initialize_pokedex_page(region) {
     pokedex.innerHTML = "";
     pokedex_page.className = "show";
-    pokedex_page_mobile.className = "show";
     document.getElementById("contact").className = "hide";
     hero.className = "hide";
     region_soundtrack = region;
@@ -233,6 +231,7 @@ function find_slot(pokemon_container) {
 function clear_inspect() {
     document.getElementById("move-list").innerHTML = "";
     document.getElementById("evolution-chain").innerHTML = "";
+    clear_slot(document.getElementById("pokemon0"));
 }
 
 function insert_slot(slot, slot_number, pokemon_container) {
@@ -284,8 +283,9 @@ function retrieve_data(gen, region) {
 
 function get_promise_array_species(data) {
     let promiseArray = [];
+    let load_percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        document.getElementById("load-percentage").textContent = i + "/" + data.length * 2 + " files downloaded.";
+        load_percentage.textContent = i + "/" + data.length * 2 + " files downloaded.";
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -293,8 +293,9 @@ function get_promise_array_species(data) {
 
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
+    let load_percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        document.getElementById("load-percentage").textContent = i + data.length + "/" + data.length * 2 + " files downloaded.";
+        load_percentage.textContent = i + data.length + "/" + data.length * 2 + " files downloaded.";
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -307,9 +308,9 @@ async function generate_pokedex(data) {
         get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
     }
     document.getElementById("loader-container").className = "hide";
+    document.getElementById("show-team").className = "show";
     document.getElementById("music-container").className = "show";
     document.getElementById("search-container").className = "show";
-    document.getElementById("load-percentage").textContent = "Loading...";
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {
@@ -367,15 +368,12 @@ function create_inspect_button(pokemon_container, button_container) {
 
 function inspect(pokemon_container) {
     clear_inspect();
-    let slot = document.getElementById("pokemon0");
-    clear_slot(slot);
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
-    slot.appendChild(datacopy);
+    document.getElementById("pokemon0").appendChild(datacopy);
     document.getElementById("inspect-view").className = "show";
     fetch_inspect(pokemon_container);
 }
-
 
 function create_clear_button(pokemon_slot, slot_number) {
     let clear_button = document.createElement("button");
@@ -491,18 +489,15 @@ async function get_move_info(moveName) {
 async function get_move_array(data) {
     var moves = data["moves"];
     let promiseArray = [];
-
     for (var i = 0; i < moves.length; i++) {
         await get_move_info(moves[i]['move']['name']);
         promiseArray.push(fetch(moves[i]['move']['url']).then(response => response.json()));
     }
-
     return Promise.all(promiseArray);
 }
 
 async function get_move_stats(data) {
     let move_array = await get_move_array(data);
-
     for (var i = 0; i < move_array.length; i++) {
         get_move_accuracy(move_array, i);
         get_move_power(move_array, i);
@@ -553,6 +548,8 @@ async function get_flavor_text(data) {
             break;
         }
     }
+
+    // get rid of weird characters in flavor text
     flavor_text = flavor_text.replace("\f", " ");
     description.textContent = flavor_text;
 }
@@ -706,13 +703,13 @@ async function generate_team_helper(settings) {
             }    
         }
 
-        if (pokemon_container.classList.contains("is_mythical")) {
+        else if (pokemon_container.classList.contains("is_mythical")) {
             if (!settings["mythicals_on"]) {
                 clear_slot(pokemon_slot, slot_number);
             }
         }
 
-        if (!settings["duplicates_on"]) {
+        else if (!settings["duplicates_on"]) {
             let types = pokemon_container.childNodes[0];
             console.log(pokemon_container.childNodes[0]);
             for (var i = 0; i < types.childElementCount; i++) {
@@ -729,17 +726,27 @@ async function generate_team_helper(settings) {
             }
         }
 
-        // remove highlight once slot contains a valid pokemon
+        // slot contains a valid pokemon, scroll down if necessary (mobile)
+        else {
+            document.getElementById("teambuilder-view").scrollTop = pokemon_slot.clientHeight;
+        }
+
+        // reset border for pokemon slot regardless of result
         pokemon_slot.style.border = "1px solid black";
     }
 }
 
 async function initialize_generation_graphics() {
+    document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("pokemon-list").style.filter = "brightness(25%)";
+    document.getElementById("build-form").style.display = "none";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("pokemon-list").style.filter = "none";
+    document.getElementById("build-form").style.display = "flex";
 }
 
 /* --------------------------------------- Music Functions --------------------------------------- */
@@ -804,4 +811,8 @@ function show_hide_search() {
 function show_hide_team() {
     document.getElementById("teambuilder-view").classList.toggle("hide");
     document.getElementById("show-team").classList.toggle("hide");
+}
+
+function hide_inspect() {
+    document.getElementById("inspect-view").classList.toggle("hide");
 }
