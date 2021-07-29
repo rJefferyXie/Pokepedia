@@ -51,8 +51,9 @@ https://rjefferyxie.github.io/Pokepedia/
 # Sources <a name="sources"></a>
 * Database: https://pokeapi.co/docs/v2
 * Soundtracks: https://downloads.khinsider.com/search?search=pokemon
+* Pokemon Type Icons: https://bulbapedia.bulbagarden.net/wiki/Type
 * Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
 * Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
 * Pokedex Template: https://github.com/bloodstorms/pokedex
 * Hero Images: https://undraw.co/illustrations
-* Wallpapers: https://wall.alphacoders.com/by_sub_category.php?id=173211&name=Pokémon+Wallpapers
+* Hero Wallpaper: https://wallpaperaccess.com/eeveelutions
