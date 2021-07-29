@@ -6,21 +6,35 @@
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    width: 1em;
+    border-radius: 0px 10px 10px 0px;
+    background-color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(75, 165, 206);
+    border-radius: 10px;
+}
+
 body::-webkit-scrollbar {
     width: 1em;
+    border-radius: 0;
     background-color: rgb(0, 0, 0);
 }
 
 body::-webkit-scrollbar-track {
+    border-radius: 0;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(75, 165, 206);
-}
-
-body {
-    overflow-x: hidden;
+    border-radius: 0;
 }
 
 .hide {
@@ -495,6 +509,32 @@ body {
     width: 100%;
 }
 
+#hide-inspect-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+}
+
+#hide-inspect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+    background-color: #1d1d1d;
+    color: rgb(63, 183, 219);
+    border-radius: 0px 0px 0px 20px;
+    cursor: pointer;
+}
+
+#hide-inspect:hover {
+    color: white;
+    background-color: #ff5353;
+}
+
 #inspect-container {
     display: flex;
     flex-direction: column;
@@ -514,7 +554,7 @@ body {
     width: 90%;
 }
 
-#intro-container, #stats-container, #moves-container {
+#intro-container, #stats-container, #moves-container, #chain-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -522,34 +562,20 @@ body {
     padding: 10px;
 }
 
-#stats-container {
+#stats-container, #moves-container {
+    height: calc(30vh + 48px);
     flex-direction: column;
 }
 
 #description-container {
     display: flex;
     justify-content: center;
-    height: 90%;
+    height: 95%;
     width: 75%;
-    font-size: 18px;
+    font-size: 1.2rem;
     padding: 10px;
     overflow-y: auto;
     background-color: #ddd;
-    border-radius: 20px;
-}
-
-#description-container::-webkit-scrollbar {
-    width: 12px;
-    border-radius: 10px;
-}
-
-#description-container::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-#description-container::-webkit-scrollbar-thumb {
-    background-color: rgb(139, 236, 207);
     border-radius: 10px;
 }
 
@@ -622,7 +648,7 @@ body {
 #move-list {
     display: flex;
     flex-direction: column;
-    height: 640px;
+    height: calc(30vh + 48px);
     width: 100%;
     background-color: white;
     border: 1px solid rgb(0,0,0);
@@ -643,62 +669,21 @@ body {
     text-transform: capitalize;
 }
 
-#move-list::-webkit-scrollbar {
-    width: 16px;
-    border-radius: 0px 10px 10px 0px;
-    background-color: white;
-}
-
-#move-list::-webkit-scrollbar-track {
-    border-radius: 0px 10px 10px 0px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-#move-list::-webkit-scrollbar-thumb {
-    background-color: rgb(59, 59, 59);
-    border-radius: 10px;
-}
-
 /* ----- Evolution Chain Section ----- */
-#chain-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    height: 100%;
-    margin: auto;
-}
-
 #evolution-chain {
     display: flex;
     overflow-x: auto;
     text-transform: capitalize;
-    margin: auto;
 }
 
 #evolution-chain li {
     height: 180px;
+    width: 200px;
     box-shadow: none;
 }
 
 #evolution-chain li .pokemon-number {
     display: none;
-}
-
-#evolution-chain::-webkit-scrollbar {
-    width: 12px;
-    background-color: white;
-    border-radius: 10px;
-}
-
-#evolution-chain::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-#evolution-chain::-webkit-scrollbar-thumb {
-    background-color: rgb(139, 236, 207);
-    border-radius: 10px;
 }
 
 .evolution-trigger {
