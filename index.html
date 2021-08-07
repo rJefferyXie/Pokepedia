@@ -159,11 +159,16 @@
         <div id="pokedex-section">
             <div id="loader-container">
                 <img src="images/undraw/loader.png" class="loader">
-                <div id="load-percentage" class="loader-text">Loading...</div>
-                <div class="loader-text">Created by <a href="https://github.com/rJefferyXie" class="loader-link" target="_blank">Jeffery Xie</a></div>
-                <div class="loader-text">Powered by <a href="https://pokeapi.co/" class="loader-link" target="_blank">Pokeapi</a></div>
+                <div id="load-percentage">Loading...</div>
+            </div>
+            <div id="search-container" class="hide">
+                <div id="search-icon"><i class="fas fa-search"></i></div>
+                <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
             </div>
             <div id="pokemon-list"></div>
+            <div id="top-page" class="hide" onclick="scroll_to('pokedex')">Back to Top</div>
+            <div id="github-footer" class="footer-text">Created by <a href="https://github.com/rJefferyXie" class="footer-link" target="_blank">Jeffery Xie</a></div>
+            <div id="pokeapi-footer" class="footer-text">Powered by <a href="https://pokeapi.co/" class="footer-link" target="_blank">Pokeapi</a></div>
         </div>
         <div id="inspect-view" class="hide">
             <div id="inspect-container">
@@ -237,11 +242,6 @@
                     <div id="hide-team" class="build-button" onclick="show_hide_team()">Hide</div>
                 </div>
             </form>
-        </div>
-        <div id="search-container" class="hide">
-            <div id="search-icon"><i class="fas fa-search"></i></div>
-            <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
-            <div id="hide-search" onclick="show_hide_search()"><i class="fas fa-times"></i></div>
         </div>
         <div id="music-container" class="hide">
             <div id="title-button-container">

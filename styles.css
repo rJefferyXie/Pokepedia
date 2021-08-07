@@ -321,7 +321,6 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - 80px);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -333,6 +332,24 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#top-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: min(180px, 75%);
+    background-color: rgb(43, 43, 43);
+    color: white;
+    border-radius: 20px;
+    padding: 20px 10px 20px 10px;
+    margin: 20px 0px 0px 0px;
+    cursor: pointer;
+}
+
+#top-page:hover {
+    background-color: rgb(61, 61, 61);
 }
 
 #loader-container {
@@ -355,10 +372,18 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 20px;
 }
 
-.loader-link {
+.footer-link {
     text-decoration: none;
     font-size: 18px;
-    color: rgb(75, 165, 206);
+    color: rgb(37, 88, 165);
+}
+
+#github-footer {
+    margin-top: 20px;
+}
+
+#pokeapi-footer {
+    margin-bottom: 30px;
 }
 
 
@@ -373,43 +398,15 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     height: 60px;
     width: min(420px, 75%);
-    position: fixed;
-    bottom: 2%;
     padding: 12px 20px 12px 40px; 
     border-radius: 20px;
-    background-color: rgb(27, 27, 27);
+    border: 1px solid black;
+    margin: 20px 0px 20px 0px;
 }
 
 #search-icon {
     width: 40px;
     margin: auto;
-    color: white;
-}
-
-#hide-search {
-    justify-content: center;
-    align-items: center;
-    color: rgb(224, 85, 85);
-    font-size: 20px;
-    width: 24px;
-    height: 24px;
-    border-radius: 24px;
-    cursor: pointer;
-}
-
-#show-search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    position: fixed;
-    height: 60px;
-    width: 60px;
-    border-radius: 20px 0px 0px 20px;
-    bottom: 15%;
-    right: 0;
-    background-color: rgb(39, 39, 39);
-    color: white;
 }
 
 #pokemon-search {
@@ -418,8 +415,6 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     width: 100%;
     height: 100%;
-    background-color: rgb(27, 27, 27);
-    color: white;
 } 
 
 #pokemon-list {
@@ -507,6 +502,7 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     height: calc(100% - 80px);
     width: 100%;
+    z-index: 1;
 }
 
 #hide-inspect-container {
@@ -586,6 +582,9 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     width: 100%;
     height: 100%;
+    background-color: #f6f6f6; 
+    border-radius: 20px;
+    border: 1px solid black;
 }
 
 #stat-name-container {
@@ -593,12 +592,12 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    margin: 0px 4px 0px 0px;
+    padding: 0px 0px 0px 10px;
 }
 
 .stat-header, .stat-bar {
-    height: calc(30vh / 6);
-    line-height: calc(30vh / 6);
+    height: calc(27vh / 6);
+    line-height: calc(27vh / 6);
     font-size: 20px;
     margin: 4px 0px 4px 0px;
 }
@@ -609,6 +608,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     height: 100%;
     width: 100%;
+    padding: 0px 10px 0px 10px;
 }
 
 .stat-bar {
@@ -618,6 +618,7 @@ body::-webkit-scrollbar-thumb {
     text-indent: 8px;
     text-align: right;
     direction: rtl;
+    border: 1px solid black;
 }
 
 #health {
@@ -715,7 +716,7 @@ body::-webkit-scrollbar-thumb {
     height: 60px;
     width: 60px;
     border-radius: 20px 0px 0px 20px;
-    bottom: 25%;
+    bottom: 15%;
     right: 0;
     background-color: rgb(39, 39, 39);
     color: white;
@@ -876,7 +877,7 @@ body::-webkit-scrollbar-thumb {
     color: rgb(224, 85, 85);
     background-color: white;
     width: 24px;
-    height: 24px;
+    height: 20px;
     border-radius: 24px;
     cursor: pointer;
     margin: auto auto auto 8px;
@@ -905,7 +906,7 @@ body::-webkit-scrollbar-thumb {
     display: none;
 }
 
-#music-container:hover #music-slider, #music-container:focus #music-slider {
+#music-container:hover #music-slider, #music-container:focus #music-slider, #music-slider:hover, #music-slider:focus {
     display: block;
 }
 
@@ -1083,6 +1084,10 @@ body::-webkit-scrollbar-thumb {
         width: 100%;
     }
 
+    #stats-container {
+        width: 100%;
+    }
+
     #moves-container {
         width: 100%;
     }
@@ -1092,12 +1097,12 @@ body::-webkit-scrollbar-thumb {
     }
 
     #teambuilder-view {
-        align-items: center;
-        position: fixed;
-        height: 475px;
-        top: 11%;
+        height: calc(100% - 80px);
+        top: 80px;
         overflow-y: auto;
         background-color: #222222;
+        z-index: 1;
+        padding-bottom: 20px;
     }
 
     .team-slot {
@@ -1151,14 +1156,6 @@ body::-webkit-scrollbar-thumb {
         border-radius: 20px;
     }
     
-    #clear-team-button {
-        background-color: #f77f7f;
-    }
-    
-    #submit-button {
-        background-color: #A7DB8D;
-    }
-    
     #help-text {
         display: none;
         align-items: flex-start;
@@ -1167,17 +1164,13 @@ body::-webkit-scrollbar-thumb {
         font-size: 24px;
     }
 
-    #show-music, #show-search, #show-team {
+    #show-music, #show-team {
         height: 40px;
         width: 40px;
     }
 
-    #show-search {
-        bottom: 13%;
-    }
-
     #show-team {
-        bottom: 21%;
+        bottom: 13%;
     }
 
     #music-container {

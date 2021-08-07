@@ -114,8 +114,6 @@ const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
 var current_intro_section = 1;
 
-var interval_; // used for holding down the scroll up/down buttons for pokedex
-
 const pokedex_page = document.getElementById("pokedex");
 const hero = document.getElementById("hero");
 const pokedex = document.getElementById("pokemon-list");
@@ -152,10 +150,10 @@ function hero_page() {
     document.getElementById("show-team").className = "hide";
     document.getElementById("music-container").className = "hide";
     document.getElementById("search-container").className = "hide";
+    document.getElementById("top-page").className = "hide";
 
     document.getElementById("teambuilder-view").className = "hide";
     document.getElementById("show-music").className = "hide";
-    document.getElementById("show-search").className = "hide";
 
     document.getElementById("inspect-view").className = "hide";
     document.getElementById("contact").className = "show";
@@ -311,6 +309,7 @@ async function generate_pokedex(data) {
     document.getElementById("show-team").className = "show";
     document.getElementById("music-container").className = "show";
     document.getElementById("search-container").className = "show";
+    document.getElementById("top-page").className = "show";
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {
@@ -424,20 +423,23 @@ function get_types(data, pokemon_container) {
 
 // --------------------------------------- Utility Functions --------------------------------------- // 
 function search_pokemon() {
-    var input, filter, list_items, a, txtValue;
-    input = document.getElementById('pokemon-search');
-    filter = input.value.toUpperCase();
-    list_items = pokedex.getElementsByTagName('li');
-  
+    let input = document.getElementById('pokemon-search');
+    let list_items = pokedex.getElementsByTagName('li');
+    var search = input.value.toLowerCase();
+
     // Loop through all list items, and hide those who don't match the search query
     for (var i = 0; i < list_items.length; i++) {
-      a = list_items[i].getElementsByTagName("a")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        list_items[i].style.display = "";
-      } 
-      else {
-        list_items[i].style.display = "none";
+        var name_container = list_items[i].getElementsByTagName("a")[0];
+        var pokemon_name = name_container.textContent;
+        var pokemon_types = list_items[i].firstChild;
+        for (var j = 0; j < pokemon_types.childElementCount; j++) {
+            if (pokemon_name.indexOf(search) > -1 || pokemon_types.childNodes[j].textContent.indexOf(search) > -1) {
+                list_items[i].style.display = "";
+                break;
+            } 
+            else {
+                list_items[i].style.display = "none";
+            }
         }
     }
 }
@@ -473,7 +475,7 @@ async function get_pokemon_stats(data) {
     var stats = data["stats"];
     for (var i = 0; i < stats.length; i++) {
         var stat = stats[i]['base_stat'];
-        document.getElementById(stat_dictionary[i]).style.width = stat + "%";
+        document.getElementById(stat_dictionary[i]).style.width = stat * 0.8 + "%";
         document.getElementById(stat_dictionary[i]).textContent = stat;
     }
 }
@@ -737,12 +739,14 @@ async function generate_team_helper(settings) {
 async function initialize_generation_graphics() {
     document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("search-container").style.filter = "brightness(25%)";
     document.getElementById("pokemon-list").style.filter = "brightness(25%)";
     document.getElementById("build-form").style.display = "none";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("search-container").style.filter = "none";
     document.getElementById("pokemon-list").style.filter = "none";
     document.getElementById("build-form").style.display = "flex";
 }
@@ -797,13 +801,6 @@ function change_song_title() {
 function show_hide_music() {
     document.getElementById("music-container").classList.toggle("hide");
     document.getElementById("show-music").classList.toggle("hide");
-}
-
-function show_hide_search() {
-    document.getElementById("pokemon-search").value = "";
-    search_pokemon();
-    document.getElementById("search-container").classList.toggle("hide");
-    document.getElementById("show-search").classList.toggle("hide");
 }
 
 function show_hide_team() {
