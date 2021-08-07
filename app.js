@@ -110,12 +110,6 @@ const change_volume = () => {
     music.volume = volume_control.value / 100;
 }
 
-var delay = 500;
-const delay_control = document.getElementById("delay-control");
-const changeDelay = () => {
-    delay = delay_control.value;
-}
-
 const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
 var current_intro_section = 1;
@@ -700,7 +694,7 @@ async function generate_team_helper(settings) {
         pokemon_slot.childNodes[0].style.display = "flex";
 
         // delay for better visual
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         // remove pokemon if rules are not met
         if (pokemon_container.classList.contains("is_legendary")) {
