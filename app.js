@@ -310,6 +310,7 @@ async function generate_pokedex(data) {
     document.getElementById("music-container").className = "show";
     document.getElementById("search-container").className = "show";
     document.getElementById("top-page").className = "show";
+    scroll_to("pokedex");
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {

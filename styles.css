@@ -583,7 +583,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     height: 100%;
     background-color: #f6f6f6; 
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid black;
 }
 
@@ -596,8 +596,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .stat-header, .stat-bar {
-    height: calc(27vh / 6);
-    line-height: calc(27vh / 6);
+    height: calc(25vh / 6);
+    line-height: calc(25vh / 6);
     font-size: 20px;
     margin: 4px 0px 4px 0px;
 }
