@@ -232,7 +232,7 @@ function clear_inspect() {
     clear_slot(document.getElementById("pokemon0"));
 }
 
-function insert_slot(slot, slot_number, pokemon_container) {
+async function insert_slot(slot, slot_number, pokemon_container) {
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
     datacopy.lastChild.removeChild(datacopy.lastChild.lastChild);
@@ -247,6 +247,14 @@ function insert_slot(slot, slot_number, pokemon_container) {
 
     pokemon_team[slot_number] = pokemon_container.id;
     pokemon_team["slots_available"] -= 1;
+
+    if (document.getElementById("teambuilder-view").className == "hide") {
+        document.getElementById("teambuilder-view").className = "show";
+        slot.style.borderColor = "#40e048";
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        slot.style.borderColor = "black";
+        document.getElementById("teambuilder-view").className = "hide";
+    }
     // eval();
 }
 
@@ -693,7 +701,7 @@ async function generate_team_helper(settings) {
         if (slot_number === undefined) { break; }
 
         // highlight which slot is currently under consideration
-        pokemon_slot.style.border = "2px solid #00FF6B";
+        pokemon_slot.style.borderColor = "#40e048";
         pokemon_slot.childNodes[0].style.display = "flex";
 
         // delay for better visual
@@ -733,23 +741,21 @@ async function generate_team_helper(settings) {
         }
 
         // reset border for pokemon slot regardless of result
-        pokemon_slot.style.border = "1px solid black";
+        pokemon_slot.style.borderColor = "black";
     }
 }
 
 async function initialize_generation_graphics() {
     document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
-    document.getElementById("search-container").style.filter = "brightness(25%)";
-    document.getElementById("pokemon-list").style.filter = "brightness(25%)";
-    document.getElementById("build-form").style.display = "none";
+    document.getElementById("form-container").classList.toggle("hide");
+    document.getElementById("pokedex-section").style.filter = "brightness(25%)";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
-    document.getElementById("search-container").style.filter = "none";
-    document.getElementById("pokemon-list").style.filter = "none";
-    document.getElementById("build-form").style.display = "flex";
+    document.getElementById("form-container").classList.toggle("hide");
+    document.getElementById("pokedex-section").style.filter = "none";
 }
 
 /* --------------------------------------- Music Functions --------------------------------------- */

@@ -52,7 +52,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.2rem;
     top: 0;
     z-index: 999;
-    background-color: rgb(14, 14, 14);
+    background-color: rgb(255, 255, 255);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -94,12 +94,20 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     height: 80px;
     width: 125px;
+    margin: 0px 10px 0px 10px;
+}
+
+#main-navbar-item {
+    border-radius: 20px;
+    color: rgb(67, 148, 185);
+    border: 2px solid rgb(67, 148, 185);
 }
 
 .navbar-links {
     cursor: pointer;
-    color: white;
     text-decoration: none;
+    font-size: 1.4rem;
+    padding: 10px 20px 10px 20px;
 }
 
 .navbar-links:hover {
@@ -332,6 +340,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 #top-page {
@@ -422,7 +431,6 @@ body::-webkit-scrollbar-thumb {
     flex-wrap: wrap;
     justify-content: center;
     background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
 }
 
 .pokemon-container {
@@ -433,7 +441,6 @@ body::-webkit-scrollbar-thumb {
     width: 200px;
     height: 240px;
     border-radius: 20px;
-    position: relative;
     font-size: 21px;
     margin: 8px;
     text-transform: capitalize;
@@ -700,7 +707,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     align-items: center;
     position: fixed;
-    width: min(1330px, 100%);
+    width: min(1350px, 100%);
     height: 400px;
     top: 25%;
     overflow-y: auto;
@@ -739,10 +746,10 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    width: 202px;
-    height: 240px;
+    width: 206px;
+    height: 234px;
     background-color: rgb(255, 255, 255);
-    border: 1px solid #000000;
+    border: 3px solid black;
     border-radius: 22px;
     margin: 8px;
 }
@@ -1022,8 +1029,8 @@ body::-webkit-scrollbar-thumb {
 
 @media screen and (max-width: 1320px) {
     .team-slot {
-        width: 182px;
-        height: 220px;
+        width: 186px;
+        height: 214px;
     }
 
     .team-slot .pokemon-container {
@@ -1040,10 +1047,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media screen and (max-width: 1024px) {
-    #search-container {
-        bottom: 15%;
-    }
-
     .pokemon-container {
         font-size: 1.2rem;
         width: 160px;
@@ -1106,8 +1109,8 @@ body::-webkit-scrollbar-thumb {
     }
 
     .team-slot {
-        width: 152px;
-        height: 190px;
+        width: 156px;
+        height: 194px;
     }
 
     .team-slot .pokemon-container {
@@ -1205,6 +1208,8 @@ body::-webkit-scrollbar-thumb {
         z-index: 99;
         height: 60vh;
         font-size: 1.6rem;
+        width: 100%;
+        border: 1px solid black;
     }
 
     #navbar-logo {
@@ -1216,11 +1221,12 @@ body::-webkit-scrollbar-thumb {
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: rgb(255, 255, 255);
+        background-color: black;
     }
 
     .navbar-item {
         width: 100%;
+        margin: 0px;
     }
       
     .navbar-links {
