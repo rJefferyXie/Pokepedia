@@ -85,13 +85,16 @@ def get_inspect_info():
 
 # print(data['name'], data['accuracy'])
 
+data = requests.get("https://pokeapi.co/api/v2/pokemon/4").json()
 
+for i in data:
+    print(i)
 
-data = requests.get("https://pokeapi.co/api/v2/pokedex/2/").json()
+# data = requests.get("https://pokeapi.co/api/v2/pokedex/2/").json()
 
-for i in range(0, len(data['pokemon_entries'])):
-    with open(str(i) + ".json", "w") as my_file:
-        json.dump(requests.get(data['pokemon_entries'][i]['pokemon_species']['url']).json(), my_file)
+# for i in range(0, len(data['pokemon_entries'])):
+#     with open(str(i) + ".json", "w") as my_file:
+#         json.dump(requests.get(data['pokemon_entries'][i]['pokemon_species']['url']).json(), my_file)
 
 # xd = open("0.json", "r")
 

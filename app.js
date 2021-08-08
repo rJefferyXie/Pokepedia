@@ -472,12 +472,18 @@ function fetch_inspect(data) {
 }
 
 async function get_inspect_info(data) {
+    get_pokemon_height_weight(data);
     get_pokemon_stats(data);
     get_move_stats(data);
 
     let species_info = await get_species_info(data);
     get_flavor_text(species_info);
     get_evolution_info(species_info);
+}
+
+async function get_pokemon_height_weight(data) {
+    document.getElementById("height").textContent = "Height: " + data['height'] * 10 + "cm"; // convert from decimeter to centimeter
+    document.getElementById("weight").textContent = "Weight: " + +(Math.round((data['weight'] / 4.536) + "e+2") + "e-2") + "lbs"; // convert from hectogram to pounds/lbs
 }
 
 async function get_pokemon_stats(data) {
@@ -748,15 +754,21 @@ async function generate_team_helper(settings) {
 async function initialize_generation_graphics() {
     document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("navbar").style.filter = "brightness(25%)";
     document.getElementById("form-container").classList.toggle("hide");
+    document.getElementById("build-button-container").classList.toggle("hide");
     document.getElementById("pokedex-section").style.filter = "brightness(25%)";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
+    document.getElementById("navbar").style.filter = "none";
     document.getElementById("form-container").classList.toggle("hide");
+    document.getElementById("build-button-container").classList.toggle("hide");
     document.getElementById("pokedex-section").style.filter = "none";
 }
+
+/* --------------------------------------- Tutorial Functions --------------------------------------- */
 
 /* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {

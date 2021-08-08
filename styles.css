@@ -44,7 +44,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ----- Navbar Section ----- */
-.navbar {
+#navbar {
     position: sticky;
     display: flex;
     justify-content: center;
