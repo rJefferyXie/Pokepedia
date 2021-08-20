@@ -178,8 +178,10 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     height: min(90%, 640px);
-    width: min(90%, 760px);
+    width: min(90%, 940px);
     border-radius: 20px;
+    color: white;
+    background-color: #627D98;
 }
 
 #about-container {
@@ -201,7 +203,6 @@ body::-webkit-scrollbar-thumb {
     font-size: 32px;
     cursor: pointer;
     margin: auto;
-    color: #23b1ca;
 }
 
 .header {
@@ -237,11 +238,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #circle-container .active {
-    color: #23b1ca;
+    color: #ffffff;
 }
 
 #region-button {
-    background-color: rgb(75, 165, 206);
+    background-color: rgb(145, 208, 238);
     width: min(95%, 360px);
     height: 70px;
     font-size: 1.6rem;
@@ -255,7 +256,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #region-button:hover {
-    background-color: rgb(79, 174, 218);
+    background-color: rgb(165, 222, 248);
 }
 
 #region-section {
@@ -579,24 +580,28 @@ body::-webkit-scrollbar-thumb {
 }
 
 #hide-inspect-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
+    display: inline-block;
+    height: 0;
     width: 100%;
+    right: 0;
+    left: 0;
+    top: 0;
+    text-align: right;
+    position: sticky;
 }
 
 #hide-inspect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 3vw;
+    width: 3vw;
+    height: 3vw;
     font-size: 1.2rem;
+    cursor: pointer;
     background-color: #1d1d1d;
     color: rgb(63, 183, 219);
     border-radius: 0px 0px 0px 20px;
-    cursor: pointer;
     transition: background-color 0ms;
 }
 
@@ -609,11 +614,10 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
-    width: 80%;
-    border-radius: 20px;
+    height: 100%;
+    width: 100%;
     box-shadow: 0px 0px 5px 1px #272727;
-    background-color: #ffffff;
+    background-color: #9FB3C8;
     overflow-y: auto;
 }
 
@@ -637,10 +641,18 @@ body::-webkit-scrollbar-thumb {
     padding: 10px;
 }
 
-.dark #description-container, .dark #stat-list, .dark #move-list, .dark #move-list li {
-    background-color: #121212;
-    color: white;
+#description-container, #height-weight-container, #stat-list, #move-list, #move-list li, .evolution-trigger {
+    background-color: #F0F4F8;
+}
+
+.dark #description-container, .dark #height-weight-container, .dark #stat-list, .dark #move-list, .dark #move-list li, .dark .evolution-trigger {
+    background-color: #486581;
     border: 1px solid black;
+    color: rgb(0, 0, 0);
+}
+
+.dark #intro-container, #dark #evolution-chain {
+    color: black;
 }
 
 #stats-container, #moves-container {
@@ -656,8 +668,16 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.2rem;
     padding: 10px;
     overflow-y: auto;
-    background-color: #ddd;
     border-radius: 10px;
+}
+
+#height-weight-container {
+    height: 95%;
+    width: 20%;
+    padding: 20px;
+    margin: 0px 14px 0px 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
 }
 
 /* ----- Pokemon Stats Section ----- */
@@ -667,7 +687,6 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: #f6f6f6; 
     border-radius: 10px;
     border: 1px solid black;
 }
@@ -736,10 +755,10 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     height: calc(30vh + 48px);
     width: 100%;
-    background-color: white;
     border: 1px solid rgb(0,0,0);
     border-radius: 10px;
     overflow-y: auto;
+    border-left: none;
 }
 
 #move-list li {
@@ -748,8 +767,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 18px; 
     width: 100%;
     color: black; 
-    background-color: #f6f6f6; 
-    border: 1px solid #ddd; 
+    border: 1px solid rgb(0, 0, 0); 
     margin-top: -1px; 
     padding: 12px; 
     text-transform: capitalize;
@@ -778,6 +796,11 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    height: 140px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 0px 20px 0px 20px;
+    color: black;
 }
 
 #teambuilder-view {
@@ -814,8 +837,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark #show-team {
-    color: black;
-    background-color: #D9E2EC;
+    background-color: #627D98;
 }
 
 #teambuilder-view::-webkit-scrollbar {
@@ -998,8 +1020,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark #show-music {
-    color: black;
-    background-color: #D9E2EC;
+    background-color: #627D98;
 }
 
 #music-slider {
@@ -1118,9 +1139,13 @@ body::-webkit-scrollbar-thumb {
         font-size: 24px;
     }
 
+    #inspect-view {
+        z-index: 2;
+    }
+
     #inspect-container {
         flex-direction: column;
-        height: 90%;
+        height: 100%;
     }
 
     #stats-moves-container {
@@ -1136,6 +1161,11 @@ body::-webkit-scrollbar-thumb {
 
     #description-container {
         width: 100%;
+    }
+
+    #height-weight-container {
+        width: 100%;
+        margin: 6px 0px 10px 0px;
     }
 
     #stats-container {
@@ -1157,6 +1187,7 @@ body::-webkit-scrollbar-thumb {
         background-color: #222222;
         z-index: 1;
         padding-bottom: 20px;
+        border-radius: 0px;
     }
 
     .team-slot {
