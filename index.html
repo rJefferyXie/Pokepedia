@@ -12,8 +12,8 @@
 </head>
 <body>
     <!-- Navigation Bar Section -->
-    <nav id="navbar">
-        <div class="navbar-container">
+    <nav id="navbar" class="ld">
+        <div class="navbar-container ld">
             <a onclick="hero_page()" id="navbar-logo"><i class="fab fa-sith"></i>POKEPEDIA</a>
             <div class="navbar-toggle" id="mobile-menu">
                 <span class="bar"></span> 
@@ -25,17 +25,19 @@
                     <a onclick="hero_page()" class="navbar-links">About</a>
                 </li>
                 <li class="navbar-item">
-                    <a onclick="scroll_to('contact')" class="navbar-links">Contact</a>
-                </li>
-                <li class="navbar-item">
                     <a id="main-navbar-item" onclick="region_page()" class="navbar-links">Regions</a>
+                </li>
+                <li class="navbar-item ld" id="light-dark-toggle" onclick="toggle_light_dark_mode()">
+                    <span class="ld" id="light-dark-slider">
+                        <div id="mode"><i class="fas fa-sun"></i></div>
+                    </span>
                 </li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div id="hero">
+    <div id="hero" class="hp ld">
         <div id="intro-section">
             <div id="about-wrapper">
                 <div id="left-arrow" class="intro-arrow" onclick="previous_intro_section()"><i class="fas fa-chevron-circle-left"></i></div>
@@ -154,23 +156,29 @@
     <!-- Overlay During Team Generation -->
     <div id="overlay"></div>
 
+    <!-- Loader Section -->
+    <div id="loader-container" class="hide hp pp">
+        <img src="images/undraw/loader.png" class="loader">
+        <div id="load-percentage-container">
+            <div id="load-percentage-bar">
+                <div id="load-percentage" max="100" value="0">0%</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Pokedex Section -->
-    <div id="pokedex" class="hide">
-        <div id="pokedex-section">
-            <div id="loader-container">
-                <img src="images/undraw/loader.png" class="loader">
-                <div id="load-percentage">Loading...</div>
-            </div>
-            <div id="search-container" class="hide">
+    <div id="pokedex" class="hide pp ld">
+        <div id="pokedex-section" class="ld">
+            <div id="search-container" class="hide pp ld">
                 <div id="search-icon"><i class="fas fa-search"></i></div>
-                <input id="pokemon-search" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
+                <input id="pokemon-search" class="ld" type="text" onkeyup="search_pokemon()" placeholder="Search for pokemon...">
             </div>
-            <div id="pokemon-list"></div>
-            <div id="top-page" class="hide" onclick="scroll_to('pokedex')">Back to Top</div>
+            <div id="pokemon-list" class="ld"></div>
+            <div id="top-page" class="hide pp" onclick="scroll_to('pokedex')">Back to Top</div>
             <div id="github-footer" class="footer-text">Created by <a href="https://github.com/rJefferyXie" class="footer-link" target="_blank">Jeffery Xie</a></div>
             <div id="pokeapi-footer" class="footer-text">Powered by <a href="https://pokeapi.co/" class="footer-link" target="_blank">Pokeapi</a></div>
         </div>
-        <div id="inspect-view" class="hide">
+        <div id="inspect-view" class="hp pp ld">
             <div id="inspect-container">
                 <div id="hide-inspect-container">
                     <div id="hide-inspect" onclick="hide_inspect()"><i class="fas fa-times"></i></div>
@@ -215,7 +223,7 @@
                 </div>
             </div>
         </div>
-        <div id="teambuilder-view" class="hide">
+        <div id="teambuilder-view" class="hp pp ld">
             <div id="team-container">
                 <div id="pokemon1" class="team-slot"></div>
                 <div id="pokemon2" class="team-slot"></div>
@@ -247,14 +255,14 @@
                 </div>
             </form>
         </div>
-        <div id="music-container" class="hide">
+        <div id="music-container" class="hide pp ld">
             <div id="title-button-container">
                 <div id="song-title-container">
                     <span id="song-title"></span>
                 </div>
                 <div id="hide-music" onclick="show_hide_music()"><i class="fas fa-times"></i></div>
             </div>
-            <div id="music-controls">
+            <div id="music-controls" class="ld">
                 <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
                 <div id="pause" class="music-button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
                 <div id="play" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
@@ -264,21 +272,8 @@
                 </div>
             </div>
         </div>
-        <div id="show-music" class="hide" onclick="show_hide_music()"><i class="fas fa-music"></i></div>
-        <div id="show-search" class="hide" onclick="show_hide_search()"><i class="fas fa-search"></i></div>
-        <div id="show-team" class="hide" onclick="show_hide_team()"><i class="fab fa-pinterest"></i></div>
-    </div>
-
-    <div id="contact">
-        <div id="contact-form-container">
-            <img src="images/undraw/error.png" id="contact-image">
-            <form id="contact-form">
-                <input class="contact-input" type="text" id="fname" name="firstname" placeholder="First Name">
-                <input class="contact-input" type="text" id="lname" name="lastname" placeholder="Last Name">
-                <input class="contact-input" type="text" id="email" name="email" placeholder="Email Address">
-                <textarea name="message" id="message" placeholder="Message"></textarea>
-            </form>
-        </div>
+        <div id="show-music" class="hide hp pp ld" onclick="show_hide_music()"><i class="fas fa-music"></i></div>
+        <div id="show-team" class="hide pp ld" onclick="show_hide_team()"><i class="fab fa-pinterest"></i></div>
     </div>
     <script src="app.js"></script>
 </body>

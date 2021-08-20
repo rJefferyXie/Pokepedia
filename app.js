@@ -1,3 +1,8 @@
+var script = document.createElement('script');
+script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+script.type = 'text/javascript';
+document.getElementsByTagName('head')[0].appendChild(script);
+
 // --------------------------------------- All Constants / Variables --------------------------------------- // 
 const type_color_schemes = { 
     "bug": "#C6D16E",
@@ -114,8 +119,9 @@ const first_intro_section = 1; // first intro page
 const final_intro_section = 3; // last intro page
 var current_intro_section = 1;
 
-const pokedex_page = document.getElementById("pokedex");
 const hero = document.getElementById("hero");
+const pokedex_page = document.getElementById("pokedex");
+const pokedex_container = document.getElementById("pokedex-section");
 const pokedex = document.getElementById("pokemon-list");
 const evolution_chain = document.getElementById('evolution-chain');
 
@@ -128,6 +134,7 @@ var pokemon_team = {
     "slots_available": 6
 }
 
+const navbar = document.getElementById("navbar");
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.navbar-menu');
 const navLogo = document.querySelector('#navbar-logo');
@@ -141,25 +148,41 @@ const mobileMenu = () => {
 menu.addEventListener('click', mobileMenu);
 menuLinks.addEventListener('click', mobileMenu);
 
+const light_dark_toggle = document.getElementById("light-dark-toggle");
+const light_dark_slider = document.getElementById("light-dark-slider");
+var light_mode = true;
+const toggle_light_dark_mode = () => {
+    light_mode = !light_mode;
+    light_dark_elements = document.getElementsByClassName("ld");
+    for (var i = 0; i < light_dark_elements.length; i++) {
+        light_dark_elements[i].classList.toggle("dark");
+    }
+    if (light_mode) {
+        light_dark_slider.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    else {
+        light_dark_slider.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+}
+
 // --------------------------------------- Website State Functions --------------------------------------- //
 function hero_page() {
-    pokedex_page.className = "hide";
-    hero.className = "show";
-    pause_song();
+    if (hero.classList.contains("hide")) {
+        // show all hero page elements
+        hero_elements = document.getElementsByClassName("hp");
+        for (var i = 0; i < hero_elements.length; i++) {
+            hero_elements[i].classList.remove("hide");
+        }
 
-    document.getElementById("show-team").className = "hide";
-    document.getElementById("music-container").className = "hide";
-    document.getElementById("search-container").className = "hide";
-    document.getElementById("top-page").className = "hide";
+        // hide all pokedex elements
+        pokedex_elements = document.getElementsByClassName("pp");
+        for (var j = 0; j < pokedex_elements.length; j++) {
+            pokedex_elements[j].classList.add("hide");
+        }
 
-    document.getElementById("teambuilder-view").className = "hide";
-    document.getElementById("show-music").className = "hide";
-
-    document.getElementById("inspect-view").className = "hide";
-    document.getElementById("contact").className = "show";
-    document.getElementById("loader-container").className = "show";
-    clear_inspect();
-    clear_team();
+        pause_song();
+        clear_team();
+    }
     scroll_to("hero");
 }
 
@@ -204,10 +227,12 @@ function toggle_section() {
 }
 
 function initialize_pokedex_page(region) {
+    hero_elements = document.getElementsByClassName("hp");
+    for (var i = 0; i < hero_elements.length; i++) {
+        hero_elements[i].classList.add("hide");
+    }
+    document.getElementById("loader-container").classList.remove("hide");
     pokedex.innerHTML = "";
-    pokedex_page.className = "show";
-    document.getElementById("contact").className = "hide";
-    hero.className = "hide";
     region_soundtrack = region;
     track_number = Math.floor(Math.random() * 6);
     music.src = soundtracks[region_soundtrack][track_number]['file_path'];
@@ -248,12 +273,14 @@ async function insert_slot(slot, slot_number, pokemon_container) {
     pokemon_team[slot_number] = pokemon_container.id;
     pokemon_team["slots_available"] -= 1;
 
-    if (document.getElementById("teambuilder-view").className == "hide") {
+    if (document.getElementById("teambuilder-view").classList.contains("hide")) {
+        initialize_generation_graphics();
         document.getElementById("teambuilder-view").className = "show";
         slot.style.borderColor = "#40e048";
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         slot.style.borderColor = "black";
         document.getElementById("teambuilder-view").className = "hide";
+        remove_generation_graphics();
     }
     // eval();
 }
@@ -289,9 +316,9 @@ function retrieve_data(gen, region) {
 
 function get_promise_array_species(data) {
     let promiseArray = [];
-    let load_percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        load_percentage.textContent = i + "/" + data.length * 2 + " files downloaded.";
+        $("#load-percentage-bar").width(Math.round(i / (data.length * 2) * 100) + 1 + "%");
+        $("#load-percentage").text(Math.round(i / (data.length * 2) * 100) + "%");
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -299,9 +326,9 @@ function get_promise_array_species(data) {
 
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
-    let load_percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        load_percentage.textContent = i + data.length + "/" + data.length * 2 + " files downloaded.";
+        $("#load-percentage-bar").width(Math.round(i / data.length * 100) + 1 + "%");
+        $("#load-percentage").text(Math.round(i / data.length * 100) + "%");
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -313,11 +340,19 @@ async function generate_pokedex(data) {
     for (var i = 0; i < species_data.length; i++) {
         get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
     }
-    document.getElementById("loader-container").className = "hide";
-    document.getElementById("show-team").className = "show";
-    document.getElementById("music-container").className = "show";
-    document.getElementById("search-container").className = "show";
-    document.getElementById("top-page").className = "show";
+
+    // show all pokedex elements
+    pokedex_elements = document.getElementsByClassName("pp");
+    for (var j = 0; j < pokedex_elements.length; j++) {
+        pokedex_elements[j].classList.remove("hide");
+    }
+
+    // hide all hero elements
+    hero_elements = document.getElementsByClassName("hp");
+    for (var i = 0; i < hero_elements.length; i++) {
+        hero_elements[i].classList.add("hide");
+    }
+
     scroll_to("pokedex");
 }
 
@@ -754,18 +789,18 @@ async function generate_team_helper(settings) {
 async function initialize_generation_graphics() {
     document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
-    document.getElementById("navbar").style.filter = "brightness(25%)";
+    // document.getElementById("navbar").style.filter = "brightness(25%)";
     document.getElementById("form-container").classList.toggle("hide");
     document.getElementById("build-button-container").classList.toggle("hide");
-    document.getElementById("pokedex-section").style.filter = "brightness(25%)";
+    // document.getElementById("pokedex-section").style.filter = "brightness(25%)";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
-    document.getElementById("navbar").style.filter = "none";
+    // document.getElementById("navbar").style.filter = "none";
     document.getElementById("form-container").classList.toggle("hide");
     document.getElementById("build-button-container").classList.toggle("hide");
-    document.getElementById("pokedex-section").style.filter = "none";
+    // document.getElementById("pokedex-section").style.filter = "none";
 }
 
 /* --------------------------------------- Tutorial Functions --------------------------------------- */

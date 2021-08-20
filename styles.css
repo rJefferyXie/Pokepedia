@@ -4,6 +4,7 @@
     padding: 0;
     font-family: 'Kumbh Sans', sans-serif;
     scroll-behavior: smooth;
+    transition: background-color 1s;
 }
 
 ::-webkit-scrollbar {
@@ -43,6 +44,11 @@ body::-webkit-scrollbar-thumb {
     left: -9999px;
 }
 
+.dark {
+    background-color: #121212;
+    color: rgb(238, 238, 238);
+}
+
 /* ----- Navbar Section ----- */
 #navbar {
     position: sticky;
@@ -52,7 +58,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.2rem;
     top: 0;
     z-index: 999;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -65,6 +71,42 @@ body::-webkit-scrollbar-thumb {
     z-index: 1;
     width: 100%;
     padding: 0 50px;
+}
+
+#light-dark-toggle {
+    display: block;
+    width: 60px;
+    height: 24px;
+    background-color: rgb(27, 27, 27);
+    padding: 0;
+    border: none;
+    margin: auto 20px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#light-dark-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 22px;
+    margin: 1px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(238, 208, 40);
+    font-size: 14px;
+    border-radius: 50%;
+    float: right;
+    transition: margin 1s;
+}
+
+.dark #light-dark-slider {
+    background-color: black;
+    margin-right: calc(100% - 25px);
+}
+
+.dark #light-dark-toggle {
+    background-color: white;
 }
 
 #navbar-logo {
@@ -349,7 +391,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     height: 60px;
     width: min(180px, 75%);
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(37, 114, 165);
     color: white;
     border-radius: 20px;
     padding: 20px 10px 20px 10px;
@@ -358,7 +400,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #top-page:hover {
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(73, 136, 231);
 }
 
 #loader-container {
@@ -377,14 +419,25 @@ body::-webkit-scrollbar-thumb {
     animation: load 2s linear infinite;
 }
 
-#load-percentage {
-    margin-bottom: 20px;
+#load-percentage-container {
+    width: min(240px, 100%);
+    background-color: #121212;
+    border-radius: 20px;
+}
+
+#load-percentage-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 87, 87);
+    border-radius: 20px;
+    padding: 10px 0px 10px 0px;
 }
 
 .footer-link {
     text-decoration: none;
     font-size: 18px;
-    color: rgb(37, 88, 165);
+    color: rgb(37, 114, 165);
 }
 
 #github-footer {
@@ -411,8 +464,9 @@ body::-webkit-scrollbar-thumb {
     border-radius: 20px;
     border: 1px solid black;
     margin: 20px 0px 20px 0px;
+    background-color: #121212;
+    color: white;
 }
-
 #search-icon {
     width: 40px;
     margin: auto;
@@ -424,13 +478,25 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     width: 100%;
     height: 100%;
+    background-color: #121212;
+    color: white;
 } 
+
+.dark #search-container, .dark #pokemon-search {
+    background-color: #243B53;
+    color: rgb(255, 255, 255);
+}
 
 #pokemon-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
+}
+
+.dark #pokemon-list, .dark #pokedex-section {
+    background-color: #121212;
+    color: white;
 }
 
 .pokemon-container {
@@ -531,6 +597,7 @@ body::-webkit-scrollbar-thumb {
     color: rgb(63, 183, 219);
     border-radius: 0px 0px 0px 20px;
     cursor: pointer;
+    transition: background-color 0ms;
 }
 
 #hide-inspect:hover {
@@ -550,6 +617,11 @@ body::-webkit-scrollbar-thumb {
     overflow-y: auto;
 }
 
+.dark #inspect-container {
+    background-color: #243B53;
+    color: white;
+}
+
 #stats-moves-container {
     display: flex;
     align-items: center;
@@ -563,6 +635,12 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     width: 90%;
     padding: 10px;
+}
+
+.dark #description-container, .dark #stat-list, .dark #move-list, .dark #move-list li {
+    background-color: #121212;
+    color: white;
+    border: 1px solid black;
 }
 
 #stats-container, #moves-container {
@@ -712,6 +790,12 @@ body::-webkit-scrollbar-thumb {
     top: 25%;
     overflow-y: auto;
     background-color: #222222;
+    border-radius: 20px;
+}
+
+.dark #teambuilder-view {
+    color: black;
+    background-color: #243B53;
 }
 
 #show-team {
@@ -725,8 +809,13 @@ body::-webkit-scrollbar-thumb {
     border-radius: 20px 0px 0px 20px;
     bottom: 15%;
     right: 0;
-    background-color: rgb(39, 39, 39);
+    background-color: #121212;
     color: white;
+}
+
+.dark #show-team {
+    color: black;
+    background-color: #D9E2EC;
 }
 
 #teambuilder-view::-webkit-scrollbar {
@@ -746,10 +835,10 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    width: 206px;
+    width: 204px;
     height: 234px;
     background-color: rgb(255, 255, 255);
-    border: 3px solid black;
+    border: 2px solid black;
     border-radius: 22px;
     margin: 8px;
 }
@@ -822,7 +911,6 @@ body::-webkit-scrollbar-thumb {
     align-items: flex-start;
     justify-content: center;
     color: rgb(255, 255, 255);
-    font-size: 20px;
 }
 
 .slide-container {
@@ -837,7 +925,7 @@ body::-webkit-scrollbar-thumb {
     -webkit-appearance: none;  
     appearance: none;
     outline: none;
-    height: 14px;
+    height: 16px;
     background-color: white;
     border-radius: 20px;
     margin-top: 8px;
@@ -847,8 +935,9 @@ body::-webkit-scrollbar-thumb {
     -webkit-appearance: none; 
     appearance: none;
     width: 14px; 
-    height: 14px; 
-    background: rgb(39, 39, 39); 
+    height: 14px;
+    margin: 1px; 
+    background-color: #121212; 
     cursor: pointer; 
     border-radius: 20px;
 }
@@ -856,7 +945,7 @@ body::-webkit-scrollbar-thumb {
 .slider::-moz-range-thumb {
     width: 14px; 
     height: 14px; 
-    background: rgb(39, 39, 39); 
+    background-color: #121212; 
     cursor: pointer; 
 }
 
@@ -867,10 +956,9 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-evenly;
     position: fixed;
     align-items: center;
+    background-color: #121212;
     color: white;
-    background-color: rgb(39, 39, 39);
     border-radius: 20px;
-    border: 1px solid black;
     width: 300px;
     padding: 10px;
     bottom: 1%;
@@ -905,8 +993,13 @@ body::-webkit-scrollbar-thumb {
     border-radius: 20px 0px 0px 20px;
     bottom: 5%;
     right: 0;
-    background-color: rgb(39, 39, 39);
+    background-color: #121212;
     color: white;
+}
+
+.dark #show-music {
+    color: black;
+    background-color: #D9E2EC;
 }
 
 #music-slider {
@@ -951,7 +1044,15 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
+    background-color: #121212;
+    color: white;
 }
+
+.dark #music-container, .dark #music-controls, .dark #music-controls .music-button {
+    background-color: #243B53;
+    color: rgb(255, 255, 255);
+}
+
 
 .music-button {
     font-size: 28px;
@@ -975,61 +1076,11 @@ body::-webkit-scrollbar-thumb {
     z-index: 9999;
 }
 
-#contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 80px);
-    width: 100%;
-}
 
-#contact-form-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 50%;
-    height: 60%;
-}
-
-#contact-image {
-    width: 25%;
-    margin: auto;
-}
-
-#contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 70%;
-    border-radius: 16px;
-    background-color: rgb(135, 189, 221);
-}
-
-#contact-form input, #contact-form textarea {
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    text-indent: 6px;
-    width: 50%;
-}
-
-.contact-input {
-    height: 5vh;
-    margin: 4px 0px 4px 0px;
-}
-
-#message {
-    resize: vertical;
-    height: 10vh;
-    line-height: 3vh;
-    margin-top: 5px;
-}
 
 @media screen and (max-width: 1320px) {
     .team-slot {
-        width: 186px;
+        width: 184px;
         height: 214px;
     }
 
@@ -1109,7 +1160,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .team-slot {
-        width: 156px;
+        width: 154px;
         height: 194px;
     }
 
@@ -1164,7 +1215,6 @@ body::-webkit-scrollbar-thumb {
         align-items: flex-start;
         justify-content: center;
         color: rgb(255, 255, 255);
-        font-size: 24px;
     }
 
     #show-music, #show-team {
