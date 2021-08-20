@@ -16,11 +16,11 @@
         <div class="navbar-container ld">
             <a onclick="hero_page()" id="navbar-logo"><i class="fab fa-sith"></i>POKEPEDIA</a>
             <div class="navbar-toggle" id="mobile-menu">
-                <span class="bar"></span> 
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar ld"></span> 
+                <span class="bar ld"></span>
+                <span class="bar ld"></span>
             </div>
-            <ul class="navbar-menu">
+            <ul class="navbar-menu ld">
                 <li class="navbar-item">
                     <a onclick="hero_page()" class="navbar-links">About</a>
                 </li>
@@ -68,18 +68,10 @@
                         </p>
                         <img src="images/undraw/teambuilder.svg" class="about-image">
                     </div>
-                    <!-- <div class="hide" id="about4">
-                        <p class="header">Compare Pokemon</p>
-                        <p class="text">
-                            Compare pokemon side-by-side to view their core similarities and differences.
-                        </p>
-                        <img src="images/undraw/compare.svg" class="about-image">
-                    </div> -->
                     <div id="circle-container">
                         <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
                         <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
                         <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
-                        <!-- <i class="fas fa-circle" id="circle-4" onclick="change_intro_section(4)"></i> -->
                     </div>
                     <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
                 </div>
@@ -157,7 +149,7 @@
     <div id="overlay"></div>
 
     <!-- Loader Section -->
-    <div id="loader-container" class="hide hp pp">
+    <div id="loader-container" class="hide hp pp ld">
         <img src="images/undraw/loader.png" class="loader">
         <div id="load-percentage-container">
             <div id="load-percentage-bar">
