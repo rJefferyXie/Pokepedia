@@ -54,6 +54,5 @@ https://rjefferyxie.github.io/Pokepedia/
 * Pokemon Type Icons: https://bulbapedia.bulbagarden.net/wiki/Type
 * Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
 * Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
-* Pokedex Template: https://github.com/bloodstorms/pokedex
 * Hero Images: https://undraw.co/illustrations
-* Hero Wallpaper: https://wallpaperaccess.com/eeveelutions
+* Dark Theme Recommendations and Standards https://uxdesign.cc/dark-mode-ui-design-the-definitive-guide-part-1-color-53dcfaea5129
