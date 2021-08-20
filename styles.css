@@ -560,6 +560,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .pokemon-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     outline: none;
     color: black;
@@ -843,7 +846,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark #show-team {
-    background-color: #627D98;
+    background-color: #243B53;
 }
 
 #teambuilder-view::-webkit-scrollbar {
@@ -1026,7 +1029,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark #show-music {
-    background-color: #627D98;
+    background-color: #243B53;
 }
 
 #music-slider {
@@ -1120,13 +1123,14 @@ body::-webkit-scrollbar-thumb {
     .pokemon-container .pokemon-button-container button {
         width: 24px;
         height: 24px;
-        line-height: 20px;
+        line-height: 24px;
     }
 }
 
 @media screen and (max-width: 1024px) {
-
-
+    .intro-arrow {
+        display: none;
+    }
 
     .pokemon-container {
         font-size: 1.2rem;

@@ -1,8 +1,3 @@
-var script = document.createElement('script');
-script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
-
 // --------------------------------------- All Constants / Variables --------------------------------------- // 
 const type_color_schemes = { 
     "bug": "#C6D16E",
@@ -282,7 +277,6 @@ async function insert_slot(slot, slot_number, pokemon_container) {
         document.getElementById("teambuilder-view").className = "hide";
         remove_generation_graphics();
     }
-    // eval();
 }
 
 async function clear_team() {
@@ -316,9 +310,11 @@ function retrieve_data(gen, region) {
 
 function get_promise_array_species(data) {
     let promiseArray = [];
+    let percentage_bar = document.getElementById("load-percentage-bar");
+    let percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        $("#load-percentage-bar").width(Math.round(i / (data.length * 2) * 100) + 1 + "%");
-        $("#load-percentage").text(Math.round(i / (data.length * 2) * 100) + "%");
+        percentage_bar.style.width = Math.round(i / (data.length * 2) * 100) + 1 + "%";
+        percentage.innerHTML = Math.round(i / (data.length * 2) * 100) + "%";
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -326,9 +322,11 @@ function get_promise_array_species(data) {
 
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
+    let percentage_bar = document.getElementById("load-percentage-bar");
+    let percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        $("#load-percentage-bar").width(Math.round(i / data.length * 100) + 1 + "%");
-        $("#load-percentage").text(Math.round(i / data.length * 100) + "%");
+        percentage_bar.style.width = Math.round(i / data.length * 100) + 1 + "%";
+        percentage.innerHTML = Math.round(i / data.length * 100) + "%";
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
