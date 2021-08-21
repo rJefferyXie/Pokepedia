@@ -129,6 +129,8 @@ var pokemon_team = {
     "slots_available": 6
 }
 
+var finished_loading = false;
+
 const navbar = document.getElementById("navbar");
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.navbar-menu');
@@ -305,16 +307,32 @@ function retrieve_data(gen, region) {
     initialize_pokedex_page(region);
     fetch("https://pokeapi.co/api/v2/pokedex/" + gen + "/")
     .then(response => response.json())
-    .then(data => generate_pokedex(data))
+    .then(data => load_pokedex_graphics(data))
+}
+
+function load() {
+    let percentage_bar = document.getElementById("load-percentage-bar");
+    let percentage = document.getElementById("load-percentage");
+    let updater = setInterval(update, 10);
+    let counter = 20;
+    function update() {
+        if (counter >= 99 || finished_loading) {
+            percentage.innerHTML = "100%";
+            percentage_bar.style.width = "100%";
+            finished_loading = false;
+            clearInterval(updater);
+        }
+        else {
+            counter++;
+            percentage.innerHTML = counter + "%";
+            percentage_bar.style.width = counter + "%";
+        }
+    }
 }
 
 function get_promise_array_species(data) {
     let promiseArray = [];
-    let percentage_bar = document.getElementById("load-percentage-bar");
-    let percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        percentage_bar.style.width = Math.round(i / (data.length * 2) * 100) + 1 + "%";
-        percentage.innerHTML = Math.round(i / (data.length * 2) * 100) + "%";
         promiseArray.push(fetch(data[i]["pokemon_species"]["url"]).then(response => response.json()))
     }
     return Promise.all(promiseArray);
@@ -322,14 +340,30 @@ function get_promise_array_species(data) {
 
 function get_promise_array_pokemon(data) {
     let promiseArray = [];
-    let percentage_bar = document.getElementById("load-percentage-bar");
-    let percentage = document.getElementById("load-percentage");
     for (var i = 0; i < data.length; i++) {
-        percentage_bar.style.width = Math.round(i / data.length * 100) + 1 + "%";
-        percentage.innerHTML = Math.round(i / data.length * 100) + "%";
         promiseArray.push(fetch(data[i]['varieties'][0]['pokemon']['url']).then(response => response.json()))
     }
     return Promise.all(promiseArray);
+}
+
+async function load_pokedex_graphics(data) {
+    load();
+    await generate_pokedex(data);
+
+    finished_loading = true;
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // show all pokedex elements
+    pokedex_elements = document.getElementsByClassName("pp");
+    for (var j = 0; j < pokedex_elements.length; j++) {
+        pokedex_elements[j].classList.remove("hide");
+    }
+    // hide all hero elements
+    hero_elements = document.getElementsByClassName("hp");
+    for (var i = 0; i < hero_elements.length; i++) {
+        hero_elements[i].classList.add("hide");
+    }
+    scroll_to("pokedex");
 }
 
 async function generate_pokedex(data) {
@@ -338,20 +372,6 @@ async function generate_pokedex(data) {
     for (var i = 0; i < species_data.length; i++) {
         get_pokemon_data(species_data[i], pokemon_data[i], i + 1);
     }
-
-    // show all pokedex elements
-    pokedex_elements = document.getElementsByClassName("pp");
-    for (var j = 0; j < pokedex_elements.length; j++) {
-        pokedex_elements[j].classList.remove("hide");
-    }
-
-    // hide all hero elements
-    hero_elements = document.getElementsByClassName("hp");
-    for (var i = 0; i < hero_elements.length; i++) {
-        hero_elements[i].classList.add("hide");
-    }
-
-    scroll_to("pokedex");
 }
 
 function get_pokemon_data(species_data, pokemon_data, entry_number) {
@@ -675,30 +695,6 @@ async function get_item_image(data_url, trigger) {
     });
 }
 
-/* --------------------------------------- Team Power --------------------------------------- */
-// function eval() {
-//     for (var i = 1; i <= 6; i++) {
-//         var pokemon_cell = document.getElementById("pokemon" + i);
-
-//         if (pokemon_cell.childElementCount == 0) {
-//             continue;
-//         }
-
-//         var pokemon_container = pokemon_cell.getElementsByClassName("pokemon-container-placed")[0];
-//         var type_container = pokemon_container.getElementsByClassName("type-container")[0];
-//         var type_list = type_container.getElementsByClassName("pokemon-type");
-
-//         for (var j = 0; j < type_list.length; j++) {
-//             document.getElementById("power-summary").textContent += type_list[j].textContent;
-//         }
-//     }
-// }
-
-// for every unique pokemon type that you have: +5 eval
-// for every unique pokemon type that you do not have: -5 eval
-// for every duplicate pokemon type: -10 eval, -20 eval, etc.
-// for every pokemon type immunity (one pokemon for each type max): +20 eval
-
 async function generate_team() {
     let form = document.getElementById("build-form");
     var settings = {
@@ -787,21 +783,15 @@ async function generate_team_helper(settings) {
 async function initialize_generation_graphics() {
     document.getElementById("teambuilder-view").scrollTop = 0;
     document.getElementById("overlay").classList.toggle("overlay");
-    // document.getElementById("navbar").style.filter = "brightness(25%)";
     document.getElementById("form-container").classList.toggle("hide");
     document.getElementById("build-button-container").classList.toggle("hide");
-    // document.getElementById("pokedex-section").style.filter = "brightness(25%)";
 }
 
 async function remove_generation_graphics() {
     document.getElementById("overlay").classList.toggle("overlay");
-    // document.getElementById("navbar").style.filter = "none";
     document.getElementById("form-container").classList.toggle("hide");
     document.getElementById("build-button-container").classList.toggle("hide");
-    // document.getElementById("pokedex-section").style.filter = "none";
 }
-
-/* --------------------------------------- Tutorial Functions --------------------------------------- */
 
 /* --------------------------------------- Music Functions --------------------------------------- */
 function play_song() {
