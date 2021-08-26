@@ -272,11 +272,11 @@ async function insert_slot(slot, slot_number, pokemon_container) {
 
     if (document.getElementById("teambuilder-view").classList.contains("hide")) {
         initialize_generation_graphics();
-        document.getElementById("teambuilder-view").className = "show";
+        document.getElementById("teambuilder-view").classList.remove("hide");
         slot.style.borderColor = "#40e048";
         await new Promise(resolve => setTimeout(resolve, 1000));
         slot.style.borderColor = "black";
-        document.getElementById("teambuilder-view").className = "hide";
+        document.getElementById("teambuilder-view").classList.add("hide");
         remove_generation_graphics();
     }
 }
@@ -386,7 +386,7 @@ function get_pokemon_data(species_data, pokemon_data, entry_number) {
 
 function create_pokemon_container(data) {
     let pokemon_container = document.createElement("li");
-    pokemon_container.className = "pokemon-container";
+    pokemon_container.className = "pokemon-container flex";
 
     if (data['is_legendary']) {
         pokemon_container.classList.add("is_legendary");
@@ -413,7 +413,7 @@ function create_buttons(pokemon_container) {
 
 function create_insert_button(pokemon_container, button_container) {
     let insert_button = document.createElement("button");
-    insert_button.className = "insert-button";
+    insert_button.className = "insert-button flex";
     insert_button.onclick = function() {find_slot(document.getElementById(pokemon_container));};
     insert_button.textContent = "+";
     button_container.appendChild(insert_button);
@@ -421,7 +421,7 @@ function create_insert_button(pokemon_container, button_container) {
 
 function create_inspect_button(pokemon_container, button_container) {
     let inspect_button = document.createElement("button");
-    inspect_button.className = "inspect-button";
+    inspect_button.className = "inspect-button flex";
     inspect_button.onclick = function() {inspect(document.getElementById(pokemon_container));};
     inspect_button.innerHTML = '<i class="fas fa-search"></i>';
     button_container.appendChild(inspect_button);
@@ -432,13 +432,13 @@ function inspect(pokemon_container) {
     let datacopy = pokemon_container.cloneNode(true);
     datacopy.id = pokemon_container.id + "-placed";
     document.getElementById("pokemon0").appendChild(datacopy);
-    document.getElementById("inspect-view").className = "show";
+    document.getElementById("inspect-view").classList.remove("hide");
     fetch_inspect(pokemon_container);
 }
 
 function create_clear_button(pokemon_slot, slot_number) {
     let clear_button = document.createElement("button");
-    clear_button.className = "clear-button";
+    clear_button.className = "clear-button flex";
     clear_button.onclick = function() {clear_slot(pokemon_slot, slot_number);};
     clear_button.textContent = "x";
     return clear_button;
@@ -468,7 +468,7 @@ function get_name(data, pokemon_container) {
 
 function get_types(data, pokemon_container) {
     let types = document.createElement("div");
-    types.className = "type-container";
+    types.className = "type-container flex";
 
     for (var i = 0; i < data["types"].length; i++) {
         var type = document.createElement("img");
@@ -658,7 +658,7 @@ async function fill_evolution_container(data) {
         }
 
         let trigger = document.createElement('div');
-        trigger.className = "evolution-trigger";
+        trigger.className = "evolution-trigger flex";
         trigger.textContent = data[i]['evolution_details'][0]['trigger']['name'];
         if (data[i]['evolution_details'][0]['trigger']['name'] == "level-up") {
             if (data[i]['evolution_details'][0]['min_level']) {

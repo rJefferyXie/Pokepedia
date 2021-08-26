@@ -49,12 +49,15 @@ body::-webkit-scrollbar-thumb {
     color: rgb(238, 238, 238);
 }
 
-/* ----- Navbar Section ----- */
-#navbar {
-    position: sticky;
+.flex {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* ----- Navbar Section ----- */
+#navbar {
+    position: sticky;
     font-size: 1.2rem;
     top: 0;
     z-index: 999;
@@ -66,7 +69,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .navbar-container {
-    display: flex;
     justify-content: space-evenly;
     z-index: 1;
     width: 100%;
@@ -86,9 +88,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #light-dark-slider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 24px;
     height: 22px;
     margin: 1px;
@@ -124,17 +123,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .navbar-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     list-style: none;
     background-color: white;
 }
 
 .navbar-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 80px;
     width: 125px;
     margin: 0px 10px 0px 10px;
@@ -172,17 +165,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #intro-section {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: calc(100vh - 80px);
 }
 
 #about-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: min(90%, 640px);
     width: min(90%, 940px);
     border-radius: 20px;
@@ -190,18 +177,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 #about-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 80%;
 }
 
 #about-container div {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .intro-arrow {
@@ -228,7 +209,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #about-container #circle-container {
-    display: flex;
     flex-direction: row;
     justify-content: flex-start;
     width: 75%;
@@ -265,17 +245,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #region-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;    
+    flex-direction: column;  
     height: calc(100vh - 80px);
 }
 
 .region-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     border-radius: 20px;
     margin: 0px 0px 10px 0px;
@@ -374,9 +348,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 #pokedex {
-    display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: normal;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -384,17 +357,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #pokedex-section {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: white;
 }
 
 #top-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 60px;
     width: min(180px, 75%);
     background-color: rgb(37, 114, 165);
@@ -410,10 +377,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #loader-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: calc(100vh - 80px);
     width: 100%;
     font-size: 16px;
@@ -433,9 +397,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #load-percentage-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: rgb(255, 87, 87);
     border-radius: 20px;
     padding: 10px 0px 10px 0px;
@@ -463,8 +424,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #search-container {
-    display: flex;
-    align-items: center;
     height: 60px;
     width: min(420px, 75%);
     padding: 12px 20px 12px 40px; 
@@ -495,9 +454,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #pokemon-list {
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     background-color: white;
 }
 
@@ -507,10 +464,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .pokemon-container {
-    display: flex;
     flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
     width: 200px;
     height: 240px;
     border-radius: 20px;
@@ -527,12 +481,6 @@ body::-webkit-scrollbar-thumb {
 .pokemon-image {
     width: 96px;
     -webkit-user-drag: none;
-}
-
-.type-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .pokemon-type, .move-type {
@@ -560,9 +508,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .pokemon-container button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     outline: none;
     color: black;
@@ -579,9 +524,6 @@ body::-webkit-scrollbar-thumb {
 
 /* ----- Inspect Section ----- */
 #inspect-view {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     height: calc(100% - 80px);
     width: 100%;
@@ -620,9 +562,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #inspect-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     height: 100%;
     width: 100%;
     box-shadow: 0px 0px 5px 1px #272727;
@@ -636,16 +576,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #stats-moves-container {
-    display: flex;
-    align-items: center;
     height: 100%;
     width: 90%;
 }
 
 #intro-container, #stats-container, #moves-container, #chain-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 90%;
     padding: 10px;
 }
@@ -670,8 +605,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 #description-container {
-    display: flex;
-    justify-content: center;
+    align-items: normal;
+    justify-content: normal;
     height: 95%;
     width: 75%;
     font-size: 1.2rem;
@@ -691,21 +626,21 @@ body::-webkit-scrollbar-thumb {
 
 /* ----- Pokemon Stats Section ----- */
 #stat-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
     border-radius: 10px;
     border: 1px solid black;
 }
 
-#stat-name-container {
-    display: flex;
+#stat-name-container, #stat-bar-container {
     flex-direction: column;
-    justify-content: center;
+    align-items: normal;
     height: 100%;
     padding: 0px 0px 0px 10px;
+}
+
+#stat-bar-container {
+    width: 100%;
 }
 
 .stat-header, .stat-bar {
@@ -713,15 +648,6 @@ body::-webkit-scrollbar-thumb {
     line-height: calc(25vh / 6);
     font-size: 20px;
     margin: 4px 0px 4px 0px;
-}
-
-#stat-bar-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    padding: 0px 10px 0px 10px;
 }
 
 .stat-bar {
@@ -760,8 +686,8 @@ body::-webkit-scrollbar-thumb {
 
 /* ----- Pokemon Moves Section ----- */
 #move-list {
-    display: flex;
     flex-direction: column;
+    justify-content: normal;
     height: calc(30vh + 48px);
     width: 100%;
     border: 1px solid rgb(0,0,0);
@@ -800,10 +726,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .evolution-trigger {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-size: 16px;
     height: 140px;
     margin: auto;
@@ -813,9 +736,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #teambuilder-view {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     position: fixed;
     width: min(1350px, 100%);
     height: 400px;
@@ -831,9 +752,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #show-team {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     position: fixed;
     height: 60px;
@@ -854,18 +772,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 #team-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
 }
 
 .team-slot {
-    display: flex;
     flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
     width: 204px;
     height: 234px;
     background-color: rgb(255, 255, 255);
@@ -889,18 +801,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 #build-form {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
     height: 100%;
 }
 
 #form-container {
-    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: center;
     width: 100%;
     height: 40%;
 }
@@ -910,17 +818,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 #build-button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 70%;
 }
 
 .build-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 128px;
     height: 40px;
     background-color: white;
@@ -945,10 +847,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .slide-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     color: white;
 }
 
@@ -982,11 +881,9 @@ body::-webkit-scrollbar-thumb {
 
 /* ----- Music Section ----- */
 #music-container {
-    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     position: fixed;
-    align-items: center;
     background-color: #121212;
     color: white;
     border-radius: 20px;
@@ -998,8 +895,6 @@ body::-webkit-scrollbar-thumb {
 
 #hide-music {
     display: none;
-    justify-content: center;
-    align-items: center;
     color: rgb(224, 85, 85);
     background-color: white;
     width: 24px;
@@ -1014,9 +909,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #show-music {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     position: fixed;
     height: 60px;
