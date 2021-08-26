@@ -4,9 +4,14 @@
     padding: 0;
     font-family: 'Kumbh Sans', sans-serif;
     scroll-behavior: smooth;
+    -webkit-user-select: none;  
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    user-select: none;  
     transition: background-color 1s;
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 1em;
     border-radius: 0px 10px 10px 0px;
@@ -38,6 +43,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 0;
 }
 
+/* Global / Utility */
 .hide {
     position: absolute;
     top: -9999px;
@@ -75,6 +81,31 @@ body::-webkit-scrollbar-thumb {
     padding: 0 50px;
 }
 
+#navbar-logo {
+    display: block;
+    cursor: pointer;
+    background-image: -webkit-linear-gradient(to top, rgb(75, 165, 206), rgb(52, 124, 158));
+    background-image: linear-gradient(to top, rgb(75, 165, 206), rgb(52, 124, 158));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin: auto 0px;
+    font-size: 1.8rem;
+}
+
+.navbar-menu {
+    list-style: none;
+    background-color: white;
+}
+
+.navbar-item {
+    height: 80px;
+    width: 125px;
+    margin: 0px 10px 0px 10px;
+}
+
 #light-dark-toggle {
     display: block;
     width: 60px;
@@ -108,31 +139,6 @@ body::-webkit-scrollbar-thumb {
     background-color: white;
 }
 
-#navbar-logo {
-    display: block;
-    cursor: pointer;
-    background-image: -webkit-linear-gradient(to top, rgb(75, 165, 206), rgb(52, 124, 158));
-    background-image: linear-gradient(to top, rgb(75, 165, 206), rgb(52, 124, 158));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    margin: auto 0px;
-    font-size: 1.8rem;
-}
-
-.navbar-menu {
-    list-style: none;
-    background-color: white;
-}
-
-.navbar-item {
-    height: 80px;
-    width: 125px;
-    margin: 0px 10px 0px 10px;
-}
-
 .dark .navbar-menu {
     background-color: #121212;
     color: white;
@@ -157,13 +163,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ----- Hero Section ----- */
-#hero {
-    -webkit-user-select: none;  
-    -moz-user-select: none;     
-    -ms-user-select: none;      
-    user-select: none;  
-}
-
 #intro-section {
     flex-direction: column;
     height: calc(100vh - 80px);
