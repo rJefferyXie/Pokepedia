@@ -169,15 +169,15 @@ body::-webkit-scrollbar-thumb {
 }
 
 #about-wrapper {
-    height: min(90%, 640px);
-    width: min(90%, 940px);
+    height: min(95%, 640px);
+    width: min(95%, 940px);
     border-radius: 20px;
     padding: 20px;
 }
 
 #about-container {
     flex-direction: column;
-    width: 80%;
+    width: 100%;
 }
 
 #about-container div {
@@ -227,7 +227,7 @@ body::-webkit-scrollbar-thumb {
 
 #region-button {
     background-color: rgb(67, 148, 185);
-    width: min(95%, 360px);
+    width: min(90%, 360px);
     height: 70px;
     font-size: 1.6rem;
     color: #fff;
@@ -252,7 +252,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     border-radius: 20px;
     margin: 0px 0px 10px 0px;
-    width: min(min(80%, calc(12vh * 6)), 720px);
+    width: min(min(90%, calc(12vh * 6)), 720px);
     height: min(11%, 108px);
 }
 
@@ -266,9 +266,10 @@ body::-webkit-scrollbar-thumb {
     image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-    width: calc(100% / 6);
+    width: calc(90% / 6);
     max-width: 96px;
     opacity: 0;
+    margin: auto;
 }
 
 .region-name {
@@ -367,7 +368,7 @@ body::-webkit-scrollbar-thumb {
     color: white;
     border-radius: 20px;
     padding: 20px 10px 20px 10px;
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0px 20px 0px;
     cursor: pointer;
 }
 
@@ -393,6 +394,7 @@ body::-webkit-scrollbar-thumb {
     background-color: white;
     border: 1px solid #121212;
     border-radius: 20px;
+    margin: 0px 0px 10px 0px;
 }
 
 #load-percentage-bar {
@@ -407,14 +409,9 @@ body::-webkit-scrollbar-thumb {
     color: rgb(37, 114, 165);
 }
 
-#github-footer {
-    margin-top: 20px;
-}
-
 #pokeapi-footer {
     margin-bottom: 30px;
 }
-
 
 @keyframes load {
     50% {
@@ -507,6 +504,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .pokemon-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     cursor: pointer;
     outline: none;
     color: black;
@@ -986,6 +987,14 @@ body::-webkit-scrollbar-thumb {
 
 .music-button:active {
     color: rgb(163, 163, 163);
+}
+
+#footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .overlay {

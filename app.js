@@ -313,7 +313,9 @@ function retrieve_data(gen, region) {
 function load() {
     let percentage_bar = document.getElementById("load-percentage-bar");
     let percentage = document.getElementById("load-percentage");
-    let updater = setInterval(update, 10);
+    percentage.innerHTML = "20%";
+    percentage_bar.style.width = "20%";
+    let updater = setInterval(update, 25);
     let counter = 20;
     function update() {
         if (counter >= 99 || finished_loading) {
