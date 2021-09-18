@@ -313,14 +313,12 @@ function retrieve_data(gen, region) {
 function load() {
     let percentage_bar = document.getElementById("load-percentage-bar");
     let percentage = document.getElementById("load-percentage");
-    percentage.innerHTML = "20%";
-    percentage_bar.style.width = "20%";
-    let updater = setInterval(update, 25);
+    percentage.innerHTML = "15%";
+    percentage_bar.style.width = "15%";
+    let updater = setInterval(update, 50);
     let counter = 20;
     function update() {
         if (counter >= 99 || finished_loading) {
-            percentage.innerHTML = "100%";
-            percentage_bar.style.width = "100%";
             finished_loading = false;
             clearInterval(updater);
         }
@@ -417,7 +415,7 @@ function create_insert_button(pokemon_container, button_container) {
     let insert_button = document.createElement("button");
     insert_button.className = "insert-button flex";
     insert_button.onclick = function() {find_slot(document.getElementById(pokemon_container));};
-    insert_button.textContent = "+";
+    insert_button.innerHTML = '<i class="fas fa-plus"></i>';
     button_container.appendChild(insert_button);
 }
 
@@ -429,6 +427,14 @@ function create_inspect_button(pokemon_container, button_container) {
     button_container.appendChild(inspect_button);
 }
 
+function create_clear_button(pokemon_slot, slot_number) {
+    let clear_button = document.createElement("button");
+    clear_button.className = "clear-button flex";
+    clear_button.onclick = function() {clear_slot(pokemon_slot, slot_number);};
+    clear_button.innerHTML = '<i class="fas fa-times"></i>';
+    return clear_button;
+}
+
 function inspect(pokemon_container) {
     clear_inspect();
     let datacopy = pokemon_container.cloneNode(true);
@@ -436,14 +442,6 @@ function inspect(pokemon_container) {
     document.getElementById("pokemon0").appendChild(datacopy);
     document.getElementById("inspect-view").classList.remove("hide");
     fetch_inspect(pokemon_container);
-}
-
-function create_clear_button(pokemon_slot, slot_number) {
-    let clear_button = document.createElement("button");
-    clear_button.className = "clear-button flex";
-    clear_button.onclick = function() {clear_slot(pokemon_slot, slot_number);};
-    clear_button.textContent = "x";
-    return clear_button;
 }
 
 function get_image(data) {
