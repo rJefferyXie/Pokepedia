@@ -38,6 +38,13 @@
 
     <!-- Hero Section -->
     <div id="hero" class="hp ld">
+        <div id="hero-wallpaper">
+            <img src="images/wallpaper.png" id="hero-image">
+            <div class="hero-text">
+                Welcome to Pokepedia!
+                Revisit your favorite pokemon memories and adventures with us.
+            </div>
+        </div>
         <div id="intro-section" class="flex">
             <div id="about-wrapper" class="flex">
                 <div id="left-arrow" class="intro-arrow" onclick="previous_intro_section()"><i class="fas fa-chevron-circle-left"></i></div>
@@ -45,7 +52,6 @@
                     <div id="about1" class="flex">
                         <p class="header">About Pokepedia</p>
                         <p class="text">
-                            Revisit your favorite pokemon memories and adventures.
                             Learn new things about all of your favorite pokemon.
                             Listen to the most memorable soundtracks.
                             Create a pokemon team with our teambuilder.
@@ -255,8 +261,8 @@
             </div>
             <div id="music-controls" class="ld">
                 <div class="music-button" onclick="previous_song()"><i class="fas fa-arrow-circle-left"></i></div>
-                <div id="pause" class="music-button" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
-                <div id="play" class="hide" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
+                <div id="pause" class="hide" onclick="pause_song()"><i class="fas fa-pause-circle"></i></div>
+                <div id="play" class="music-button" onclick="play_song()"><i class="fas fa-play-circle"></i></div>
                 <div class="music-button" onclick="next_song()"><i class="fas fa-arrow-circle-right"></i></div>
                 <div id="music-slider" class="slide-container flex">
                     <input type="range" min="0" max="100" value="10" class="slider" id="volume-control" onchange="change_volume()" oninput="change_volume()">

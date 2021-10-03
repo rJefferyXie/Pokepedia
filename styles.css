@@ -78,7 +78,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-evenly;
     z-index: 1;
     width: 100%;
-    padding: 0 50px;
+    padding: 10px 50px;
 }
 
 #navbar-logo {
@@ -92,7 +92,7 @@ body::-webkit-scrollbar-thumb {
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     margin: auto 0px;
-    font-size: 1.8rem;
+    font-size: max(2.5vw, 2.5vh);
 }
 
 .navbar-menu {
@@ -101,30 +101,30 @@ body::-webkit-scrollbar-thumb {
 }
 
 .navbar-item {
-    height: 80px;
-    width: 125px;
-    margin: 0px 10px 0px 10px;
+    height: max(4vw, 4vh);
+    width: max(5vw, 5vh);
+    margin: 0px 3vw 0px 3vw;
 }
 
 #light-dark-toggle {
     display: block;
-    width: 60px;
-    height: 24px;
+    width: max(7vw, 7vh);
+    height: max(3vw, 3vh);
     background-color: #121212;
     padding: 0;
     border: none;
     margin: auto 20px;
-    border-radius: 16px;
+    border-radius: max(3vw, 3vh);
     cursor: pointer;
 }
 
 #light-dark-slider {
-    width: 24px;
-    height: 22px;
+    width: max(3vw, 3vh);
+    height: calc(max(3vw, 3vh) - 2px);
     margin: 1px;
     background-color: rgb(255, 255, 255);
     color: rgb(238, 208, 40);
-    font-size: 14px;
+    font-size: max(2vh, 2vw);
     border-radius: 50%;
     float: right;
     transition: margin 1s;
@@ -132,7 +132,7 @@ body::-webkit-scrollbar-thumb {
 
 .dark #light-dark-slider {
     background-color: #121212;
-    margin-right: calc(100% - 25px);
+    margin-right: calc(100% - max(3.1vh, 3.1vw));
 }
 
 .dark #light-dark-toggle {
@@ -145,7 +145,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #main-navbar-item {
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     color: rgb(67, 148, 185);
     border: 2px solid rgb(67, 148, 185);
 }
@@ -153,7 +153,7 @@ body::-webkit-scrollbar-thumb {
 .navbar-links {
     cursor: pointer;
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: max(1.8vw, 1.8vh);
     padding: 10px 20px 10px 20px;
 }
 
@@ -163,6 +163,31 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ----- Hero Section ----- */
+#hero-wallpaper {
+    position: relative;
+    width: 100%;
+}
+
+#hero-image {
+    width: 100%;
+    border: 2px solid black;
+    border-radius: max(2vh, 2vw);
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    width: 80%;
+    font-size: max(1.8vw, 1.8vh);
+    padding: max(2vh, 2vw);
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  }
+
 #intro-section {
     flex-direction: column;
     height: calc(100vh - 80px);
@@ -171,7 +196,7 @@ body::-webkit-scrollbar-thumb {
 #about-wrapper {
     height: min(95%, 640px);
     width: min(95%, 840px);
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     padding: 20px;
 }
 
@@ -232,7 +257,7 @@ body::-webkit-scrollbar-thumb {
     height: 70px;
     font-size: 1.6rem;
     color: #fff;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     margin: 10px 0px 0px 0px;
     cursor: pointer;
     outline: none;
@@ -251,7 +276,7 @@ body::-webkit-scrollbar-thumb {
 
 .region-container {
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     margin: 0px 0px 10px 0px;
     width: min(min(90%, calc(12vh * 6)), 720px);
     height: min(12%, 108px);
@@ -369,7 +394,7 @@ body::-webkit-scrollbar-thumb {
     width: min(180px, 75%);
     background-color: rgb(37, 114, 165);
     color: white;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     padding: 20px 10px 20px 10px;
     margin: 20px 0px 20px 0px;
     cursor: pointer;
@@ -396,13 +421,13 @@ body::-webkit-scrollbar-thumb {
     width: min(240px, 100%);
     background-color: white;
     border: 1px solid #121212;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     margin: 0px 0px 10px 0px;
 }
 
 #load-percentage-bar {
     background-color: rgb(255, 87, 87);
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     padding: 10px 0px 10px 0px;
     width: 15%;
 }
@@ -427,7 +452,7 @@ body::-webkit-scrollbar-thumb {
     height: 60px;
     width: min(420px, 75%);
     padding: 12px 20px 12px 40px; 
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     border: 1px solid black;
     margin: 20px 0px 20px 0px;
     background-color: #121212;
@@ -467,7 +492,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column-reverse;
     width: 200px;
     height: 240px;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     font-size: 21px;
     margin: 8px;
     text-transform: capitalize;
@@ -516,7 +541,7 @@ body::-webkit-scrollbar-thumb {
     color: black;
     background-color: white;
     border: 1px solid white;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     height: 36px;
     width: 36px;
 }
@@ -622,7 +647,7 @@ body::-webkit-scrollbar-thumb {
 #height-weight-container {
     height: 95%;
     width: 20%;
-    padding: 20px;
+    padding: 10px;
     margin: 0px 14px 0px 10px;
     border-radius: 10px;
     font-size: 1.2rem;
@@ -656,8 +681,8 @@ body::-webkit-scrollbar-thumb {
 
 .stat-bar {
     min-width: 35px;
-    max-width: 100%;
-    border-radius: 20px;
+    max-width: 98%;
+    border-radius: max(2vh, 2vw);
     text-indent: 8px;
     text-align: right;
     direction: rtl;
@@ -734,7 +759,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     height: 140px;
     margin: auto;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     padding: 0px 20px 0px 20px;
     color: black;
 }
@@ -748,7 +773,7 @@ body::-webkit-scrollbar-thumb {
     top: 25%;
     overflow-y: auto;
     background-color: #222222;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
 }
 
 .dark #teambuilder-view {
@@ -833,7 +858,7 @@ body::-webkit-scrollbar-thumb {
     background-color: white;
     cursor: pointer;
     margin: 0px 16px 0px 16px;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
 }
 
 #clear-team-button {
@@ -862,7 +887,7 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     height: 16px;
     background-color: white;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     margin-top: 8px;
 }
 
@@ -874,7 +899,7 @@ body::-webkit-scrollbar-thumb {
     margin: 1px; 
     background-color: #121212; 
     cursor: pointer; 
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
 }
   
 .slider::-moz-range-thumb {
@@ -891,7 +916,7 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     background-color: #121212;
     color: white;
-    border-radius: 20px;
+    border-radius: max(2vh, 2vw);
     width: 300px;
     padding: 10px;
     bottom: 1%;
@@ -1155,7 +1180,7 @@ body::-webkit-scrollbar-thumb {
         background-color: white;
         cursor: pointer;
         margin: 0px 16px 0px 16px;
-        border-radius: 20px;
+        border-radius: max(2vh, 2vw);
     }
     
     #help-text {
@@ -1205,13 +1230,8 @@ body::-webkit-scrollbar-thumb {
         transition: all 0.5s ease;
         z-index: 99;
         height: 60vh;
-        font-size: 1.6rem;
         width: 100%;
         border: 1px solid black;
-    }
-
-    #navbar-logo {
-        font-size: 1.2rem;
     }
 
     .navbar-toggle .bar {

@@ -233,7 +233,7 @@ function initialize_pokedex_page(region) {
     region_soundtrack = region;
     track_number = Math.floor(Math.random() * 6);
     music.src = soundtracks[region_soundtrack][track_number]['file_path'];
-    play_song();
+    change_song_title();
 }
 
 
