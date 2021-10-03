@@ -1,5 +1,5 @@
 # Enhanced-Pokedex
-A pokedex with many amazing features such as viewing pokemon stats and movesets in real time, building your own team, and a built in team generator.
+A pokedex made by a pokemon lover for pokemon lovers. This pokedex has many interesting features such as viewing pokemon stats and movesets, and a built in team builder + generator.
 https://rjefferyxie.github.io/Pokepedia/
 
 # Table of Contents
@@ -41,11 +41,10 @@ https://rjefferyxie.github.io/Pokepedia/
 
 * Teambuilder
     * Build your own team
-    * Team strength calculator
     * Auto generate team
 
 * Soundtrack
-    * Your favorite soundtracks from each generation of pokemon.
+    * Nolstagic soundtracks from each generation of pokemon.
     * 7 unique soundtracks from each region.
 
 # Sources <a name="sources"></a>
