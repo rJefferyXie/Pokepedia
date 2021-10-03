@@ -55,4 +55,5 @@ https://rjefferyxie.github.io/Pokepedia/
 * Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
 * Stat Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Stat_color_templates
 * Hero Images: https://undraw.co/illustrations
+* Hero Wallpaper: https://wallpaperaccess.com/pokemon-eevee-evolutions
 * Dark Theme Tutorial https://uxdesign.cc/dark-mode-ui-design-the-definitive-guide-part-1-color-53dcfaea5129
