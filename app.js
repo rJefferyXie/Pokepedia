@@ -147,6 +147,7 @@ menuLinks.addEventListener('click', mobileMenu);
 
 const light_dark_toggle = document.getElementById("light-dark-toggle");
 const light_dark_slider = document.getElementById("light-dark-slider");
+const hero_image = document.getElementById("hero-image");
 var light_mode = true;
 const toggle_light_dark_mode = () => {
     light_mode = !light_mode;
@@ -156,9 +157,11 @@ const toggle_light_dark_mode = () => {
     }
     if (light_mode) {
         light_dark_slider.innerHTML = '<i class="fas fa-sun"></i>';
+        hero_image.style.filter = 'none';
     }
     else {
         light_dark_slider.innerHTML = '<i class="fas fa-moon"></i>';
+        hero_image.style.filter = 'brightness(75%)';
     }
 }
 
@@ -188,39 +191,6 @@ function region_page() {
         hero_page();
     }
     scroll_to("region-section");
-}
-
-function previous_intro_section() {
-    toggle_section();
-    if (current_intro_section == first_intro_section) {
-        current_intro_section = final_intro_section;
-    }
-    else {
-        current_intro_section -= 1;
-    }
-    toggle_section();
-}
-
-function change_intro_section(new_section) {
-    toggle_section();
-    current_intro_section = new_section;
-    toggle_section();
-}
-
-function next_intro_section() {
-    toggle_section();
-    if (current_intro_section == final_intro_section) {
-        current_intro_section = first_intro_section;
-    }
-    else {
-        current_intro_section += 1;
-    }
-    toggle_section();
-}
-
-function toggle_section() {
-    document.getElementById("about" + current_intro_section).classList.toggle("hide");
-    document.getElementById("circle-" + current_intro_section).classList.toggle("active");
 }
 
 function initialize_pokedex_page(region) {

@@ -9,6 +9,7 @@
     -ms-user-select: none;      
     user-select: none;  
     transition: background-color 1s;
+    transition: filter 1s;
 }
 
 /* Scrollbar */
@@ -165,7 +166,11 @@ body::-webkit-scrollbar-thumb {
 /* ----- Hero Section ----- */
 #hero-wallpaper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+    padding: 0px 0px 20px 0px;
 }
 
 #hero-image {
@@ -185,80 +190,45 @@ body::-webkit-scrollbar-thumb {
     font-size: max(1.8vw, 1.8vh);
     padding: max(2vh, 2vw);
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    background-color: rgba(0,0,0, 0.6); /* Black w/opacity/see-through */
   }
 
 #intro-section {
     flex-direction: column;
-    height: calc(100vh - 80px);
-}
-
-#about-wrapper {
-    height: min(95%, 640px);
-    width: min(95%, 840px);
-    border-radius: max(2vh, 2vw);
-    padding: 20px;
+    padding: 20px 0px 20px 0px;
 }
 
 #about-container {
-    flex-direction: column;
+    height: 95%;
     width: 100%;
 }
 
 #about-container div {
     flex-direction: column;
-}
-
-.intro-arrow {
-    font-size: 32px;
-    cursor: pointer;
-    margin: auto;
-    color: rgb(67, 148, 185);
+    padding: 20px;
 }
 
 .header {
     font-size: 3vh;
     width: 100%;
-}
+}   
 
 .text {
-    max-width: 500px;
     font-size: 2.5vh;
 }
 
 .about-image {
-    width: 95%;
-    height: 75%;
-    max-height: 270px;
-    margin-top: 10px;
-}
-
-#about-container #circle-container {
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 75%;
-    max-width: 500px;
-    margin-top: 10px;
-}
-
-#circle-container i {
-    margin-right: 6px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#circle-container .active {
-    color: rgb(67, 148, 185);
+    width: 85%;
 }
 
 #region-button {
     background-color: rgb(67, 148, 185);
-    width: min(90%, 360px);
-    height: 70px;
+    width: max(25vh, 25vw);
+    height: max(5vh, 5vw);
     font-size: 1.6rem;
     color: #fff;
     border-radius: max(2vh, 2vw);
-    margin: 10px 0px 0px 0px;
+    font-size: max(1.8vw, 1.8vh);
     cursor: pointer;
     outline: none;
     border: none;
@@ -271,7 +241,7 @@ body::-webkit-scrollbar-thumb {
 
 #region-section {
     flex-direction: column;  
-    height: calc(100vh - 80px);
+    padding: 20px 0px 20px 0px;
 }
 
 .region-container {
@@ -1062,8 +1032,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media screen and (max-width: 1024px) {
-    .intro-arrow {
-        display: none;
+    #about-container {
+        flex-direction: column;
     }
 
     .pokemon-container {

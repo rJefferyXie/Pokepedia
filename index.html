@@ -43,45 +43,27 @@
             <div class="hero-text">
                 Welcome to Pokepedia!
                 Revisit your favorite pokemon memories and adventures with us.
+                <!-- <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button> -->
             </div>
         </div>
         <div id="intro-section" class="flex">
-            <div id="about-wrapper" class="flex">
-                <div id="left-arrow" class="intro-arrow" onclick="previous_intro_section()"><i class="fas fa-chevron-circle-left"></i></div>
-                <div id="about-container" class="flex">
-                    <div id="about1" class="flex">
-                        <p class="header">About Pokepedia</p>
-                        <p class="text">
-                            Learn new things about all of your favorite pokemon.
-                            Listen to the most memorable soundtracks.
-                            Create a pokemon team with our teambuilder.
-                        </p>
-                        <img src="images/undraw/about.svg" class="about-image">
-                    </div>
-                    <div class="hide flex" id="about2">
-                        <p class="header">Pokemon Lookup</p>
-                        <p class="text">
-                            With our pokedex containing every pokemon from your selected region, you can find information on any pokemon. 
-                            Learn about each pokemon's characteristics, stats, moveset, and evolution chain with ease.
-                        </p>
-                        <img src="images/undraw/lookup.svg" class="about-image">
-                    </div>
-                    <div class="hide flex" id="about3">
-                        <p class="header">Team Generation</p>
-                        <p class="text">
-                            Automatically generate a full team, or choose your favorites and let the generator do the rest. 
-                            Customize your team with options such as banning legendary pokemon, duplicate pokemon types, and more.
-                        </p>
-                        <img src="images/undraw/teambuilder.svg" class="about-image">
-                    </div>
-                    <div id="circle-container" class="flex">
-                        <i class="fas fa-circle active" id="circle-1" onclick="change_intro_section(1)"></i>
-                        <i class="fas fa-circle" id="circle-2" onclick="change_intro_section(2)"></i>
-                        <i class="fas fa-circle" id="circle-3" onclick="change_intro_section(3)"></i>
-                    </div>
-                    <button id="region-button" onclick="scroll_to('region-section')">Choose a Region</button>
+            <div id="about-container" class="flex">
+                <div class="flex">
+                    <p class="header">Pokemon Lookup</p>
+                    <p class="text">
+                        With our pokedex containing every pokemon from your selected region, you can find information on any pokemon. 
+                        Learn about each pokemon's characteristics, stats, moveset, and evolution chain with ease.
+                    </p>
+                    <img src="images/undraw/lookup.svg" class="about-image">
                 </div>
-                <div id="right-arrow" class="intro-arrow" onclick="next_intro_section()"><i class="fas fa-chevron-circle-right"></i></div>
+                <div class="flex">
+                    <p class="header">Team Generation</p>
+                    <p class="text">
+                        Automatically generate a full team, or choose your favorites and let the generator do the rest. 
+                        Customize your team with options such as banning legendary pokemon, duplicate pokemon types, and more.
+                    </p>
+                    <img src="images/undraw/teambuilder.svg" class="about-image">
+                </div>
             </div>
         </div>
         <div id="region-section" class="flex">
