@@ -1,5 +1,5 @@
 # Enhanced-Pokedex
-A pokedex made by a pokemon lover for pokemon lovers. This pokedex has many interesting features such as viewing pokemon stats and movesets, and a built in team builder + generator.
+A website that fits all your pokemon needs with a beautiful UI. This pokedex includes many interesting features such as viewing pokemon stats and movesets, and a built in team builder + generator.
 https://rjefferyxie.github.io/Pokepedia/
 
 # Table of Contents
