@@ -93,7 +93,7 @@ body::-webkit-scrollbar-thumb {
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     margin: auto 0px;
-    font-size: max(2.5vw, 2.5vh);
+    font-size: 2rem;
 }
 
 .navbar-menu {
@@ -102,30 +102,28 @@ body::-webkit-scrollbar-thumb {
 }
 
 .navbar-item {
-    height: max(4vw, 4vh);
-    width: max(5vw, 5vh);
-    margin: 0px 3vw 0px 3vw;
+    height: 80px;
+    margin: 0px 4px;
 }
 
 #light-dark-toggle {
     display: block;
-    width: max(7vw, 7vh);
-    height: max(3vw, 3vh);
+    width: 100px;
+    height: 40px;
     background-color: #121212;
     padding: 0;
     border: none;
     margin: auto 20px;
-    border-radius: max(3vw, 3vh);
+    border-radius: 20px;
     cursor: pointer;
 }
 
 #light-dark-slider {
-    width: max(3vw, 3vh);
-    height: calc(max(3vw, 3vh) - 2px);
+    width: 40px;
+    height: 38px;
     margin: 1px;
     background-color: rgb(255, 255, 255);
     color: rgb(238, 208, 40);
-    font-size: max(2vh, 2vw);
     border-radius: 50%;
     float: right;
     transition: margin 1s;
@@ -133,7 +131,7 @@ body::-webkit-scrollbar-thumb {
 
 .dark #light-dark-slider {
     background-color: #121212;
-    margin-right: calc(100% - max(3.1vh, 3.1vw));
+    margin-right: calc(100% - 41px);
 }
 
 .dark #light-dark-toggle {
@@ -146,7 +144,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #main-navbar-item {
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     color: rgb(67, 148, 185);
     border: 2px solid rgb(67, 148, 185);
 }
@@ -175,8 +173,7 @@ body::-webkit-scrollbar-thumb {
 
 #hero-image {
     width: 100%;
-    border: 2px solid black;
-    border-radius: max(2vh, 2vw);
+    border: 1px solid black;
 }
 
 .hero-text {
@@ -187,8 +184,8 @@ body::-webkit-scrollbar-thumb {
     transform: translate(-50%, -50%);
     color: white;
     width: 80%;
-    font-size: max(1.8vw, 1.8vh);
-    padding: max(2vh, 2vw);
+    font-size: 1.5rem;
+    padding: 1rem;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0, 0.6); /* Black w/opacity/see-through */
   }
@@ -200,7 +197,7 @@ body::-webkit-scrollbar-thumb {
 
 #about-container {
     height: 95%;
-    width: 100%;
+    width: 90%;
 }
 
 #about-container div {
@@ -209,16 +206,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 .header {
-    font-size: 3vh;
+    font-size: 1.4rem;
     width: 100%;
 }   
 
 .text {
-    font-size: 2.5vh;
+    font-size: 1.2rem;
 }
 
 .about-image {
-    width: 85%;
+    height: 200px;
 }
 
 #region-button {
@@ -227,7 +224,7 @@ body::-webkit-scrollbar-thumb {
     height: max(5vh, 5vw);
     font-size: 1.6rem;
     color: #fff;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     font-size: max(1.8vw, 1.8vh);
     cursor: pointer;
     outline: none;
@@ -246,7 +243,7 @@ body::-webkit-scrollbar-thumb {
 
 .region-container {
     cursor: pointer;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     margin: 0px 0px 10px 0px;
     width: min(min(90%, calc(12vh * 6)), 720px);
     height: min(12%, 108px);
@@ -272,7 +269,7 @@ body::-webkit-scrollbar-thumb {
 
 .region-name {
     position: absolute;
-    font-size: 6.5vh;
+    font-size: 3rem;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: #fff;
     text-shadow: 
@@ -364,7 +361,7 @@ body::-webkit-scrollbar-thumb {
     width: min(180px, 75%);
     background-color: rgb(37, 114, 165);
     color: white;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     padding: 20px 10px 20px 10px;
     margin: 20px 0px 20px 0px;
     cursor: pointer;
@@ -391,13 +388,13 @@ body::-webkit-scrollbar-thumb {
     width: min(240px, 100%);
     background-color: white;
     border: 1px solid #121212;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     margin: 0px 0px 10px 0px;
 }
 
 #load-percentage-bar {
     background-color: rgb(255, 87, 87);
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     padding: 10px 0px 10px 0px;
     width: 15%;
 }
@@ -422,7 +419,7 @@ body::-webkit-scrollbar-thumb {
     height: 60px;
     width: min(420px, 75%);
     padding: 12px 20px 12px 40px; 
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     border: 1px solid black;
     margin: 20px 0px 20px 0px;
     background-color: #121212;
@@ -462,8 +459,8 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column-reverse;
     width: 200px;
     height: 240px;
-    border-radius: max(2vh, 2vw);
-    font-size: 21px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
     margin: 8px;
     text-transform: capitalize;
     color: white;
@@ -511,7 +508,7 @@ body::-webkit-scrollbar-thumb {
     color: black;
     background-color: white;
     border: 1px solid white;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     height: 36px;
     width: 36px;
 }
@@ -652,7 +649,7 @@ body::-webkit-scrollbar-thumb {
 .stat-bar {
     min-width: 35px;
     max-width: 98%;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     text-indent: 8px;
     text-align: right;
     direction: rtl;
@@ -729,7 +726,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     height: 140px;
     margin: auto;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     padding: 0px 20px 0px 20px;
     color: black;
 }
@@ -743,7 +740,7 @@ body::-webkit-scrollbar-thumb {
     top: 25%;
     overflow-y: auto;
     background-color: #222222;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
 }
 
 .dark #teambuilder-view {
@@ -828,7 +825,7 @@ body::-webkit-scrollbar-thumb {
     background-color: white;
     cursor: pointer;
     margin: 0px 16px 0px 16px;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
 }
 
 #clear-team-button {
@@ -857,7 +854,7 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     height: 16px;
     background-color: white;
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
     margin-top: 8px;
 }
 
@@ -869,7 +866,7 @@ body::-webkit-scrollbar-thumb {
     margin: 1px; 
     background-color: #121212; 
     cursor: pointer; 
-    border-radius: max(2vh, 2vw);
+    border-radius: 1rem;
 }
   
 .slider::-moz-range-thumb {
@@ -886,7 +883,7 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     background-color: #121212;
     color: white;
-    border-radius: max(2vh, 2vw);
+    border-radius: 20px;
     width: 300px;
     padding: 10px;
     bottom: 1%;
@@ -1150,7 +1147,7 @@ body::-webkit-scrollbar-thumb {
         background-color: white;
         cursor: pointer;
         margin: 0px 16px 0px 16px;
-        border-radius: max(2vh, 2vw);
+        border-radius: 1rem;
     }
     
     #help-text {
